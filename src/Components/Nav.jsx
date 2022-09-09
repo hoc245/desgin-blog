@@ -34,10 +34,12 @@ export default function Nav({loginState, user}) {
                 <>
                     {!loginState ? 
                         <div className="nav-right">
+                            <Button value={"Create a post"} iconLeft="add" state="is-outline"/>
                             <Link to={"/About"} ><Button value={"Giới thiệu"} state={"is-ghost"}/></Link>
                             <Button value={"Đăng nhập"}/>
                         </div> : 
                         <div className="nav-right">
+                            <Button value={"Create a post"} iconLeft="add" state="is-outline"/>
                             <Link to={"/About"} ><Button value={"Giới thiệu"} state={"is-ghost"}/></Link>
                             <div className="nav-user">
                                 <img src={`${user && user.image}`} alt="user-image"/>

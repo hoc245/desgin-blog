@@ -23,6 +23,7 @@ function App() {
     <div className="App">
       <Nav loginState={hasLogin}/>
       {location.pathname === "/" && <Homepage />}
+      {location.pathname === "/design-blog" && <Homepage />}
       <Outlet />
       <Popup />
     </div>

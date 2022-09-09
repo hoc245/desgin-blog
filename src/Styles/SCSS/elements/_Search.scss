@@ -1,0 +1,35 @@
+@use "../abstracts/colortheme" as col;
+@use "../abstracts/font" as font;
+.searchbar {
+    position: relative;
+    height: 35px;
+    display: flex;
+    .search {
+        flex:1 1 0%;
+        height: 100%;
+        border:none;
+        outline: none;
+        padding: 0px 120px 0 16px;
+        color:col.$text;
+        border-radius: 100px;
+        transition: all 200ms ease;
+        &::placeholder {
+            @include font.italic12;
+            color: col.$text-light;
+        }
+        &:focus {
+            outline:1px solid col.$text-link;
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.14);
+        }
+    }
+    .button {
+        position: absolute;
+        top:0;right:0;
+        background-color: col.$neutral-20;
+        color: col.$text;
+        border-radius: 0 50px 50px 0;
+        &:hover {
+            background-color: col.$neutral-30;
+        }
+    }
+}

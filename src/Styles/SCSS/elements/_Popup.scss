@@ -1,0 +1,157 @@
+.popup {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    z-index: 999;
+    padding:32px;
+    overflow: scroll;
+    opacity: 0;
+    transition: all 300ms ease;
+    &.is-active {
+        opacity: 1;
+        .popup-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    .button.popup-close {
+        position: fixed;
+        top:16px;right: 16px;
+        width: 35px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        z-index: 999;
+    }
+    .popup-overlay {
+        position: fixed;
+        top:0;left:0;right:0;bottom:0;
+        background-color: rgba(0,0,0,0.8);
+        z-index: 1;
+        backdrop-filter: blur(20px);
+    }
+    .popup-container {
+        position: relative;
+        transform: translateY(50%);
+        opacity: 0;
+        z-index: 2;
+        padding:64px;
+        width: 100%;
+        max-width: 1040px;
+        margin:auto;
+        background-color: white;
+        border-radius: 8px;
+        transition: all 300ms ease;
+        .breakcrumb {
+            margin-bottom: 32px;
+        }
+        .popup-content {
+            h2 {
+                margin-bottom: 16px;
+            }
+            .card-description {
+                width: 100%;
+                margin-bottom: 16px;
+            }
+            h4 {
+                margin-bottom: 32px;
+            }
+            img {
+                border-radius: 8px;
+                margin-bottom: 32px;
+                max-height: 300px;
+            }
+            p {
+                @include font.regular14;
+            }
+            .source {
+                margin: 32px 0;
+                @include font.medium12;
+                a {
+                    @include font.italic12;
+                    color: col.$text-link;
+                }
+            }
+            .post-comment {
+                width: 100%;
+                textarea {
+                    width: 100%;
+                    resize: none;
+                    padding: 16px;
+                    outline: none;
+                    border:1px solid col.$neutral-10;
+                    border-radius: 8px;
+                    margin-bottom: 16px;
+                    &:focus {
+                        border-color: col.$text-link;
+                    }
+                }
+                .button {
+                    margin-left: auto;
+                    margin-bottom: 32px;
+                }
+                h4 {
+                    @include font.bold14;
+                    margin-bottom: 16px;
+                }
+                .post-comment-item {
+                    display: flex;
+                    align-items: flex-start;
+                    margin-bottom: 16px;
+                    img {
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                        margin-bottom: 0;
+                    }
+                    &-content {
+                        p {
+                            @include font.bold12;
+                        }
+                        span {
+                            @include font.regular12;
+                        }
+                    }
+                }
+                .related-news {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap:32px;
+                    margin-bottom: 32px;
+                    .breakcrumb {
+                        margin-bottom: 0;
+                    }
+                    .card {
+                        width: calc(calc((100% - 64px) / 3));
+                        img {
+                            margin:0;
+                            border-radius: 0;
+                        }
+                        .content {
+                            p {
+                                @include font.regular12;
+                            }
+                        }
+                        .card-description {
+                            margin-bottom: 0;
+                            .button {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+                hr {
+                    display: block;
+                    width: 100%;
+                    height: 1px;
+                    background-color: col.$neutral-10;
+                    border:none;
+                }
+            }
+        }
+    }
+}

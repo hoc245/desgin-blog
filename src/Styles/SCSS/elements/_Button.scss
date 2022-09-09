@@ -1,0 +1,51 @@
+@use "../abstracts/colortheme" as col;
+@use "../abstracts/font" as font;
+
+.button {
+    height: 35px;
+    padding:0 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    gap: 8px;
+    justify-content: space-between;
+    transition: all 200ms ease;
+    cursor: pointer;
+    span.is-hidden {
+        display: none;
+    }
+    @include font.bold14;
+    span {
+        font-size: 16px;
+    }
+    &.is-small {
+        @include font.bold12;
+        span {
+            font-size: 12px;
+        }
+    }
+    &.is-filled {
+        border:none;
+        background-color: col.$primary;
+        color: white;
+        &:hover {
+            background-color: col.$primary-dark;
+        }
+    }
+    &.is-outline {
+        border: 1px solid col.$neutral-30;
+        background-color: transparent;
+        color: col.$text;
+        &:hover {
+            border-color: col.$neutral-40;
+            background-color: col.$neutral-20;
+        }
+    }
+    &.is-ghost {
+        border:none;
+        background-color: transparent;
+        &:hover {
+            background-color: col.$neutral-20;
+        }
+    }
+}

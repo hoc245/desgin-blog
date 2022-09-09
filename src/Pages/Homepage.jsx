@@ -4,7 +4,6 @@ import Button from "../Components/Button";
 import Card from "../Components/Card";
 import Footer from "../Components/Footer";
 import Hero from "../Components/Hero";
-import Popup from "../Components/Popup";
 
 export default function Homepage() {
     return (

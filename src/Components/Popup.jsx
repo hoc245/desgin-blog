@@ -44,7 +44,7 @@ export default function Popup({time}) {
         let popup = document.querySelector('.popup');
 
         [].forEach.call(catalogies, item => catalogiesArray.push(item.innerHTML));
-        if(id && catalogiesArray.indexOf(id.replace('-'," ")) === -1) {
+        if(id && catalogiesArray.indexOf(id.replace('-'," ").replace("UIUX","UI/UX")) === -1) {
             popup.removeAttribute('style');
             popup.classList.add('is-active');
             popup.scrollTo(0,0);

@@ -147,9 +147,12 @@
 .card.is-line:hover img {
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
 }
-.card.is-line img {
-  transition: box-shadow 200ms ease;
+.card.is-line a {
   width: 50%;
+}
+.card.is-line a img {
+  transition: box-shadow 200ms ease;
+  width: 100%;
   height: 100%;
   border-radius: 8px;
 }

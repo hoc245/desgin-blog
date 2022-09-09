@@ -17,18 +17,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path='Homepage' element={<Homepage />}>
-            <Route path=':id' element={<Homepage />}/>
-          </Route>
-          <Route path='Result' element={<Result />}>
-            <Route path=':id' element={<Result />}>
-              <Route path=':id' element={<Result />} />
-            </Route>
-          </Route>
-          <Route path='Course' element={<Course />}/>
-          <Route path='About' element={<About />}/>
-        </Route>
-        <Route path='design-blog' element={<App />} >
+          <Route path='design-blog' element={<Homepage />}/>
           <Route path='Homepage' element={<Homepage />}>
             <Route path=':id' element={<Homepage />}/>
           </Route>

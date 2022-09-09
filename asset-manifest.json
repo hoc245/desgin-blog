@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/design-blog/static/css/main.4516a0ff.css",
-    "main.js": "/design-blog/static/js/main.38498573.js",
-    "static/media/Bg news.png": "/design-blog/static/media/Bg news.a2570b84dcd98dbadd7d.png",
-    "static/media/Thesis-amico.png": "/design-blog/static/media/Thesis-amico.0a9ce8d98f22a3d83f17.png",
-    "static/media/Subscriber-bro.png": "/design-blog/static/media/Subscriber-bro.46d50ab777d53f017dcd.png",
-    "index.html": "/design-blog/index.html",
-    "main.4516a0ff.css.map": "/design-blog/static/css/main.4516a0ff.css.map",
-    "main.38498573.js.map": "/design-blog/static/js/main.38498573.js.map"
+    "main.css": "/desgin-blog/static/css/main.685e9d4a.css",
+    "main.js": "/desgin-blog/static/js/main.7287f1e1.js",
+    "static/media/Bg news.png": "/desgin-blog/static/media/Bg news.a2570b84dcd98dbadd7d.png",
+    "static/media/Thesis-amico.png": "/desgin-blog/static/media/Thesis-amico.0a9ce8d98f22a3d83f17.png",
+    "static/media/Subscriber-bro.png": "/desgin-blog/static/media/Subscriber-bro.46d50ab777d53f017dcd.png",
+    "index.html": "/desgin-blog/index.html",
+    "main.685e9d4a.css.map": "/desgin-blog/static/css/main.685e9d4a.css.map",
+    "main.7287f1e1.js.map": "/desgin-blog/static/js/main.7287f1e1.js.map"
   },
   "entrypoints": [
-    "static/css/main.4516a0ff.css",
-    "static/js/main.38498573.js"
+    "static/css/main.685e9d4a.css",
+    "static/js/main.7287f1e1.js"
   ]
 }

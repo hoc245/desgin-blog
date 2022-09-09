@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/design-blog/static/css/main.4516a0ff.css",
+    "main.js": "/design-blog/static/js/main.38498573.js",
+    "static/media/Bg news.png": "/design-blog/static/media/Bg news.a2570b84dcd98dbadd7d.png",
+    "static/media/Thesis-amico.png": "/design-blog/static/media/Thesis-amico.0a9ce8d98f22a3d83f17.png",
+    "static/media/Subscriber-bro.png": "/design-blog/static/media/Subscriber-bro.46d50ab777d53f017dcd.png",
+    "index.html": "/design-blog/index.html",
+    "main.4516a0ff.css.map": "/design-blog/static/css/main.4516a0ff.css.map",
+    "main.38498573.js.map": "/design-blog/static/js/main.38498573.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4516a0ff.css",
+    "static/js/main.38498573.js"
+  ]
+}

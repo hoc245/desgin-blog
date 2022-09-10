@@ -2,100 +2,104 @@
 @use "../abstracts/font" as font;
 
 .card {
+  display: flex;
+  width: calc((100% - 64px) / 3);
+  flex-direction: column;
+  border: 1px solid col.$neutral-10;
+  height: fit-content;
+  max-height: 350px;
+  flex-wrap: nowrap;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  transition: box-shadow 200ms ease;
+  &:hover {
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
+  }
+  img {
+    width: 100%;
+    height: 155px;
+  }
+  .content {
     display: flex;
-    width: calc((100% - 64px) / 3);
     flex-direction: column;
+    height: 100%;
+    padding: 16px;
+    .tags-container {
+      margin-bottom: 16px;
+      .tag + .tag {
+        margin-left: 8px;
+      }
+    }
+    h3 {
+      margin-bottom: 16px;
+      @include font.bold14;
+    }
+    p {
+      margin-bottom: 16px;
+      @include font.regular12;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+  &.is-line {
+    width: 100%;
+    flex-direction: row;
+    height: 215px;
+    gap: 16px;
+    overflow: visible;
     border: 1px solid col.$neutral-10;
-    flex-wrap: nowrap;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: white;
-    transition: box-shadow 200ms ease;
     &:hover {
-        box-shadow: 4px 4px 16px rgba(0,0,0,0.14);
+      box-shadow: none;
+    }
+    &:hover img {
+      box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
     }
     img {
-        width: 100%;
-        height: 155px;
+      transition: box-shadow 200ms ease;
+      width: 50%;
+      height: 100%;
+      border-radius: 8px;
+      cursor: pointer;
     }
     .content {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        padding: 16px;
-        .tags-container {
-            margin-bottom: 16px;
-            .tag +.tag {
-                margin-left: 8px;
-            }
-        }
-        h3 {
-            margin-bottom: 16px;
-            @include font.bold14;
-        }
-        p {
-            flex:1 1 0%;
-            margin-bottom: 16px;
-            @include font.regular12;
-            overflow: hidden;
-        }
+      width: 50%;
+      padding-left: 0;
+      h3 {
+        font-size: 24px;
+        line-height: 36px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      p {
+        @include font.regular12;
+      }
     }
-    &.is-line {
-        width: 100%;
-        flex-direction: row;
-        height: 215px;
-        gap: 16px;
-        border:none;
-        overflow: visible;
-        &:hover {
-            box-shadow: none;
-        }
-        &:hover img {
-            box-shadow: 4px 4px 16px rgba(0,0,0,0.14);
-        }
-        img {
-            transition: box-shadow 200ms ease;
-            width: 50%;
-            height: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .content {
-            width: 50%;
-            padding: 0;
-            h3 {
-                font-size: 24px;
-                line-height: 36px;
-                font-weight: 700;
-                cursor: pointer;
-            }
-            p {
-                @include font.regular12;
-            }
-        }
-    }
+  }
 }
 .tag {
-    padding:4px 8px;
-    background-color: col.$neutral-10;
-    border-radius: 4px;
-    @include font.medium10;
-    color: col.$text-des;
-    cursor: pointer;
+  padding: 4px 8px;
+  background-color: col.$neutral-10;
+  border-radius: 4px;
+  @include font.medium10;
+  color: col.$text-des;
+  cursor: pointer;
 }
 
-
 .card-description {
+  margin-top: auto;
+  display: flex;
+  justify-content: left;
+  .description-time {
+    flex: 1 1 0%;
     display: flex;
-    justify-content: left;
-    .description-time {
-        flex: 1 1 0%;
-        display: flex;
-        align-items: center;
-        @include font.medium12;
-        span.material-symbols-outlined {
-            font-size: 16px;
-            margin-right: 4px;
-        }
+    align-items: center;
+    @include font.medium12;
+    span.material-symbols-outlined {
+      font-size: 16px;
+      margin-right: 4px;
     }
+  }
 }

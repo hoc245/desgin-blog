@@ -2,44 +2,44 @@
 @use "../abstracts/font" as font;
 
 .rdp.daypicker {
-    position: absolute;
-    display: none;
-    margin:0;
-    border-radius: 8px;
-    overflow: hidden;
-    --rdp-accent-color : #C0303B;
-    --rdp-background-color : #DFE0E1;
-    --rdp-accent-color-dark : #A92A34;
-    --rdp-cell-size: 35px;
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.14);
-    z-index: 999;
-    background-color: white;
-    &.is-active {
-        display: block;
+  position: absolute;
+  display: none;
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  --rdp-accent-color: #c0303b;
+  --rdp-background-color: #dfe0e1;
+  --rdp-accent-color-dark: #a92a34;
+  --rdp-cell-size: 35px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.14);
+  z-index: 999;
+  background-color: white;
+  &.is-active {
+    display: block;
+  }
+  .rdp-caption {
+    padding: 8px;
+    background-color: col.$neutral-20;
+    h2 {
+      @include font.bold14;
     }
-    .rdp-caption {
-        padding:8px;
-        background-color: col.$neutral-20;
-        h2 {
-            @include font.bold14
-        }
-        .rdp-nav {
-            button {
-                width: 24px;
-                height: 24px;
-            }
-        }
+    .rdp-nav {
+      button {
+        width: 24px;
+        height: 24px;
+      }
     }
-    .rdp-table {
-        thead {
-            th {
-                @include font.bold10;
-            }
-        }
-        tbody {
-            td {
-                @include font.medium12;
-            }
-        }
+  }
+  .rdp-table {
+    thead {
+      th {
+        @include font.bold10;
+      }
     }
+    tbody {
+      td {
+        @include font.medium12;
+      }
+    }
+  }
 }

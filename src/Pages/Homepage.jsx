@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Components/Button";
 import Card from "../Components/Card";
 import Footer from "../Components/Footer";
 import Hero from "../Components/Hero";
+import Popup from "../Components/Popup";
+import { ref, onValue } from "firebase/database";
+import {auth , db} from '../firebase';
 
 export default function Homepage() {
+    const [postThumb,setPostThumb] = useState();
+    const [postPopup,setPostPopup] = useState({
+      trigger : false,
+      id : ""
+    })
+    useEffect(() => {
+        onValue(ref(db, `/postThumb/`),snapshot => {
+            setPostThumb(snapshot.val())
+        })
+    },[]);
+    const newPost = postThumb ? Object.keys(postThumb).sort((a,b) => {return b - a}).splice(0,4) : [];
+    const graphicPost = postThumb ? Object.keys(postThumb).filter(item => {
+        if(postThumb[`${item}`].catalogue === "Graphic Design") {
+            return true
+        }
+    }).sort((a,b) => {return b - a}).splice(0,3) : [];
+    const uiuxPost = postThumb ? Object.keys(postThumb).filter(item => {
+        if(postThumb[`${item}`].catalogue === "UI/UX Design") {
+            return true
+        }
+    }).sort((a,b) => {return b - a}).splice(0,3) : [];
     return (
         <>
             <div className="main">
@@ -17,19 +41,18 @@ export default function Homepage() {
                         <span>Wednesday, 24/08/2022</span>
                     </section>
                     <section className="card-container">
-                        <Card postID="post-001" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]}/>
-                        <Card postID="post-002" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-003" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-004" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
+                        {postThumb && newPost.map(post => {
+                            return <Card setPostPopup={setPostPopup} postID={post} title={postThumb[`${post}`].title} description={postThumb[`${post}`].description} cover={postThumb[`${post}`].image} time={post} tags={Object.keys(postThumb[`${post}`].tags)} type={newPost.indexOf(post) === 0 ? null : ""}/>
+                        })}
                     </section>
                     <section className="breakcrumb">
                         <h3>Graphic Design</h3>
                         <hr></hr>
                     </section>
                     <section className="card-container">
-                        <Card postID="post-005" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-006" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-007" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
+                        {postThumb && graphicPost.map(post => {
+                            return <Card setPostPopup={setPostPopup} postID={post} title={postThumb[`${post}`].title} description={postThumb[`${post}`].description} cover={postThumb[`${post}`].image} time={post} tags={Object.keys(postThumb[`${post}`].tags)} type={graphicPost.indexOf(post) === 0 ? null : ""}/>
+                        })}
                         <Link className="seemore-btn" to={"/Result/Graphic-Design"} >
                             <Button value={"See all"} state="is-outline" iconRight="chevron_right"/>
                         </Link>
@@ -39,14 +62,15 @@ export default function Homepage() {
                         <hr></hr>
                     </section>
                     <section className="card-container">
-                        <Card postID="post-008" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-009" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
-                        <Card postID="post-010" title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam" description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..." cover="" time="09/02/2022" tags={["Lastest","UI/UX"]} type=""/>
+                        {postThumb && uiuxPost.map(post => {
+                            return <Card setPostPopup={setPostPopup} postID={post} title={postThumb[`${post}`].title} description={postThumb[`${post}`].description} cover={postThumb[`${post}`].image} time={post} tags={Object.keys(postThumb[`${post}`].tags)} type={uiuxPost.indexOf(post) === 0 ? null : ""}/>
+                        })}
                         <Link className="seemore-btn" to={"/Result/Graphic-Design"} >
                             <Button value={"See all"} state="is-outline" iconRight="chevron_right"/>
                         </Link>
                     </section>
                 </div>
+                <Popup trigger={postPopup.trigger} postID={postPopup.id} setTriggerPopup={setPostPopup}/>
             </div>
             <Footer />
         </>

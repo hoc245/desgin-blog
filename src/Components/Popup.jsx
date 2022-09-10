@@ -32,45 +32,37 @@ function timeSince(date) {
   }
 
   
-export default function Popup({time}) {
+export default function Popup(props) {
     var ago = "";
-    if( time !== "" ) {
-        ago = timeSince(new Date(time));
-    }
-    let { id } = useParams();
+    // if( props.time !== "" ) {
+    //     ago = timeSince(new Date(props.time));
+    // }
     useEffect(() => {
-        let catalogies = document.querySelectorAll(".--catalogies-item");
-        let catalogiesArray = [];
-        let popup = document.querySelector('.popup');
-
-        [].forEach.call(catalogies, item => catalogiesArray.push(item.innerHTML));
-        if(id && catalogiesArray.indexOf(id.replace('-'," ").replace("UIUX","UI/UX")) === -1) {
+        if(document.querySelectorAll('.popup.is-active').length) {
+            let popup = document.querySelector('.popup');
             popup.removeAttribute('style');
-            popup.classList.add('is-active');
             popup.scrollTo(0,0);
             document.body.setAttribute('style','overflow:hidden');
+            setTimeout(() => {
+                popup.classList.add('is-active');
+            },0)
+        } else {
+            document.body.setAttribute('style','overflow:auto');
         }
-    },[id])
+    },[props.trigger]);
     const closePopup = () => {
         let popup = document.querySelector('.popup');
-        if(popup) {
-            popup.classList.remove('is-active');
-            setTimeout(() => {
-                popup.setAttribute('style','display:none')
-            },400)
-            document.body.removeAttribute('style');
-            const nextURL = window.location.href.replace(`/${id}`,"");
-            const nextTitle = 'My new page title';
-            const nextState = { additionalInformation: 'Updated the URL with JS' };
-            window.history.pushState(nextState, nextTitle, nextURL);
-        }
+        popup.classList.remove('is-active');
+        setTimeout(() => {
+            props.setTriggerPopup({trigger : false, id : ""})
+        },200)
     }
-    return (
+    return props.trigger ? (
         <div className="popup" style={{display:"none"}}>
             <Button value="" iconLeft="close" state="is-filled popup-close" onClick={() => {closePopup()}}/>
             <div className="popup-container">
                 <section className="breakcrumb">
-                    <h3>UI/ UX Design {id}</h3>
+                    <h3>UI/ UX Design</h3>
                     <hr></hr>
                 </section>
                 <section className="popup-content">
@@ -133,5 +125,5 @@ export default function Popup({time}) {
             </div>
             <div className="popup-overlay"></div>
         </div>
-    )
+    ) : ( <></> )
 }

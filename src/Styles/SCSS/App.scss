@@ -5,6 +5,22 @@
 @import "elements/Search";
 @import "elements/Card";
 @import "elements/Popup";
+@import "elements/Daypicker";
+
+@keyframes change-background {
+    0% {
+        background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Images/hero-image-01.gif');
+    };
+    33% {
+        background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Images/hero-image-02.gif');
+    };
+    66% {
+        background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Images/hero-image-03.gif');
+    }
+    100% {
+        background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Images/hero-image-01.gif');
+    };
+}
 
 // Reset Style
 * {
@@ -45,12 +61,11 @@ h3 {
 .nav {
     width: 100%;
     padding:20px;
-    background-color: rgba(255,255,255,0.9);
-    position: sticky;
+    position: fixed;
     top:0;
     z-index: 99;
-    backdrop-filter: blur(20px) saturate(150%);
     transition: all 200ms ease;
+    color: white;
     .nav-container {
         width: 100%;
         max-width: 1040px;
@@ -65,12 +80,13 @@ h3 {
                 position: relative;
                 img {
                     padding-bottom: 4px;
+                    filter: invert(1);
                 }
             }
             .nav-item {
                 margin-left: 16px;
                 @include font.bold14;
-                color: col.$text;
+                color: white;
                 position: relative;
                 vertical-align: middle;
                 display: flex;
@@ -81,7 +97,7 @@ h3 {
                     position: absolute;
                     width: 100%;
                     height: 2px;
-                    background-color: col.$text;
+                    background-color: white;
                     opacity: 0;
                     top:40px;
                 }
@@ -96,6 +112,9 @@ h3 {
                 position: relative;
                 display: flex;
                 align-items: center;
+                .nav-dropdown-title {
+                    color: white;
+                }
                 &:hover .nav-dropdown-menu {
                     opacity: 1;
                     visibility: visible;
@@ -137,14 +156,95 @@ h3 {
         .nav-right {
             display: flex;
             align-items: center;
-            a {
+            button {
+                color:white;
                 margin-right: 16px;
+                &:hover {
+                    color: col.$text;
+                }
+            }
+            .nav-user {
+                position: relative;
+                width: 45px;
+                height: 45px;
+                cursor: pointer;
+                transition: all 200ms ease;
+                img {
+                    border-radius: 50%;
+                    border:2px solid white;
+                }
+                ul {
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    list-style: none;
+                    padding:16px;
+                    background-color: white;
+                    position: absolute;
+                    width: fit-content;
+                    min-width: 150px;
+                    border-radius: 8px;
+                    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
+                    right:0;
+                    top: calc(100%);
+                    transition: all 200ms ease;
+                    color: col.$text;
+                    &.is-active {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: all;
+                        top: calc(100% + 8px);
+                    }
+                    li+li {
+                        margin-top: 16px;
+                    }
+                    li {
+                        @include font.medium14;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: col.$text-link;
+                        }
+                    }
+                }
             }
         }
     }
     &.is-scroll {
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
         padding:0px 20px;
+        backdrop-filter: blur(20px) saturate(150%);
+        background-color: rgba(255,255,255,0.9);
+        color: col.$text;
+        .nav-container {
+            .nav-right {
+                .nav-user {
+                    width: 35px;
+                    height: 35px;
+                }
+                button {
+                    color:col.$text;
+                }
+            }
+            .nav-left {
+                .logo {
+                    img {
+                        filter: invert(0);
+                    }
+                }
+                .nav-item {
+                    color: col.$text;
+                    &::after {
+                        background-color: col.$text;
+                    }
+                }
+                .nav-dropdown {
+                    .nav-dropdown-title {
+                        color: col.$text;
+                    }
+                }
+            }
+        }
     }
 }
 .main {
@@ -202,18 +302,22 @@ section {
 }
 .hero-section {
     position: relative;
-    height: 400px;
+    height: 500px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color:col.$text;
-    background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../Images/Bg\ news.png');
+    animation-name: change-background;
+    animation-duration: 12s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
     background-repeat: no-repeat;
     background-size: cover;
     color:white;
     margin-bottom: 64px;
+    transition: background 200ms ease;
     &-catalogies {
         display: flex;
         list-style: none;

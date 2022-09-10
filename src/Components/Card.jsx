@@ -32,52 +32,43 @@ function timeSince(date) {
   }
 
 
-export default function Card({postID,title="",description="",cover="",time="",tags=[],type="is-line"}) {
+export default function Card(props) {
     var ago = "";
     const location = window.location
     let link = "";
       if(location && location.pathname && location.pathname !== "/" ) {
-        if(!location.pathname.includes(postID)) {
-          link = `${location.pathname}/${postID}`
+        if(!location.pathname.includes(props.postID)) {
+          link = `${location.pathname}/${props.postID}`
         } else {
           link = location.pathname
         }
       } else {
         if(location.pathname.includes('Homepage')) {
-          link = `${postID}`
+          link = `${props.postID}`
         } else {
-          link = `/Homepage/${postID}`
+          link = `/Homepage/${props.postID}`
         }
       }
-    if( time !== "" ) {
-        ago = timeSince(new Date(time));
+    if( props.time !== "" ) {
+        ago = timeSince(props.time);
     }
-    if( cover === "" ) {
-        cover = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/cb/3c4030d65011e682d8b14e2f0915fa/shutterstock_226881610.jpg?auto=format%2Ccompress&dpr=1"
-    }
-    const handlePopup = () => {
-      console.log('Ok')
-      let popup = document.querySelector('.popup');
-      if(popup) {
-        if(!popup.classList.contains('is-active')) {
-          popup.removeAttribute('style');
-          popup.classList.add('is-active');
-          popup.scrollTo(0,0);
-          document.body.setAttribute('style','overflow:hidden');
-        }
-      }
+    const openPopup = (val) => {
+      props.setPostPopup({
+        trigger : true,
+        id : val
+      });
     }
     return(
-        <div id={postID} className={`card ${type}`}>
-            <Link to={link} ><img src={cover} alt="cover" onClick={() => {handlePopup()}}/></Link>
+        <div id={props.postID} className={`card ${props.type === "" ? props.type : "is-line"}`}>
+            <img src={props.cover ? props.cover : "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/cb/3c4030d65011e682d8b14e2f0915fa/shutterstock_226881610.jpg?auto=format%2Ccompress&dpr=1"} alt="cover" onClick={() => {openPopup(props.postID)}}/>
             <div className="content">
                 <div className="tags-container">
-                    {tags.length && tags.map(tag => {
+                    {props.tags.length && props.tags.map(tag => {
                         return <span key={`card-${tag}`} className="tag">{tag}</span>
                     })}
                 </div>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <h3 onClick={() => {openPopup(props.postID)}}>{props.title}</h3>
+                <p>{props.description}</p>
                 <div className="card-description">
                     <div className="description-time">
                         <span className="material-symbols-outlined">schedule</span>

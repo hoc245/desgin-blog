@@ -8,7 +8,7 @@ import Button from './Button';
 function Login(props) {
     const [checked,setChecked] = useState(false);
     const param = useParams();
-    const [signUp,setSignUp] = useState(true);
+    const [signUp,setSignUp] = useState(false);
     useEffect(() => {
         if(props.trigger) {
             let popup = document.querySelector('.popup.login');

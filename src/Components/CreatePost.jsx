@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Button from './Button';
-import ReactQuill from 'react-quill';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import imageCompression from "browser-image-compression";
 import {auth , db, storage} from '../firebase';
 import { ref, onValue , set , update } from "firebase/database";
+import Editor from './Editor';
 
 export default function CreatePost(props) {
-    const [value, setValue] = useState('');
     const [tags,setTags] = useState();
     const [selected, setSelected] = useState();
     const [hasLogin,setHaslogin] = useState(false);
@@ -22,7 +21,8 @@ export default function CreatePost(props) {
     var mFile;
     let mm = 0
     let dd = 0
-    let currentSelectDay = ""
+    let currentSelectDay = "";
+    let value = "";
     if (selected) {
       mm = selected.getMonth() + 1; // Months start at 0!
       dd = selected.getDate();
@@ -62,19 +62,6 @@ export default function CreatePost(props) {
         document.body.style.overflow = "auto"
       }
     })
-    var modules = {
-        toolbar: [
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
-          ['clean']
-        ],
-      }
-    var formats = [
-      'bold', 'italic', 'underline', 'strike', 'blockquote',
-      'list', 'bullet', 'indent',
-      'link', 'image'
-    ]
     const tagsSuggestion = (e) => {
         const value = e.currentTarget.value;
         const tags = document.querySelectorAll('.post-tags-suggestion .tag');
@@ -308,7 +295,7 @@ export default function CreatePost(props) {
                 <h3>Sub-title</h3>
                 <textarea className='post-content-sub' rows={3}></textarea>
                 <h3>Main</h3>
-                <ReactQuill modules={modules} formats={formats} theme="snow" value={value} onChange={setValue} />
+                <Editor sendValue={(e) => {value = e}} />
               </section>
               <section className="post-action">
                 <Button value={"Create post"} iconLeft="add" onClick={() => newPost()}/>

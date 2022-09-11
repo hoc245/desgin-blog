@@ -22,7 +22,9 @@ export default function Button({
       >
         {iconLeft}
       </span>
-      {value}
+      <span className={value ? "button-value" : "button-value is-hidden"}>
+        {value}
+      </span>
       <span
         className={`${
           iconRight === ""

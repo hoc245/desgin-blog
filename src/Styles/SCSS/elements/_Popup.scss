@@ -19,6 +19,15 @@
   background: col.$primary-dark;
 }
 
+@keyframes spinAround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .popup {
   position: fixed;
   top: 0;
@@ -317,14 +326,25 @@
       position: relative;
       width: 100%;
       border-radius: 8px;
+      height: fit-content;
+      &.is-sticky::before {
+        position: sticky;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 95px;
+        top: -75px;
+        background-color: white;
+        z-index: 999;
+      }
       .ql-toolbar {
         border-radius: 8px 8px 0 0;
-        &.is-sticky {
-          position: sticky;
-          top: 0;
-          background-color: white;
-          z-index: 999;
-        }
+      }
+      &.is-sticky .ql-toolbar {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 999;
       }
       .ql-container {
         border-radius: 0 0 8px 8px;
@@ -441,8 +461,57 @@
   .post-action {
     justify-content: left;
     margin-bottom: 0;
+    position: relative;
+    p.post-action-valid {
+      position: absolute;
+      top: -24px;
+      color: col.$error;
+      @include font.medium14;
+      opacity: 0;
+      &.is-active {
+        opacity: 1;
+      }
+    }
     .button + .button {
       margin-left: 8px;
+    }
+    .button.create-post {
+      position: relative;
+      transition: all 200ms ease;
+      &.is-success {
+        background-color: col.$success;
+        color: white;
+        span {
+          display: none;
+        }
+        span.button-value {
+          display: inline-block;
+        }
+      }
+      &.is-loading {
+        color: transparent;
+        background-color: col.$neutral-20;
+        cursor: not-allowed;
+        pointer-events: none;
+        span {
+          opacity: 0;
+        }
+        &::after {
+          content: "";
+          display: block;
+          height: 1em;
+          width: 1em;
+          left: calc(50% - (1em * 0.5));
+          top: calc(50% - (1em * 0.5));
+          position: absolute;
+          -webkit-animation: spinAround 0.5s infinite linear;
+          animation: spinAround 0.5s infinite linear;
+          border: 2px solid col.$neutral-40;
+          border-radius: 9999px;
+          border-right-color: transparent;
+          border-top-color: transparent;
+        }
+      }
     }
   }
 }

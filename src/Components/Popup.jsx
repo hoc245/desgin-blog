@@ -41,6 +41,29 @@ export default function Popup(props) {
     }
   }, [props.postID]);
   useEffect(() => {
+    let popContent = document.querySelector(".popup-container");
+    if (popContent) {
+      popContent.scrollTo(0, 0);
+    }
+    console.log("scroll");
+  }, [post]);
+  const relatedPost =
+    props.allPost && post
+      ? Object.keys(props.allPost)
+          .filter((item) => {
+            if (
+              props.allPost[`${item}`].catalogue === post.catalogue &&
+              parseInt(item) !== parseInt(post.createAt)
+            ) {
+              return true;
+            }
+          })
+          .sort((a, b) => {
+            return b - a;
+          })
+          .splice(0, 5)
+      : [];
+  useEffect(() => {
     if (props.trigger && post) {
       let popup = document.querySelector(".popup");
       popup.removeAttribute("style");
@@ -61,10 +84,18 @@ export default function Popup(props) {
     let popup = document.querySelector(".popup");
     popup.classList.remove("is-active");
     setTimeout(() => {
-      props.setTriggerPopup(false);
+      props.setTriggerPopup({
+        trigger: false,
+        id: "",
+        allPost: props.allPost,
+      });
     }, 200);
   };
-
+  const changePopupContent = (id) => {
+    onValue(ref(db, `/postDetail/${id}`), (snapshot) => {
+      setPost(snapshot.val());
+    });
+  };
   return props.trigger && post ? (
     <div className="popup" style={{ display: "none" }}>
       <Button
@@ -157,33 +188,26 @@ export default function Popup(props) {
             <Button value="More" state="is-ghost" isSmall="true" />
             <div className="related-news">
               <section className="breakcrumb">
-                <h3>UI/ UX Design</h3>
+                <h3>Related Post</h3>
                 <hr></hr>
               </section>
-              <Card
-                postID="post-020"
-                title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam"
-                description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..."
-                cover=""
-                time="09/02/2022"
-                tags={["Lastest", "UI/UX"]}
-              />
-              <Card
-                postID="post-021"
-                title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam"
-                description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..."
-                cover=""
-                time="09/02/2022"
-                tags={["Lastest", "UI/UX"]}
-              />
-              <Card
-                postID="post-022"
-                title="Tiềm năng phát triển của ngành UI/ UX Design tại Việt Nam"
-                description="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia mollit nonconsequat duis enim velit mollit. Exercita veniam consequat sunt nostrud amet ..."
-                cover=""
-                time="09/02/2022"
-                tags={["Lastest", "UI/UX"]}
-              />
+              {relatedPost &&
+                relatedPost.map((post) => {
+                  return (
+                    <Card
+                      key={`graphic${post}`}
+                      setPostPopup={(e) => {
+                        changePopupContent(e.id);
+                      }}
+                      postID={post}
+                      title={props.allPost[`${post}`].title}
+                      description={props.allPost[`${post}`].description}
+                      cover={props.allPost[`${post}`].image}
+                      time={post}
+                      tags={Object.keys(props.allPost[`${post}`].tags)}
+                    />
+                  );
+                })}
             </div>
             <hr></hr>
           </div>

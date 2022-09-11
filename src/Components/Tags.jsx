@@ -41,7 +41,7 @@ function Tags() {
   };
   return (
     <div className="post-tags">
-      <h3>Tags</h3>
+      <h3>Tags (Required)</h3>
       <div className="post-tags-result">
         <div className="tags-selected">
           {tags &&

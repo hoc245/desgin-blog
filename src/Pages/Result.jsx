@@ -17,10 +17,16 @@ export default function Result() {
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
+    allPost: {},
   });
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());
+      setPostPopup({
+        trigger: false,
+        id: "",
+        allPost: snapshot.val(),
+      });
     });
     var current = location.pathname.substring(8).replace("-", " ");
     if (current.includes("UIUX")) {
@@ -100,6 +106,7 @@ export default function Result() {
               currentPost.map((post) => {
                 return (
                   <Card
+                    key={`${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}
@@ -202,6 +209,7 @@ export default function Result() {
       <Popup
         trigger={postPopup.trigger}
         postID={postPopup.id}
+        allPost={postThumb}
         setTriggerPopup={setPostPopup}
       />
       <Footer />

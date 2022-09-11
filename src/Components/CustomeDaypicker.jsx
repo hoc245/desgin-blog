@@ -26,6 +26,7 @@ function CustomeDaypicker(props) {
       mode="single"
       selected={selected}
       onSelect={(e) => {
+        document.querySelector(".daypicker").classList.toggle("is-active");
         handleCallBack(e);
       }}
     />

@@ -43,15 +43,14 @@ export default function CreatePost(props) {
   });
   const stickyEditor = () => {
     let editor = document.querySelector(".quill");
-    let toolbar = editor.querySelector(".ql-toolbar");
     if (!editor) {
       return false;
     } else {
       let y = editor.getBoundingClientRect().y;
       if (y < 95) {
-        toolbar.classList.add("is-sticky");
+        editor.classList.add("is-sticky");
       } else {
-        toolbar.classList.remove("is-sticky");
+        editor.classList.remove("is-sticky");
       }
     }
   };
@@ -94,6 +93,7 @@ export default function CreatePost(props) {
     const subTitle = document.querySelector(".post-content-sub").value;
     const body = value;
     const valid = checkValid();
+    const createBtn = document.querySelector(".button.create-post");
     var mPost = {
       createAt: "",
       catalogue: "",
@@ -128,6 +128,7 @@ export default function CreatePost(props) {
         storage,
         `images/${fileName}.${file.name.substr(-3)}`
       );
+      createBtn.classList.add("is-loading");
       await imageCompression(file, options).then((compressFile) => {
         uploadBytes(imageRef, compressFile).then(() => {
           getDownloadURL(
@@ -147,7 +148,14 @@ export default function CreatePost(props) {
               set(ref(db, `/postDetail/${mPost.createAt}`), mPost);
             })
             .then(() => {
-              closePopup();
+              createBtn.classList.remove("is-loading");
+              createBtn.classList.add("is-success");
+              document.querySelector(
+                ".button.create-post .button-value"
+              ).innerHTML = "Post created successfully";
+              setTimeout(() => {
+                closePopup();
+              }, 2000);
             });
         });
       });
@@ -157,6 +165,7 @@ export default function CreatePost(props) {
     }
   };
   const checkValid = () => {
+    const validText = document.querySelector(".post-action-valid");
     const createAt = document.querySelector(
       ".post-create-day--value"
     ).innerHTML;
@@ -190,7 +199,6 @@ export default function CreatePost(props) {
       catalogiesSection.classList.remove("is-invalid");
     }
     if (!Object.keys(tags).length) {
-      console.log(tags);
       tagsSection.classList.add("is-invalid");
       console.log(`Error at: tagsSection`);
     } else {
@@ -209,8 +217,10 @@ export default function CreatePost(props) {
     }
     const invalid = document.querySelectorAll(".is-invalid");
     if (invalid.length) {
+      validText.classList.add("is-active");
       return false;
     } else {
+      validText.classList.remove("is-active");
       return true;
     }
   };
@@ -258,7 +268,7 @@ export default function CreatePost(props) {
               </section>
               <section className="post-option">
                 <div className="post-catalogies">
-                  <h3>Catalogue</h3>
+                  <h3>Catalogue (Required)</h3>
                   <div className="dropdown-catalogies">
                     <div
                       className="dropdown-catalogies-title"
@@ -296,7 +306,7 @@ export default function CreatePost(props) {
                   </div>
                 </div>
                 <div className="post-create-day">
-                  <h3>Create at</h3>
+                  <h3>Create at (Required)</h3>
                   <p
                     className="post-create-day--value"
                     onClick={(e) => {
@@ -318,7 +328,7 @@ export default function CreatePost(props) {
                 <Tags />
               </section>
               <section className="post-banner">
-                <h3>Banner</h3>
+                <h3>Banner (Required)</h3>
                 <div className="post-banner-preview">
                   <label htmlFor="banner-upload">
                     <Button value="Upload" iconLeft={"add_photo_alternate"} />
@@ -334,11 +344,11 @@ export default function CreatePost(props) {
                 </div>
               </section>
               <section className="post-content">
-                <h3>Title</h3>
+                <h3>Title (Required)</h3>
                 <textarea className="post-content-header" rows={1}></textarea>
                 <h3>Sub-title</h3>
                 <textarea className="post-content-sub" rows={3}></textarea>
-                <h3>Main</h3>
+                <h3>Main (Required)</h3>
                 <Editor
                   sendValue={(e) => {
                     value = e;
@@ -346,10 +356,14 @@ export default function CreatePost(props) {
                 />
               </section>
               <section className="post-action">
+                <p className="post-action-valid">
+                  You need to fill some fields before create a post
+                </p>
                 <Button
                   value={"Create post"}
                   iconLeft="add"
                   onClick={() => newPost()}
+                  state="is-filled create-post"
                 />
                 <Button
                   value={"Cancel"}

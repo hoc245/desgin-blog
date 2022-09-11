@@ -13,10 +13,16 @@ export default function Homepage() {
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
+    allPost: {},
   });
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());
+      setPostPopup({
+        trigger: false,
+        id: "",
+        allPost: snapshot.val(),
+      });
     });
   }, []);
   const newPost = postThumb
@@ -66,7 +72,6 @@ export default function Homepage() {
                 return (
                   <Card
                     key={`new${post}`}
-                    trigger={postPopup.trigger}
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}
@@ -89,7 +94,6 @@ export default function Homepage() {
                 return (
                   <Card
                     key={`graphic${post}`}
-                    trigger={postPopup.trigger}
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}
@@ -142,6 +146,7 @@ export default function Homepage() {
         <Popup
           trigger={postPopup.trigger}
           postID={postPopup.id}
+          allPost={postThumb}
           setTriggerPopup={setPostPopup}
         />
       </div>

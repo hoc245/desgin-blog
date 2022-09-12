@@ -25,6 +25,7 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
+  height: 24px;
 }
 .button.is-small span {
   font-size: 12px;
@@ -1111,6 +1112,9 @@ h3 {
 .nav .nav-container .nav-right button:hover {
   color: #1a1a1c;
 }
+.nav .nav-container .nav-right .button.is-filled:hover {
+  color: white;
+}
 .nav .nav-container .nav-right .nav-user {
   position: relative;
   width: 45px;
@@ -1574,6 +1578,108 @@ section.breakcrumb span {
   font-weight: 400;
   line-height: 18px;
   font-style: italic;
+}
+
+.main.account {
+  display: flex;
+  padding-top: 100px;
+}
+.main.account .main-content {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main.account .main-content .account-info {
+  display: flex;
+  gap: 32px;
+}
+.main.account .main-content .account-info .account-image {
+  width: 300px;
+  max-height: 300px;
+  position: relative;
+  border-radius: 8px;
+}
+.main.account .main-content .account-info .account-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+}
+.main.account .main-content .account-info .account-image label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -45px;
+  z-index: 9;
+}
+.main.account .main-content .account-info .account-image label input {
+  display: none;
+}
+.main.account .main-content .account-info .account-image .button {
+  pointer-events: none;
+}
+.main.account .main-content .account-info .account-detail {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+}
+.main.account .main-content .account-info .account-detail h3 {
+  margin-top: 32px;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 16px;
+}
+.main.account .main-content .account-info .account-detail h3:nth-of-type(1) {
+  margin-top: 0;
+}
+.main.account .main-content .account-info .account-detail label {
+  width: 100%;
+  height: 35px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #dfe0e1;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.main.account .main-content .account-info .account-detail label.is-invalid {
+  border-color: #ff4936;
+}
+.main.account .main-content .account-info .account-detail label input {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+.main.account .main-content .account-info .account-detail .account-valid {
+  width: 100%;
+  display: none;
+  text-align: center;
+  position: absolute;
+  bottom: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #ff4936;
+}
+.main.account .main-content .account-info .account-detail .account-valid.is-active {
+  display: block;
+}
+.main.account .main-content .account-info .account-detail .account-action {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main.account .main-content .account-info .account-detail .account-action .button + .button {
+  margin-left: 8px;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -6,6 +6,7 @@ import Homepage from "./Pages/Homepage";
 import Result from "./Pages/Result";
 import Course from "./Pages/Course";
 import About from "./Pages/About";
+import Account from "./Pages/Account";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
           </Route>
           <Route path="Course" element={<Course />} />
           <Route path="About" element={<About />} />
+          <Route path="Account" element={<Account />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -7,6 +7,23 @@ import Popup from "../Components/Popup";
 import { onValue, ref } from "firebase/database";
 import { auth, db } from "../firebase";
 
+function getDayName(dateStr) {
+  var date = new Date(parseInt(dateStr));
+  return date.toLocaleDateString("en-EN", { weekday: "long" });
+}
+function padTo2Digits(num) {
+  return num.toString().padStart(2, "0");
+}
+
+function formatDate(date) {
+  var day = new Date(parseInt(date));
+  return [
+    padTo2Digits(day.getDate()),
+    padTo2Digits(day.getMonth() + 1),
+    day.getFullYear(),
+  ].join("/");
+}
+
 export default function Result() {
   const location = useLocation();
   const param = useParams();
@@ -111,6 +128,7 @@ export default function Result() {
             }
             if (currentCatalogue === "Saved") {
               if (
+                user &&
                 user.savedPost &&
                 Object.keys(user.savedPost).indexOf(item) >= 0
               ) {
@@ -227,6 +245,13 @@ export default function Result() {
                 : `${currentCatalogue}`}
             </h3>
             <hr></hr>
+            {currentCatalogue === "Latest" ? (
+              <span>{`${getDayName(currentPost[0])}, ${formatDate(
+                currentPost[0]
+              )}`}</span>
+            ) : (
+              <></>
+            )}
           </section>
           <section className="card-container result">
             {currentPost.length ? (

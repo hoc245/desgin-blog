@@ -34,21 +34,6 @@ function timeSince(date) {
 export default function Card(props) {
   const [user, setUser] = useState(props.user);
   var ago = "";
-  const location = window.location;
-  let link = "";
-  if (location && location.pathname && location.pathname !== "/") {
-    if (!location.pathname.includes(props.postID)) {
-      link = `${location.pathname}/${props.postID}`;
-    } else {
-      link = location.pathname;
-    }
-  } else {
-    if (location.pathname.includes("Homepage")) {
-      link = `${props.postID}`;
-    } else {
-      link = `/Homepage/${props.postID}`;
-    }
-  }
   if (props.time !== "") {
     ago = timeSince(props.time);
   }

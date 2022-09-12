@@ -23,6 +23,7 @@
   }
   &.is-small {
     @include font.bold12;
+    height: 24px;
     span {
       font-size: 12px;
     }

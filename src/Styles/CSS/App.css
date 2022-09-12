@@ -59,6 +59,10 @@
 .button.is-ghost:hover {
   background-color: #dfe0e1;
 }
+.button.is-invalid {
+  position: relative;
+  border: 1px solid #ff4936;
+}
 
 .searchbar {
   position: relative;
@@ -356,8 +360,7 @@
   padding-bottom: 8px;
   border-left: 4px solid #e9eaea;
 }
-.popup .popup-container .popup-content div blockquote + p,
-.popup .popup-container .popup-content div blockquote + h1 {
+.popup .popup-container .popup-content div blockquote + p, .popup .popup-container .popup-content div blockquote + h1 {
   margin-top: 16px;
 }
 .popup .popup-container .popup-content img {
@@ -427,22 +430,12 @@
   margin-right: 8px;
   margin-bottom: 0;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .post-comment-item-content
-  p {
+.popup .popup-container .popup-content .post-comment .post-comment-item-content p {
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .post-comment-item-content
-  span {
+.popup .popup-container .popup-content .post-comment .post-comment-item-content span {
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
@@ -457,22 +450,10 @@
 .popup .popup-container .popup-content .post-comment .related-news .breakcrumb {
   margin-bottom: 0;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .breakcrumb
-  h3 {
+.popup .popup-container .popup-content .post-comment .related-news .breakcrumb h3 {
   width: fit-content;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .breakcrumb
-  hr {
+.popup .popup-container .popup-content .post-comment .related-news .breakcrumb hr {
   display: block;
   flex: 1 1 0%;
   border: none;
@@ -487,47 +468,20 @@
   border-radius: 0;
   object-fit: cover;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .card
-  .content
-  h3 {
+.popup .popup-container .popup-content .post-comment .related-news .card .content h3 {
   font-size: 14px;
   font-weight: 700;
   line-height: 21px;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .card
-  .content
-  p {
+.popup .popup-container .popup-content .post-comment .related-news .card .content p {
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .card
-  .card-description {
+.popup .popup-container .popup-content .post-comment .related-news .card .card-description {
   margin-bottom: 0;
 }
-.popup
-  .popup-container
-  .popup-content
-  .post-comment
-  .related-news
-  .card
-  .card-description
-  .button {
+.popup .popup-container .popup-content .post-comment .related-news .card .card-description .button {
   margin-bottom: 0;
 }
 .popup .popup-container .popup-content .post-comment hr {
@@ -694,20 +648,13 @@
   border-radius: 4px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.14);
 }
-.popup-container
-  .post-option
-  .post-catalogies
-  .dropdown-catalogies-menu.is-active {
+.popup-container .post-option .post-catalogies .dropdown-catalogies-menu.is-active {
   display: block;
 }
 .popup-container .post-option .post-catalogies .dropdown-catalogies-menu p {
   cursor: pointer;
 }
-.popup-container
-  .post-option
-  .post-catalogies
-  .dropdown-catalogies-menu
-  p:hover {
+.popup-container .post-option .post-catalogies .dropdown-catalogies-menu p:hover {
   color: #355caa;
 }
 .popup-container .post-option .post-catalogies .dropdown-catalogies-menu p + p {
@@ -833,20 +780,16 @@
   border: none;
   background-color: transparent;
 }
-.login .popup-container .form label[for="checkbox"] {
+.login .popup-container .form label[for=checkbox] {
   border: none;
   color: #1a1a1c;
   width: fit-content;
   margin: 16px 0;
 }
-.login .popup-container .form label[for="checkbox"] span {
+.login .popup-container .form label[for=checkbox] span {
   color: inherit;
 }
-.login
-  .popup-container
-  .form
-  label[for="checkbox"]
-  span:not(.material-symbols-outlined) {
+.login .popup-container .form label[for=checkbox] span:not(.material-symbols-outlined) {
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -1004,20 +947,16 @@
 
 @keyframes change-background {
   0% {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("../../Images/hero-image-01.gif");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../Images/hero-image-01.gif");
   }
   33% {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("../../Images/hero-image-02.gif");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../Images/hero-image-02.gif");
   }
   66% {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("../../Images/hero-image-03.gif");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../Images/hero-image-03.gif");
   }
   100% {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url("../../Images/hero-image-01.gif");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../Images/hero-image-01.gif");
   }
 }
 * {
@@ -1218,43 +1157,35 @@ h3 {
 .nav .nav-container .nav-right .nav-user ul li:hover {
   color: #355caa;
 }
-.nav.is-scroll,
-.nav.is-result {
+.nav.is-scroll, .nav.is-result {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   padding: 0px 20px;
   backdrop-filter: blur(20px) saturate(150%);
   background-color: rgba(255, 255, 255, 0.9);
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-right .nav-user,
-.nav.is-result .nav-container .nav-right .nav-user {
+.nav.is-scroll .nav-container .nav-right .nav-user, .nav.is-result .nav-container .nav-right .nav-user {
   width: 35px;
   height: 35px;
 }
 .nav.is-scroll .nav-container .nav-right button.is-ghost,
-.nav.is-scroll .nav-container .nav-right button.is-outline,
-.nav.is-result .nav-container .nav-right button.is-ghost,
+.nav.is-scroll .nav-container .nav-right button.is-outline, .nav.is-result .nav-container .nav-right button.is-ghost,
 .nav.is-result .nav-container .nav-right button.is-outline {
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-right button.is-filled:hover,
-.nav.is-result .nav-container .nav-right button.is-filled:hover {
+.nav.is-scroll .nav-container .nav-right button.is-filled:hover, .nav.is-result .nav-container .nav-right button.is-filled:hover {
   color: white;
 }
-.nav.is-scroll .nav-container .nav-left .logo img,
-.nav.is-result .nav-container .nav-left .logo img {
+.nav.is-scroll .nav-container .nav-left .logo img, .nav.is-result .nav-container .nav-left .logo img {
   filter: invert(0);
 }
-.nav.is-scroll .nav-container .nav-left .nav-item,
-.nav.is-result .nav-container .nav-left .nav-item {
+.nav.is-scroll .nav-container .nav-left .nav-item, .nav.is-result .nav-container .nav-left .nav-item {
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-left .nav-item::after,
-.nav.is-result .nav-container .nav-left .nav-item::after {
+.nav.is-scroll .nav-container .nav-left .nav-item::after, .nav.is-result .nav-container .nav-left .nav-item::after {
   background-color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-left .nav-dropdown .nav-dropdown-title,
-.nav.is-result .nav-container .nav-left .nav-dropdown .nav-dropdown-title {
+.nav.is-scroll .nav-container .nav-left .nav-dropdown .nav-dropdown-title, .nav.is-result .nav-container .nav-left .nav-dropdown .nav-dropdown-title {
   color: #1a1a1c;
 }
 
@@ -1574,24 +1505,12 @@ section.breakcrumb span {
   height: 50px;
   margin-right: 8px;
 }
-.review
-  .review-slider
-  .review-right
-  .review-item
-  .review-item-user
-  .user-info
-  p {
+.review .review-slider .review-right .review-item .review-item-user .user-info p {
   font-size: 14px;
   font-weight: 700;
   line-height: 21px;
 }
-.review
-  .review-slider
-  .review-right
-  .review-item
-  .review-item-user
-  .user-info
-  span {
+.review .review-slider .review-right .review-item .review-item-user .user-info span {
   font-size: 10px;
   font-weight: 400;
   line-height: 15px;

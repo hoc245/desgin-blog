@@ -1,6 +1,6 @@
 import { set, ref } from "firebase/database";
 import React, { useState } from "react";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import Button from "./Button";
 import { motion } from "framer-motion";
 
@@ -70,23 +70,29 @@ export default function Card(props) {
       reject("error");
     });
   }
-  const handleSavePost = async (id) => {
-    const savedPost = user.savedPost ? user.savedPost : {};
-    await checkExist(savedPost, id)
-      .then((result) => {
-        set(ref(db, `/users/${user.id}/savedPost/`), result);
-        setUser({
-          email: user.email,
-          id: user.id,
-          image: user.image,
-          jobs: user.jobs,
-          name: user.name,
-          savedPost: result,
+  const handleSavePost = async (e, id) => {
+    const savedPost = user && user.savedPost ? user.savedPost : {};
+    const saveBtn = e.currentTarget;
+    if (user) {
+      saveBtn.classList.remove("is-invalid");
+      await checkExist(savedPost, id)
+        .then((result) => {
+          set(ref(db, `/users/${user.id}/savedPost/`), result);
+          setUser({
+            email: user.email,
+            id: user.id,
+            image: user.image,
+            jobs: user.jobs,
+            name: user.name,
+            savedPost: result,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    } else {
+      saveBtn.classList.add("is-invalid");
+    }
   };
   return (
     <motion.div
@@ -135,22 +141,25 @@ export default function Card(props) {
             <span>{ago}</span>
           </div>
           <Button
-            onClick={() => {
-              handleSavePost(props.postID);
+            onClick={(e) => {
+              handleSavePost(e, props.postID);
             }}
             value={`${
+              user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
                 ? "Saved"
                 : "Save"
             }`}
             iconLeft={`${
+              user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
                 ? "favorite"
                 : "favorite_border"
             }`}
             state={`${
+              user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
                 ? "is-filled is-saved"

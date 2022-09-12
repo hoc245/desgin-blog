@@ -6,8 +6,7 @@
   width: calc((100% - 64px) / 3);
   flex-direction: column;
   border: 1px solid col.$neutral-10;
-  height: fit-content;
-  max-height: 350px;
+  align-items: stretch;
   flex-wrap: nowrap;
   border-radius: 8px;
   overflow: hidden;
@@ -23,8 +22,8 @@
   .content {
     display: flex;
     flex-direction: column;
-    height: 100%;
     padding: 16px;
+    height: 100%;
     .tags-container {
       margin-bottom: 16px;
       .tag + .tag {
@@ -47,26 +46,25 @@
   &.is-line {
     width: 100%;
     flex-direction: row;
-    height: 215px;
+    height: fit-content;
     gap: 16px;
     overflow: visible;
     border: 1px solid col.$neutral-10;
+    align-items: stretch;
     &:hover {
-      box-shadow: none;
-    }
-    &:hover img {
       box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
     }
     img {
       transition: box-shadow 200ms ease;
-      width: 50%;
-      height: 100%;
+      width: calc(50% - 8px);
+      height: auto;
       border-radius: 8px;
       cursor: pointer;
     }
     .content {
-      width: 50%;
+      width: calc(50% - 8px);
       padding-left: 0;
+      height: auto;
       h3 {
         font-size: 24px;
         line-height: 36px;

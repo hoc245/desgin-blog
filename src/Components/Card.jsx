@@ -1,5 +1,8 @@
-import React from "react";
+import { set, ref } from "firebase/database";
+import React, { useState } from "react";
+import { db } from "../firebase";
 import Button from "./Button";
+import { motion } from "framer-motion"
 
 function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -29,6 +32,7 @@ function timeSince(date) {
 }
 
 export default function Card(props) {
+  const [user,setUser] = useState(props.user);
   var ago = "";
   const location = window.location;
   let link = "";
@@ -52,12 +56,42 @@ export default function Card(props) {
     props.setPostPopup({
       trigger: true,
       id: val,
+      user : props.user
     });
   };
+  function checkExist(savedPost,id) {
+    return new Promise((resolve,reject) => {
+      if(Object.keys(savedPost).indexOf(id) === -1) {
+        savedPost[`${id}`] = true;
+      } else {
+        delete savedPost[`${id}`];
+      }
+      resolve(savedPost);
+      reject("error");
+    })
+  }
+  const handleSavePost = async (id) => {
+    const savedPost = user.savedPost ? user.savedPost : {};
+    await checkExist(savedPost,id).then((result) => {
+      set(ref(db,`/users/${user.id}/savedPost/`),result);
+      setUser({
+        email : user.email,
+        id : user.id,
+        image : user.image,
+        jobs : user.jobs,
+        name : user.name,
+        savedPost : result
+      })
+    }).catch(error => {
+      console.log(error)
+    })
+  }
   return (
-    <div
+    <motion.div
       id={props.postID}
       className={`card ${props.type === "" ? props.type : "is-line"}`}
+      transition={{ duration: 1 , type : "spring" }}
+      initial={{x : -40 , opacity : 0}} animate={{x : 0 , opacity: 1}} exit={{x : 40 , opacity: 1}}
     >
       <img
         src={
@@ -88,16 +122,19 @@ export default function Card(props) {
         >
           {props.title}
         </h3>
-        <p>{props.description}</p>
+        <p style={{display : `${props.description ? "" : "none"}`}}>{props.description}</p>
         <div className="card-description">
           <div className="description-time">
             <span className="material-symbols-outlined">schedule</span>
             <span>{ago}</span>
           </div>
           <Button
-            value={"Save"}
-            iconLeft="favorite"
-            state="is-ghost"
+            onClick={() => {
+              handleSavePost(props.postID);
+            }}
+            value={`${user.savedPost && Object.keys(user.savedPost).indexOf(props.postID) !== -1 ? "Saved" : "Save"}`}
+            iconLeft={`${user.savedPost && Object.keys(user.savedPost).indexOf(props.postID) !== -1 ? "favorite" : "favorite_border"}`}
+            state={`${user.savedPost && Object.keys(user.savedPost).indexOf(props.postID) !== -1 ? "is-filled is-saved" : "is-ghost"}`}
             isSmall="true"
           />
           <Button
@@ -108,6 +145,6 @@ export default function Card(props) {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

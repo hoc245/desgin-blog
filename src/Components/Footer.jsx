@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="footer-menu">
             <div className="footer-menu-news">
               <p>News</p>
-              <Link to={"/Result/Lastest"}>Lastest</Link>
+              <Link to={"/Result/Latest"}>Latest</Link>
               <Link to={"/Result/Graphic-Design"}>Graphic Design</Link>
               <Link to={"/Result/UIUX-Design"}>UI/UX-Design</Link>
             </div>

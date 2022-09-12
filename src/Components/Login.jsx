@@ -9,30 +9,6 @@ import { auth, db } from "../firebase";
 import Button from "./Button";
 
 function Login(props) {
-<<<<<<< HEAD
-    const [checked,setChecked] = useState(false);
-    const param = useParams();
-    const [signUp,setSignUp] = useState(false);
-    useEffect(() => {
-        if(props.trigger) {
-            let popup = document.querySelector('.popup.login');
-            popup.removeAttribute('style');
-            popup.scrollTo(0,0);
-            document.body.setAttribute('style','overflow:hidden');
-            setTimeout(() => {
-                popup.classList.add('is-active');
-            },0)
-        } else {
-            document.body.setAttribute('style','overflow:auto');
-        }
-    },[props.trigger]);
-    const closePopup = () => {
-        let popup = document.querySelector('.popup');
-        popup.classList.remove('is-active');
-        setTimeout(() => {
-            props.setTriggerPopup(false)
-        },200)
-=======
   const [checked, setChecked] = useState(false);
   const param = useParams();
   const [signUp, setSignUp] = useState(false);
@@ -47,7 +23,6 @@ function Login(props) {
       }, 0);
     } else {
       document.body.setAttribute("style", "overflow:auto");
->>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
     }
   }, [props.trigger]);
   const closePopup = () => {

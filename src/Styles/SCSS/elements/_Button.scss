@@ -31,6 +31,12 @@
     border: none;
     background-color: col.$primary;
     color: white;
+    &.is-saved {
+      background-color: col.$success;
+      &:hover {
+        background-color: col.$success;
+      }
+    }
     &:hover {
       background-color: col.$primary-dark;
     }

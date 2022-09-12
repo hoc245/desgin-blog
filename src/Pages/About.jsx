@@ -50,7 +50,7 @@ export default function About() {
                 </p>
                 <ul>
                   <Link to="/Homepage">All</Link>
-                  <Link to="/Result/Lastest">Lastest</Link>
+                  <Link to="/Result/Latest">Latest</Link>
                   <Link to="/Result/Graphic-Design">Graphic Design</Link>
                   <Link to="/Result/UIUX-Design">UI/UX Design</Link>
                 </ul>

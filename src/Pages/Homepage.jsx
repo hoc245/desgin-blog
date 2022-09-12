@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import Button from "../Components/Button";
 import Card from "../Components/Card";
 import Footer from "../Components/Footer";
@@ -7,6 +7,7 @@ import Hero from "../Components/Hero";
 import Popup from "../Components/Popup";
 import { ref, onValue } from "firebase/database";
 import { db } from "../firebase";
+import { motion } from "framer-motion"
 
 export default function Homepage() {
   const [postThumb, setPostThumb] = useState();
@@ -15,6 +16,7 @@ export default function Homepage() {
     id: "",
     allPost: {},
   });
+  const [user,setUser] = useOutletContext();
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());
@@ -62,7 +64,7 @@ export default function Homepage() {
         <Hero />
         <div className="main-content">
           <section className="breakcrumb">
-            <h3>Lastest</h3>
+            <h3>Latest</h3>
             <hr></hr>
             <span>Wednesday, 24/08/2022</span>
           </section>
@@ -71,6 +73,7 @@ export default function Homepage() {
               newPost.map((post) => {
                 return (
                   <Card
+                    user={user}
                     key={`new${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
@@ -93,6 +96,7 @@ export default function Homepage() {
               graphicPost.map((post) => {
                 return (
                   <Card
+                    user={user}
                     key={`graphic${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
@@ -122,6 +126,7 @@ export default function Homepage() {
               uiuxPost.map((post) => {
                 return (
                   <Card
+                    user={user}
                     key={`uiux${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}

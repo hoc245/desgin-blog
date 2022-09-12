@@ -24,10 +24,10 @@ export default function Nav({ loginState, user, triggerPopup }) {
   };
   return (
     <>
-      <nav className="nav">
+      <nav className={`${location.pathname.includes('Result') ? "is-result nav" : "nav" }`}>
         <div className="nav-container">
           <div className="nav-left">
-            <Link className={"logo"} to="/">
+            <Link className={"logo"} to="/Homepage">
               <img src={logo} alt="logo" />
             </Link>
             <Link
@@ -63,13 +63,13 @@ export default function Nav({ loginState, user, triggerPopup }) {
                 </Link>
                 <Link
                   className={`${
-                    location.pathname.includes("Lastest")
+                    location.pathname.includes("Latest")
                       ? "nav-dropdown-menu-item is-active"
                       : "nav-dropdown-menu-item"
                   }`}
-                  to="/Result/Lastest"
+                  to="/Result/Latest"
                 >
-                  Lastest
+                  Latest
                 </Link>
                 <Link
                   className={`${

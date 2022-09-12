@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../Components/Button";
 
 export default function Hero() {
   const [currentSearch, setCurrentSearch] = useState("");
   const param = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     if (param.id && param.id.includes("Search")) {
       setCurrentSearch(
-        param.id.substring(8).replace("-", " ").replace("Search&q=", "")
+        param.id.replace("-", " ").replace("Search&q=", "").replace("%20", " ")
       );
     }
-  }, []);
+  }, [param]);
   const handleSearch = (e) => {
     const input = e.currentTarget.previousSibling;
     const value = input.value;
+    console.log()
     if (value === "") {
       return false;
     } else {
-      console.log(`/Result/Search&q=${value}`);
-      window.location.href = `/Result/Search&q=${value}`;
+      navigate(`/Result/Search&q=${value}`)
     }
   };
   const clearSearch = () => {
+    document.scrollingElement.scrollTo(0,0)
     setCurrentSearch("");
   };
   return (
@@ -43,16 +45,16 @@ export default function Hero() {
         </Link>
         <Link
           className={`${
-            param.id && param.id.includes("Lastest")
+            param.id && param.id.includes("Latest")
               ? "--catalogies-item is-active"
               : "--catalogies-item"
           }`}
-          to="/Result/Lastest"
+          to="/Result/Latest"
           onClick={() => {
             clearSearch();
           }}
         >
-          Lastest
+          Latest
         </Link>
         <Link
           className={`${

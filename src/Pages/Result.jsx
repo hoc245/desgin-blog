@@ -1,45 +1,58 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Hero from "../Components/Hero";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Button from "../Components/Button";
 import Popup from "../Components/Popup";
 import { onValue, ref } from "firebase/database";
 import { db } from "../firebase";
+import { motion } from "framer-motion"
 
 export default function Result() {
   const location = useLocation();
+  const param = useParams();
   const [page, setPage] = useState(1);
   const [currentCatalogue, setCurrentCatalogue] = useState();
   const [postThumb, setPostThumb] = useState();
-  const maxpage = 10;
+  const [currentSearch, setCurrentSearch] = useState("");
+  const navigate = useNavigate()
+  const handleSearch = (e) => {
+    const input = e.currentTarget.previousSibling;
+    const value = input.value;
+    if (value === "") {
+      return false;
+    } else {
+      navigate(`/Result/Search&q=${value}`);
+    }
+  };
+  const [user,setUser] = useOutletContext();
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
-    allPost: {},
+    user : user,
   });
+  const postPerPage = 10;
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());
-      setPostPopup({
-        trigger: false,
-        id: "",
-        allPost: snapshot.val(),
-      });
     });
     var current = location.pathname.substring(8).replace("-", " ");
     if (current.includes("UIUX")) {
       current = "UI/UX Design";
     }
     if (current.includes("Search")) {
-      current = current.replace("Search&q=", "");
+      current = current.replace("Search&q=", "").replace("%20", " ");
     }
     if (current.includes("/") && !current.includes("UI/UX")) {
       current = current.substring(0, current.indexOf("/"));
     }
     setCurrentCatalogue(current);
+    setPage(1);
   }, [location.pathname]);
+  useEffect(() => {
+    document.scrollingElement.scrollTo(0,0)
+  },[page]);
   useEffect(() => {
     const pages = document.querySelectorAll(".pagination-item");
     if (pages) {
@@ -52,24 +65,37 @@ export default function Result() {
       });
     }
   });
-  console.log(postThumb, currentCatalogue);
   const currentPost =
     postThumb && currentCatalogue
       ? Object.keys(postThumb)
           .filter((item) => {
-            if (currentCatalogue === "Lastest") {
+            if (currentCatalogue === "Latest") {
               return item;
             } else {
-              if (postThumb[`${item}`].catalogue === currentCatalogue) {
-                return item;
+              if(Boolean(currentCatalogue !== "Graphic Design" && currentCatalogue !== "UI/UX Design" && currentCatalogue !== "Saved")) {
+                let result = currentCatalogue.replace('Result for: ',"").split(" ");
+                if(result.every(v => { return postThumb[`${item}`].title.toLowerCase().includes(v.toLowerCase())})) {
+                  return item
+                }
+              }
+            }
+            if (Boolean(currentCatalogue === "Graphic Design" || currentCatalogue === "UI/UX Design") && postThumb[`${item}`].catalogue === currentCatalogue) {
+              return item;
+            }
+            if(currentCatalogue === "Saved") {
+              if(user.savedPost && Object.keys(user.savedPost).indexOf(item) >= 0) {
+                return item
               }
             }
           })
           .sort((a, b) => {
             return b - a;
           })
-          .splice((page - 1) * 4, 4)
+          .splice((page - 1) * postPerPage, postPerPage)
       : [];
+
+  
+  const maxpage = postThumb && currentPost ? Math.floor(currentPost.length / postPerPage) + (currentPost.length % postPerPage !== 0 ? 1 : 0 ) : 1;
   const changePage = (e) => {
     const value = e.currentTarget.innerHTML;
     setPage(parseInt(value));
@@ -90,9 +116,77 @@ export default function Result() {
   };
   return (
     <>
-      <div className="main">
-        <Hero />
+      <div className="main is-result">
+        {/* <Hero /> */}
         <div className="main-content">
+          <ul className="hero-section-catalogies">
+            <Link
+              className={`${
+                param.id && param.id.includes("Homepage")
+                  ? "--catalogies-item is-active"
+                  : "--catalogies-item"
+              }`}
+              to="/Homepage"
+            >
+              All
+            </Link>
+            <Link
+              className={`${
+                param.id && param.id.includes("Latest")
+                  ? "--catalogies-item is-active"
+                  : "--catalogies-item"
+              }`}
+              to="/Result/Latest"
+            >
+              Latest
+            </Link>
+            <Link
+              className={`${
+                param.id && param.id.includes("Graphic-Design")
+                  ? "--catalogies-item is-active"
+                  : "--catalogies-item"
+              }`}
+              to="/Result/Graphic-Design"
+            >
+              Graphic Design
+            </Link>
+            <Link
+              className={`${
+                param.id && param.id.includes("UIUX-Design")
+                  ? "--catalogies-item is-active"
+                  : "--catalogies-item"
+              }`}
+              to="/Result/UIUX-Design"
+            >
+              UI/UX Design
+            </Link>
+            <Link
+              className={`${
+                param.id && param.id.includes("Saved")
+                  ? "--catalogies-item is-active"
+                  : "--catalogies-item"
+              }`}
+              to="/Result/Saved"
+            >
+              Saved
+            </Link>
+            <div className="searchbar">
+              <input
+                type={"text"}
+                className="search"
+                placeholder="Tiêu đề bài viết"
+                defaultValue={currentSearch}
+              />
+              <Button
+                value="Search"
+                iconRight="search"
+                state="is-filled"
+                onClick={(e) => {
+                  handleSearch(e);
+                }}
+              />
+            </div>
+          </ul>
           <section className="breakcrumb">
             <h3>
               {location.pathname.includes("Search")
@@ -102,11 +196,12 @@ export default function Result() {
             <hr></hr>
           </section>
           <section className="card-container result">
-            {postThumb &&
+            {currentPost.length ?
               currentPost.map((post) => {
                 return (
                   <Card
                     key={`${post}`}
+                    user={user}
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}
@@ -116,7 +211,7 @@ export default function Result() {
                     tags={Object.keys(postThumb[`${post}`].tags)}
                   />
                 );
-              })}
+              }) : <p className="no-result">No matching results were found</p>  }
             <ul className="pagination">
               <Button
                 value=""
@@ -210,6 +305,7 @@ export default function Result() {
         trigger={postPopup.trigger}
         postID={postPopup.id}
         allPost={postThumb}
+        user={postPopup.user}
         setTriggerPopup={setPostPopup}
       />
       <Footer />

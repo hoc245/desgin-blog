@@ -45,7 +45,6 @@ export default function Popup(props) {
     if (popContent) {
       popContent.scrollTo(0, 0);
     }
-    console.log("scroll");
   }, [post]);
   const relatedPost =
     props.allPost && post
@@ -195,10 +194,11 @@ export default function Popup(props) {
                 relatedPost.map((post) => {
                   return (
                     <Card
-                      key={`graphic${post}`}
+                      key={`related${post}`}
                       setPostPopup={(e) => {
                         changePopupContent(e.id);
                       }}
+                      user={props.user}
                       postID={post}
                       title={props.allPost[`${post}`].title}
                       description={props.allPost[`${post}`].description}

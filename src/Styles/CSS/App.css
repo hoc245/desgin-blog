@@ -34,6 +34,12 @@
   background-color: #c0303b;
   color: white;
 }
+.button.is-filled.is-saved {
+  background-color: #25c167;
+}
+.button.is-filled.is-saved:hover {
+  background-color: #25c167;
+}
 .button.is-filled:hover {
   background-color: #a92a34;
 }
@@ -97,8 +103,7 @@
   width: calc((100% - 64px) / 3);
   flex-direction: column;
   border: 1px solid #e9eaea;
-  height: fit-content;
-  max-height: 350px;
+  align-items: stretch;
   flex-wrap: nowrap;
   border-radius: 8px;
   overflow: hidden;
@@ -115,8 +120,8 @@
 .card .content {
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 16px;
+  height: 100%;
 }
 .card .content .tags-container {
   margin-bottom: 16px;
@@ -143,27 +148,26 @@
 .card.is-line {
   width: 100%;
   flex-direction: row;
-  height: 215px;
+  height: fit-content;
   gap: 16px;
   overflow: visible;
   border: 1px solid #e9eaea;
+  align-items: stretch;
 }
 .card.is-line:hover {
-  box-shadow: none;
-}
-.card.is-line:hover img {
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.14);
 }
 .card.is-line img {
   transition: box-shadow 200ms ease;
-  width: 50%;
-  height: 100%;
+  width: calc(50% - 8px);
+  height: auto;
   border-radius: 8px;
   cursor: pointer;
 }
 .card.is-line .content {
-  width: 50%;
+  width: calc(50% - 8px);
   padding-left: 0;
+  height: auto;
 }
 .card.is-line .content h3 {
   font-size: 24px;
@@ -1149,43 +1153,36 @@ h3 {
 .nav .nav-container .nav-right .nav-user ul li:hover {
   color: #355caa;
 }
-.nav.is-scroll {
+.nav.is-scroll, .nav.is-result {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   padding: 0px 20px;
   backdrop-filter: blur(20px) saturate(150%);
   background-color: rgba(255, 255, 255, 0.9);
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-right .nav-user {
+.nav.is-scroll .nav-container .nav-right .nav-user, .nav.is-result .nav-container .nav-right .nav-user {
   width: 35px;
   height: 35px;
 }
 .nav.is-scroll .nav-container .nav-right button.is-ghost,
-.nav.is-scroll .nav-container .nav-right button.is-outline {
+.nav.is-scroll .nav-container .nav-right button.is-outline, .nav.is-result .nav-container .nav-right button.is-ghost,
+.nav.is-result .nav-container .nav-right button.is-outline {
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-right button.is-filled:hover {
+.nav.is-scroll .nav-container .nav-right button.is-filled:hover, .nav.is-result .nav-container .nav-right button.is-filled:hover {
   color: white;
 }
-.nav.is-scroll .nav-container .nav-left .logo img {
+.nav.is-scroll .nav-container .nav-left .logo img, .nav.is-result .nav-container .nav-left .logo img {
   filter: invert(0);
 }
-.nav.is-scroll .nav-container .nav-left .nav-item {
+.nav.is-scroll .nav-container .nav-left .nav-item, .nav.is-result .nav-container .nav-left .nav-item {
   color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-left .nav-item::after {
+.nav.is-scroll .nav-container .nav-left .nav-item::after, .nav.is-result .nav-container .nav-left .nav-item::after {
   background-color: #1a1a1c;
 }
-.nav.is-scroll .nav-container .nav-left .nav-dropdown .nav-dropdown-title {
+.nav.is-scroll .nav-container .nav-left .nav-dropdown .nav-dropdown-title, .nav.is-result .nav-container .nav-left .nav-dropdown .nav-dropdown-title {
   color: #1a1a1c;
-}
-
-.main {
-  width: 100%;
-}
-.main .main-content {
-  width: 100%;
-  padding: 0 20px;
 }
 
 section {
@@ -1222,6 +1219,9 @@ section.breakcrumb span {
   gap: 32px;
   margin-bottom: 64px;
 }
+.card-container.result {
+  justify-content: center;
+}
 .card-container.result .pagination {
   max-width: 650px;
   margin: 0 0 64px 0;
@@ -1255,6 +1255,7 @@ section.breakcrumb span {
   animation-timing-function: ease;
   animation-iteration-count: infinite;
   background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   color: white;
   margin-bottom: 64px;
@@ -1533,6 +1534,42 @@ section.breakcrumb span {
 .review .review-slider .review-right .button:nth-of-type(2) {
   right: auto;
   left: 8px;
+}
+
+.main {
+  width: 100%;
+}
+.main.is-result {
+  padding: 100px;
+}
+.main .main-content {
+  width: 100%;
+  padding: 0 20px;
+}
+.main .main-content .hero-section-catalogies {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  margin: auto;
+}
+.main .main-content .hero-section-catalogies .--catalogies-item:hover {
+  color: #54575d;
+}
+.main .main-content .hero-section-catalogies .searchbar {
+  flex: 1 1 0%;
+  position: relative;
+  margin-left: 16px;
+}
+.main .main-content .hero-section-catalogies .searchbar .search {
+  border: 1px solid #dfe0e1;
+}
+
+.no-result {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=App.css.map */

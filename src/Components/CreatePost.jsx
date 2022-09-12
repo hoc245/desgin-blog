@@ -1,147 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import Button from './Button';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
-import imageCompression from "browser-image-compression";
-import {auth , db, storage} from '../firebase';
-import { ref, onValue , set , update } from "firebase/database";
-import Editor from './Editor';
-
-export default function CreatePost(props) {
-    const [tags,setTags] = useState();
-    const [selected, setSelected] = useState();
-    const [hasLogin,setHaslogin] = useState(false);
-    useEffect(() => {
-      auth.onAuthStateChanged(user => {
-        if(user) {
-            setHaslogin(true);
-        }
-      })
-    },[])
-    var mFile;
-    let mm = 0
-    let dd = 0
-    let currentSelectDay = "";
-    let value = "";
-    if (selected) {
-      mm = selected.getMonth() + 1; // Months start at 0!
-      dd = selected.getDate();
-  
-      if (dd < 10) dd = '0' + dd;
-      if (mm < 10) mm = '0' + mm;
-      currentSelectDay = dd + "/" + mm + "/" + selected.getFullYear()
-    } else {
-      currentSelectDay = "Select a day"
-    }
-    const addTag = (e) => {
-      const value = e.currentTarget.innerHTML;
-      const input = document.querySelector('.tags-input')
-      const mArray = tags && tags.length > 0 ? tags.slice() : [];
-      const allTags = document.querySelectorAll('.post-tags-suggestion .tag');
-      if(mArray === [] || mArray === null || mArray.indexOf(value) === -1) {
-        mArray.push(value);
-        setTags(mArray);
-        input.value = "";
-        [].forEach.call(allTags, tag => {
-          tag.classList.remove('is-active');
-        })
-      }
-    }
-    const removeTag = (e) => {
-      const mArray = tags.slice()
-      const value = e.currentTarget.innerHTML;
-      mArray.splice(mArray.indexOf(value),1)
-      setTags(mArray);
-    }
-    useEffect(() => {
-      if(props.trigger) {
-        let popup = document.querySelector('.create-post');
-        document.body.style.overflow = "hidden";
-        popup.classList.add('is-active')
-      } else {
-        document.body.style.overflow = "auto"
-      }
-    })
-    const tagsSuggestion = (e) => {
-        const value = e.currentTarget.value;
-        const tags = document.querySelectorAll('.post-tags-suggestion .tag');
-        if(value) {
-            [].forEach.call(tags, tag => {
-            if(tag.innerHTML.toLowerCase().includes(value)) {
-                tag.classList.add('is-active');
-            } else {
-                tag.classList.remove('is-active');
-            }
-            })
-        } else {
-            [].forEach.call(tags, tag => {
-            tag.classList.remove('is-active');
-            })
-        } 
-    }
-    const handleCatalogue = (e) => {
-      const value = e.currentTarget.innerHTML;
-      const catalogue = document.querySelector('.dropdown-catalogies-title-value');
-      if(value === catalogue.innerHTML) {
-        catalogue.innerHTML = "Choose catalogue";
-      } else {
-        catalogue.innerHTML = value;
-      }
-      document.querySelector('.dropdown-catalogies-menu').classList.toggle('is-active')
-    }
-    const handleDaypicker = (e) => {
-      setSelected(e);
-      document.querySelector('.daypicker').classList.toggle('is-active')
-    }
-    const closePopup = () => {
-      let popup = document.querySelector('.create-post');
-      popup.classList.remove('is-active');
-      setTimeout(() => {
-        props.setCreatePost(false)
-      },200)
-    }
-    const newPost = () => {
-      const createAt = selected ? selected.getTime() : new Date().getTime();
-      const catalogies = document.querySelector('.dropdown-catalogies-title-value').innerHTML;
-      const source = document.querySelector('.post-create-source input').value;
-      var tags = {};
-      let selectedTags = document.querySelectorAll('.tag.is-selected');
-      [].forEach.call(selectedTags, item => {
-        tags[`${item.innerHTML.replace("/","-")}`] = true;
-      })
-      const image = document.querySelector('.post-banner-preview img').src;
-      const title = document.querySelector('.post-content-header').value;
-      const subTitle = document.querySelector('.post-content-sub').value;
-      const body = value;
-      const valid = checkValid();
-      var mPost = {
-        createAt : "",
-        catalogies : "",
-        source : "",
-        tags : "",
-        image : "",
-        title : "",
-        description : "",
-        body : "",
-      }
-      mPost[`createAt`] = createAt;
-      mPost[`catalogies`] = catalogies;
-      mPost[`source`] = source;
-      mPost[`tags`] = tags;
-      mPost[`image`] = image;
-      mPost[`title`] = title;
-      mPost[`description`] = subTitle;
-      mPost[`body`] = body
-      if(valid) {
-        console.log('valid');
-        set(ref(db, `/postThumb/${createAt}`),{
-          catalogies : mPost.catalogies,
-          description : mPost.description,
-          image : mPost.image,
-          tags : mPost.tags,
-          title : mPost.title,
-=======
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import CustomeDaypicker from "./CustomeDaypicker";
@@ -177,7 +33,6 @@ export default function CreatePost(props) {
       if (editor) {
         editor.addEventListener("scroll", () => {
           stickyEditor();
->>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
         });
       }
       document.body.style.overflow = "hidden";
@@ -492,11 +347,6 @@ export default function CreatePost(props) {
                 <h3>Title (Required)</h3>
                 <textarea className="post-content-header" rows={1}></textarea>
                 <h3>Sub-title</h3>
-<<<<<<< HEAD
-                <textarea className='post-content-sub' rows={3}></textarea>
-                <h3>Main</h3>
-                <Editor sendValue={(e) => {value = e}} />
-=======
                 <textarea className="post-content-sub" rows={3}></textarea>
                 <h3>Main (Required)</h3>
                 <Editor
@@ -504,7 +354,6 @@ export default function CreatePost(props) {
                     value = e;
                   }}
                 />
->>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
               </section>
               <section className="post-action">
                 <p className="post-action-valid">
@@ -531,13 +380,6 @@ export default function CreatePost(props) {
         </>
       ) : (
         <>
-<<<<<<< HEAD
-          <div className='create-post popup' style={{display : "flex",'alignItems' : "center"}}>
-            <Button iconLeft='close' state='is-filled popup-close' onClick={() => {closePopup()}}/>
-            <div className='popup-container' >
-              <section className='popup-title'>
-                <h2 style={{'text-align': "center",width : "100%"}}>Sign in to create a post</h2>
-=======
           <div
             className="create-post popup"
             style={{ display: "flex", alignItems: "center" }}
@@ -554,7 +396,6 @@ export default function CreatePost(props) {
                 <h2 style={{ "text-align": "center", width: "100%" }}>
                   Sign in to create a post
                 </h2>
->>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
               </section>
               <section>
                 <img

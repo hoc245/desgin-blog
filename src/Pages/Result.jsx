@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import Hero from "../Components/Hero";
-import { Link, useLocation, useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Button from "../Components/Button";
 import Popup from "../Components/Popup";
 import { onValue, ref } from "firebase/database";
-import { db } from "../firebase";
-import { motion } from "framer-motion"
+import { auth, db } from "../firebase";
 
 export default function Result() {
   const location = useLocation();
@@ -16,7 +14,7 @@ export default function Result() {
   const [currentCatalogue, setCurrentCatalogue] = useState();
   const [postThumb, setPostThumb] = useState();
   const [currentSearch, setCurrentSearch] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSearch = (e) => {
     const input = e.currentTarget.previousSibling;
     const value = input.value;
@@ -26,11 +24,20 @@ export default function Result() {
       navigate(`/Result/Search&q=${value}`);
     }
   };
-  const [user,setUser] = useOutletContext();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user && localStorage.getItem("saveLogin")) {
+        onValue(ref(db, `/users/${user.uid}`), (snapshot) => {
+          setUser(snapshot.val());
+        });
+      }
+    });
+  }, []);
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
-    user : user,
+    user: user,
   });
   const postPerPage = 10;
   useEffect(() => {
@@ -51,8 +58,8 @@ export default function Result() {
     setPage(1);
   }, [location.pathname]);
   useEffect(() => {
-    document.scrollingElement.scrollTo(0,0)
-  },[page]);
+    document.scrollingElement.scrollTo(0, 0);
+  }, [page]);
   useEffect(() => {
     const pages = document.querySelectorAll(".pagination-item");
     if (pages) {
@@ -72,19 +79,42 @@ export default function Result() {
             if (currentCatalogue === "Latest") {
               return item;
             } else {
-              if(Boolean(currentCatalogue !== "Graphic Design" && currentCatalogue !== "UI/UX Design" && currentCatalogue !== "Saved")) {
-                let result = currentCatalogue.replace('Result for: ',"").split(" ");
-                if(result.every(v => { return postThumb[`${item}`].title.toLowerCase().includes(v.toLowerCase())})) {
-                  return item
+              if (
+                Boolean(
+                  currentCatalogue !== "Graphic Design" &&
+                    currentCatalogue !== "UI/UX Design" &&
+                    currentCatalogue !== "Saved"
+                )
+              ) {
+                let result = currentCatalogue
+                  .replace("Result for: ", "")
+                  .split(" ");
+                if (
+                  result.every((v) => {
+                    return postThumb[`${item}`].title
+                      .toLowerCase()
+                      .includes(v.toLowerCase());
+                  })
+                ) {
+                  return item;
                 }
               }
             }
-            if (Boolean(currentCatalogue === "Graphic Design" || currentCatalogue === "UI/UX Design") && postThumb[`${item}`].catalogue === currentCatalogue) {
+            if (
+              Boolean(
+                currentCatalogue === "Graphic Design" ||
+                  currentCatalogue === "UI/UX Design"
+              ) &&
+              postThumb[`${item}`].catalogue === currentCatalogue
+            ) {
               return item;
             }
-            if(currentCatalogue === "Saved") {
-              if(user.savedPost && Object.keys(user.savedPost).indexOf(item) >= 0) {
-                return item
+            if (currentCatalogue === "Saved") {
+              if (
+                user.savedPost &&
+                Object.keys(user.savedPost).indexOf(item) >= 0
+              ) {
+                return item;
               }
             }
           })
@@ -94,8 +124,11 @@ export default function Result() {
           .splice((page - 1) * postPerPage, postPerPage)
       : [];
 
-  
-  const maxpage = postThumb && currentPost ? Math.floor(currentPost.length / postPerPage) + (currentPost.length % postPerPage !== 0 ? 1 : 0 ) : 1;
+  const maxpage =
+    postThumb && currentPost
+      ? Math.floor(currentPost.length / postPerPage) +
+        (currentPost.length % postPerPage !== 0 ? 1 : 0)
+      : 1;
   const changePage = (e) => {
     const value = e.currentTarget.innerHTML;
     setPage(parseInt(value));
@@ -196,7 +229,7 @@ export default function Result() {
             <hr></hr>
           </section>
           <section className="card-container result">
-            {currentPost.length ?
+            {currentPost.length ? (
               currentPost.map((post) => {
                 return (
                   <Card
@@ -211,7 +244,10 @@ export default function Result() {
                     tags={Object.keys(postThumb[`${post}`].tags)}
                   />
                 );
-              }) : <p className="no-result">No matching results were found</p>  }
+              })
+            ) : (
+              <p className="no-result">No matching results were found</p>
+            )}
             <ul className="pagination">
               <Button
                 value=""

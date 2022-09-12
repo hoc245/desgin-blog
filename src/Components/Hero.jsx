@@ -16,15 +16,15 @@ export default function Hero() {
   const handleSearch = (e) => {
     const input = e.currentTarget.previousSibling;
     const value = input.value;
-    console.log()
+    console.log();
     if (value === "") {
       return false;
     } else {
-      navigate(`/Result/Search&q=${value}`)
+      navigate(`/Result/Search&q=${value}`);
     }
   };
   const clearSearch = () => {
-    document.scrollingElement.scrollTo(0,0)
+    document.scrollingElement.scrollTo(0, 0);
     setCurrentSearch("");
   };
   return (

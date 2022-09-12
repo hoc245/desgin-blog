@@ -24,7 +24,11 @@ export default function Nav({ loginState, user, triggerPopup }) {
   };
   return (
     <>
-      <nav className={`${location.pathname.includes('Result') ? "is-result nav" : "nav" }`}>
+      <nav
+        className={`${
+          location.pathname.includes("Result") ? "is-result nav" : "nav"
+        }`}
+      >
         <div className="nav-container">
           <div className="nav-left">
             <Link className={"logo"} to="/Homepage">

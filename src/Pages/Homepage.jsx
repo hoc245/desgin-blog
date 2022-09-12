@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../Components/Button";
 import Card from "../Components/Card";
 import Footer from "../Components/Footer";
 import Hero from "../Components/Hero";
 import Popup from "../Components/Popup";
 import { ref, onValue } from "firebase/database";
-import { db } from "../firebase";
-import { motion } from "framer-motion"
+import { auth, db } from "../firebase";
 
 export default function Homepage() {
   const [postThumb, setPostThumb] = useState();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user && localStorage.getItem("saveLogin")) {
+        onValue(ref(db, `/users/${user.uid}`), (snapshot) => {
+          setUser(snapshot.val());
+        });
+      }
+    });
+  }, []);
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
-    allPost: {},
+    user: user,
   });
-  const [user,setUser] = useOutletContext();
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());

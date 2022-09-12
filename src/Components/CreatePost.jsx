@@ -307,7 +307,7 @@ export default function CreatePost(props) {
         </>
          : 
         <>
-        <div className='create-post popup' style={{display : "flex",'alignItems' : "center"}}>
+          <div className='create-post popup' style={{display : "flex",'alignItems' : "center"}}>
             <Button iconLeft='close' state='is-filled popup-close' onClick={() => {closePopup()}}/>
             <div className='popup-container' >
               <section className='popup-title'>

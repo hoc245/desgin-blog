@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import Button from './Button';
 import { DayPicker } from 'react-day-picker';
@@ -140,186 +141,435 @@ export default function CreatePost(props) {
           image : mPost.image,
           tags : mPost.tags,
           title : mPost.title,
-        });
-        set(ref(db, `/postDetail/${createAt}`),mPost);
-      } else {
-        console.log('invalid');
-        console.log('something went wrong');
-      }
-    }
-    const checkValid = () => {
-      const catalogies = document.querySelector('.dropdown-catalogies-title-value').innerHTML;
-      var tags = {};
-      let selectedTags = document.querySelectorAll('.tag.is-selected');
-      [].forEach.call(selectedTags, item => {
-        tags[`${item.innerHTML.replace("/","-")}`] = true;
-      })
-      const image = document.querySelector('.post-banner-preview img').src;
-      const title = document.querySelector('.post-content-header').value;
-      const body = value;
-      // Container
-      const daypickerSection = document.querySelector('.post-create-day');
-      const catalogiesSection = document.querySelector('.post-catalogies');
-      const tagsSection = document.querySelector('.post-tags');
-      const bannerSection = document.querySelector('.post-banner');
-      const contentSection = document.querySelector('.post-content');
-      if(!selected) {
-        daypickerSection.classList.add('is-invalid');
-        console.log(`Error at: daypickerSection`)
-      } else {
-        daypickerSection.classList.remove('is-invalid');
-      }
-      if(catalogies === "") {
-        catalogiesSection.classList.add('is-invalid');
-        console.log(`Error at: catalogiesSection`)
-      } else {
-        catalogiesSection.classList.remove('is-invalid');
-      }
-      if(!Object.keys(tags).length) {
-        console.log(tags);
-        tagsSection.classList.add('is-invalid');
-        console.log(`Error at: tagsSection`)
-      } else {
-        tagsSection.classList.remove('is-invalid');
-      }
-      if(!image || image === "") {
-        bannerSection.classList.add('is-invalid');
-      } else {
-        bannerSection.classList.remove('is-invalid');
-      }
-      if(title === "" || body === "") {
-        contentSection.classList.add('is-invalid');
-        console.log(`Error at: contentSection`)
-      } else {
-        contentSection.classList.remove('is-invalid');
-      }
-      const invalid = document.querySelectorAll('.is-invalid');
-      if(invalid.length) {
-        return false
-      } else {
-        return true
-      }
+=======
+import React, { useEffect, useState } from "react";
+import Button from "./Button";
+import CustomeDaypicker from "./CustomeDaypicker";
+import imageCompression from "browser-image-compression";
+import { auth, db, storage } from "../firebase";
+import Editor from "./Editor";
+import { set, ref } from "firebase/database";
+import "react-quill/dist/quill.snow.css";
+import "react-day-picker/dist/style.css";
+import Tags from "./Tags";
+import { getDownloadURL, uploadBytes } from "firebase/storage";
+import { ref as sRef } from "@firebase/storage";
 
-    }
-    const handleFile = async (e) => {
-      const options = {
-        maxSizeMB: 2,
-        maxWidthOrHeight: 1920,
-        useWebWorker: true
+export default function CreatePost(props) {
+  const [hasLogin, setHaslogin] = useState(false);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setHaslogin(true);
       }
-      const [file] = await e.currentTarget.files;
-      const time = new Date();
-      const fileName = `${time.getTime()}${file.name}`;
-      const preview = document.querySelector('.post-banner-preview img');
-      if(file) {
-          await imageCompression(file,options)
-            .then((compressFile) => {
-              preview.src = URL.createObjectURL(compressFile);
-              preview.setAttribute('alt',fileName);
-              mFile = Object.assign({},{
-                file : compressFile,
-                name : fileName
+    });
+  }, []);
+  let options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true,
+  };
+  let value = "";
+  useEffect(() => {
+    if (props.trigger) {
+      let popup = document.querySelector(".create-post");
+      let editor = document.querySelector(".popup-container");
+      if (editor) {
+        editor.addEventListener("scroll", () => {
+          stickyEditor();
+>>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
+        });
+      }
+      document.body.style.overflow = "hidden";
+      popup.classList.add("is-active");
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
+  const stickyEditor = () => {
+    let editor = document.querySelector(".quill");
+    if (!editor) {
+      return false;
+    } else {
+      let y = editor.getBoundingClientRect().y;
+      if (y < 95) {
+        editor.classList.add("is-sticky");
+      } else {
+        editor.classList.remove("is-sticky");
+      }
+    }
+  };
+  const handleCatalogue = (e) => {
+    const value = e.currentTarget.innerHTML;
+    const catalogue = document.querySelector(
+      ".dropdown-catalogies-title-value"
+    );
+    if (value === catalogue.innerHTML) {
+      catalogue.innerHTML = "Choose catalogue";
+    } else {
+      catalogue.innerHTML = value;
+    }
+    document
+      .querySelector(".dropdown-catalogies-menu")
+      .classList.toggle("is-active");
+  };
+  const closePopup = () => {
+    let popup = document.querySelector(".create-post");
+    popup.classList.remove("is-active");
+    setTimeout(() => {
+      props.setCreatePost(false);
+    }, 200);
+  };
+  const newPost = async () => {
+    const createAt = document.querySelector(
+      ".post-create-day--value"
+    ).innerHTML;
+    const catalogies = document.querySelector(
+      ".dropdown-catalogies-title-value"
+    ).innerHTML;
+    const source = document.querySelector(".post-create-source input").value;
+    var tags = {};
+    let selectedTags = document.querySelectorAll(".tag.is-selected");
+    [].forEach.call(selectedTags, (item) => {
+      tags[`${item.innerHTML.replace("/", "-")}`] = true;
+    });
+    const image = "";
+    const title = document.querySelector(".post-content-header").value;
+    const subTitle = document.querySelector(".post-content-sub").value;
+    const body = value;
+    const valid = checkValid();
+    const createBtn = document.querySelector(".button.create-post");
+    var mPost = {
+      createAt: "",
+      catalogue: "",
+      source: "",
+      tags: "",
+      image: "",
+      title: "",
+      description: "",
+      body: "",
+    };
+    let current = new Date();
+    mPost[`createAt`] = new Date(
+      `${createAt
+        .split("/")
+        .reverse()
+        .join(
+          "/"
+        )} ${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}:${current.getMilliseconds()}`
+    ).getTime();
+    mPost[`catalogue`] = catalogies;
+    mPost[`source`] = source;
+    mPost[`tags`] = tags;
+    mPost[`image`] = image;
+    mPost[`title`] = title;
+    mPost[`description`] = subTitle;
+    mPost[`body`] = body;
+    if (valid) {
+      console.log("valid");
+      let [file] = document.querySelector('input[id="banner-upload"]').files;
+      let fileName = mPost.createAt;
+      let imageRef = sRef(
+        storage,
+        `images/${fileName}.${file.name.substr(-3)}`
+      );
+      createBtn.classList.add("is-loading");
+      await imageCompression(file, options).then((compressFile) => {
+        uploadBytes(imageRef, compressFile).then(() => {
+          getDownloadURL(
+            sRef(storage, `images/${fileName}.${file.name.substr(-3)}`)
+          )
+            .then((url) => {
+              mPost.image = url;
             })
-        })
-      }
+            .then(() => {
+              set(ref(db, `/postThumb/${mPost.createAt}`), {
+                catalogue: mPost.catalogue,
+                description: mPost.description,
+                image: mPost.image,
+                tags: mPost.tags,
+                title: mPost.title,
+              });
+              set(ref(db, `/postDetail/${mPost.createAt}`), mPost);
+            })
+            .then(() => {
+              createBtn.classList.remove("is-loading");
+              createBtn.classList.add("is-success");
+              document.querySelector(
+                ".button.create-post .button-value"
+              ).innerHTML = "Post created successfully";
+              setTimeout(() => {
+                closePopup();
+              }, 2000);
+            });
+        });
+      });
+    } else {
+      console.log("invalid");
+      console.log("something went wrong");
     }
-    return props.trigger ? (
-      <>
-        {hasLogin ? 
+  };
+  const checkValid = () => {
+    const validText = document.querySelector(".post-action-valid");
+    const createAt = document.querySelector(
+      ".post-create-day--value"
+    ).innerHTML;
+    const catalogies = document.querySelector(
+      ".dropdown-catalogies-title-value"
+    ).innerHTML;
+    var tags = {};
+    let selectedTags = document.querySelectorAll(".tag.is-selected");
+    [].forEach.call(selectedTags, (item) => {
+      tags[`${item.innerHTML.replace("/", "-")}`] = true;
+    });
+    const image = document.querySelector(".post-banner-preview img").src;
+    const title = document.querySelector(".post-content-header").value;
+    const body = value;
+    // Container
+    const daypickerSection = document.querySelector(".post-create-day");
+    const catalogiesSection = document.querySelector(".post-catalogies");
+    const tagsSection = document.querySelector(".post-tags");
+    const bannerSection = document.querySelector(".post-banner");
+    const contentSection = document.querySelector(".post-content");
+    if (createAt === "Select a day") {
+      daypickerSection.classList.add("is-invalid");
+      console.log(`Error at: daypickerSection`);
+    } else {
+      daypickerSection.classList.remove("is-invalid");
+    }
+    if (catalogies === "") {
+      catalogiesSection.classList.add("is-invalid");
+      console.log(`Error at: catalogiesSection`);
+    } else {
+      catalogiesSection.classList.remove("is-invalid");
+    }
+    if (!Object.keys(tags).length) {
+      tagsSection.classList.add("is-invalid");
+      console.log(`Error at: tagsSection`);
+    } else {
+      tagsSection.classList.remove("is-invalid");
+    }
+    if (!image || image === "") {
+      bannerSection.classList.add("is-invalid");
+    } else {
+      bannerSection.classList.remove("is-invalid");
+    }
+    if (title === "" || body === "") {
+      contentSection.classList.add("is-invalid");
+      console.log(`Error at: contentSection`);
+    } else {
+      contentSection.classList.remove("is-invalid");
+    }
+    const invalid = document.querySelectorAll(".is-invalid");
+    if (invalid.length) {
+      validText.classList.add("is-active");
+      return false;
+    } else {
+      validText.classList.remove("is-active");
+      return true;
+    }
+  };
+  const handleFile = async (e) => {
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+    const [file] = await e.currentTarget.files;
+    const time = new Date();
+    const fileName = `${time.getTime()}${file.name}`;
+    const preview = document.querySelector(".post-banner-preview img");
+    if (file) {
+      await imageCompression(file, options).then((compressFile) => {
+        preview.src = URL.createObjectURL(compressFile);
+        preview.setAttribute("alt", fileName);
+      });
+    }
+  };
+  const handleDaypicker = (e) => {
+    let current = document.querySelector(".post-create-day--value");
+    let value = current.innerHTML;
+    if (value !== e) {
+      current.innerHTML = e;
+    } else {
+      current.innerHTML = "Select a day";
+    }
+  };
+  return props.trigger ? (
+    <>
+      {hasLogin ? (
         <>
-          <div className='create-post popup'>
-            <Button iconLeft='close' state='is-filled popup-close' onClick={() => {closePopup()}}/>
-            <div className='popup-container'>
-              <section className='popup-title'>
+          <div className="create-post popup">
+            <Button
+              iconLeft="close"
+              state="is-filled popup-close"
+              onClick={() => {
+                closePopup();
+              }}
+            />
+            <div className="popup-container">
+              <section className="popup-title">
                 <h2>Create post</h2>
               </section>
-              <section className='post-option'>
-                <div className='post-catalogies'>
-                  <h3>Catalogue</h3>
-                  <div className='dropdown-catalogies'>
-                    <div className='dropdown-catalogies-title' onClick={(e) => {e.currentTarget.nextSibling.classList.toggle('is-active')}}>
-                      <span className="dropdown-catalogies-title-value">Choose catalogue</span> 
+              <section className="post-option">
+                <div className="post-catalogies">
+                  <h3>Catalogue (Required)</h3>
+                  <div className="dropdown-catalogies">
+                    <div
+                      className="dropdown-catalogies-title"
+                      onClick={(e) => {
+                        e.currentTarget.nextSibling.classList.toggle(
+                          "is-active"
+                        );
+                      }}
+                    >
+                      <span className="dropdown-catalogies-title-value">
+                        Choose catalogue
+                      </span>
                       <span class="material-symbols-outlined">
-                      navigate_next
+                        navigate_next
                       </span>
                     </div>
-                    <div className='dropdown-catalogies-menu'>
-                      <p className='dropdown-catalogies-item' onClick={(e) => {handleCatalogue(e)}}>Graphic Design</p>
-                      <p className='dropdown-catalogies-item' onClick={(e) => {handleCatalogue(e)}}>UI/UX Design</p>
+                    <div className="dropdown-catalogies-menu">
+                      <p
+                        className="dropdown-catalogies-item"
+                        onClick={(e) => {
+                          handleCatalogue(e);
+                        }}
+                      >
+                        Graphic Design
+                      </p>
+                      <p
+                        className="dropdown-catalogies-item"
+                        onClick={(e) => {
+                          handleCatalogue(e);
+                        }}
+                      >
+                        UI/UX Design
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div className='post-create-day'>
-                  <h3>Create at</h3>
-                  <p onClick={(e) => {e.currentTarget.nextSibling.classList.toggle('is-active')}}>{currentSelectDay}</p>
-                  <DayPicker className='daypicker'
-                    mode="single"
-                    selected={selected}
-                    onSelect={(e) => {handleDaypicker(e)}}
-                    />
+                <div className="post-create-day">
+                  <h3>Create at (Required)</h3>
+                  <p
+                    className="post-create-day--value"
+                    onClick={(e) => {
+                      e.currentTarget.nextSibling.classList.toggle("is-active");
+                    }}
+                  >
+                    Select a day
+                  </p>
+                  <CustomeDaypicker
+                    callback={(e) => {
+                      handleDaypicker(e);
+                    }}
+                  />
                 </div>
-                <div className='post-create-source'>
+                <div className="post-create-source">
                   <h3>Source (optional)</h3>
-                  <input type={"text"} placeholder={"Link to post source"}/>
+                  <input type={"text"} placeholder={"Link to post source"} />
                 </div>
-                <div className='post-tags'>
-                  <h3>Tags</h3>
-                  <div className='post-tags-result'>
-                    <div className='tags-selected'>
-                      {tags && tags.map(tag => {
-                        return <span key={`post-tags-${tag}`} className='tag is-selected' onClick={(e) => {removeTag(e)}}>{tag}</span>
-                      })}
-                    </div>
-                    <input className='tags-input' type={"text"} placeholder={"Graphic, UI/UX..."} onChange={(e) => {tagsSuggestion(e)}} onFocus={(e) => {e.currentTarget.classList.add('is-focus')}} onBlur={(e) => {e.currentTarget.classList.remove('is-focus')}}/>
-                  </div>
-                  <div className='post-tags-suggestion'>
-                    <span className='tag' onClick={(e) => {addTag(e)}}>Graphic</span>
-                    <span className='tag' onClick={(e) => {addTag(e)}}>UI/UX</span>
-                    <span className='tag' onClick={(e) => {addTag(e)}}>Trends</span>
-                  </div>
-                </div>
+                <Tags />
               </section>
-              <section className='post-banner'>
-                <h3>Banner</h3>
-                <div className='post-banner-preview'>
-                  <label htmlFor='banner-upload'>
-                    <Button value="Upload" iconLeft={"add_photo_alternate"}/>
-                    <input id='banner-upload' type="file" accept={"image/png, image/gif, image/jpeg"} name="filename" onChange={(e) => handleFile(e)} />
+              <section className="post-banner">
+                <h3>Banner (Required)</h3>
+                <div className="post-banner-preview">
+                  <label htmlFor="banner-upload">
+                    <Button value="Upload" iconLeft={"add_photo_alternate"} />
+                    <input
+                      id="banner-upload"
+                      type="file"
+                      accept={"image/png, image/gif, image/jpeg"}
+                      name="filename"
+                      onChange={(e) => handleFile(e)}
+                    />
                   </label>
-                  <img src='' alt='preview' />
+                  <img src="" alt="preview" />
                 </div>
               </section>
-              <section className='post-content'>
-                <h3>Title</h3>
-                <textarea className='post-content-header' rows={1}></textarea>
+              <section className="post-content">
+                <h3>Title (Required)</h3>
+                <textarea className="post-content-header" rows={1}></textarea>
                 <h3>Sub-title</h3>
+<<<<<<< HEAD
                 <textarea className='post-content-sub' rows={3}></textarea>
                 <h3>Main</h3>
                 <Editor sendValue={(e) => {value = e}} />
+=======
+                <textarea className="post-content-sub" rows={3}></textarea>
+                <h3>Main (Required)</h3>
+                <Editor
+                  sendValue={(e) => {
+                    value = e;
+                  }}
+                />
+>>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
               </section>
               <section className="post-action">
-                <Button value={"Create post"} iconLeft="add" onClick={() => newPost()}/>
-                <Button value={"Cancel"} iconLeft="remove" state='is-ghost' onClick={() => {closePopup()}}/>
+                <p className="post-action-valid">
+                  You need to fill some fields before create a post
+                </p>
+                <Button
+                  value={"Create post"}
+                  iconLeft="add"
+                  onClick={() => newPost()}
+                  state="is-filled create-post"
+                />
+                <Button
+                  value={"Cancel"}
+                  iconLeft="remove"
+                  state="is-ghost"
+                  onClick={() => {
+                    closePopup();
+                  }}
+                />
               </section>
             </div>
-            <div className='popup-overlay'></div>
+            <div className="popup-overlay"></div>
           </div>
         </>
-         : 
+      ) : (
         <>
+<<<<<<< HEAD
           <div className='create-post popup' style={{display : "flex",'alignItems' : "center"}}>
             <Button iconLeft='close' state='is-filled popup-close' onClick={() => {closePopup()}}/>
             <div className='popup-container' >
               <section className='popup-title'>
                 <h2 style={{'text-align': "center",width : "100%"}}>Sign in to create a post</h2>
+=======
+          <div
+            className="create-post popup"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <Button
+              iconLeft="close"
+              state="is-filled popup-close"
+              onClick={() => {
+                closePopup();
+              }}
+            />
+            <div className="popup-container">
+              <section className="popup-title">
+                <h2 style={{ "text-align": "center", width: "100%" }}>
+                  Sign in to create a post
+                </h2>
+>>>>>>> eb62d4a6557f4053e1359ee4c9ff034d4f13e8f2
               </section>
               <section>
-                <img style={{height:"300px"}} src='https://i.pinimg.com/originals/65/dc/a6/65dca69f78972935caf61580e7c17bd9.png' />
+                <img
+                  style={{ height: "300px" }}
+                  src="https://i.pinimg.com/originals/65/dc/a6/65dca69f78972935caf61580e7c17bd9.png"
+                  alt=""
+                />
               </section>
             </div>
-            <div className='popup-overlay'></div>
+            <div className="popup-overlay"></div>
           </div>
-        </>}
-      </>
-    ) : ( <></> )
-  }
+        </>
+      )}
+    </>
+  ) : (
+    <></>
+  );
+}

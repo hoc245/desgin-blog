@@ -8,6 +8,23 @@ import Popup from "../Components/Popup";
 import { ref, onValue } from "firebase/database";
 import { auth, db } from "../firebase";
 
+function getDayName(dateStr) {
+  var date = new Date(parseInt(dateStr));
+  return date.toLocaleDateString("en-EN", { weekday: "long" });
+}
+function padTo2Digits(num) {
+  return num.toString().padStart(2, "0");
+}
+
+function formatDate(date) {
+  var day = new Date(parseInt(date));
+  return [
+    padTo2Digits(day.getDate()),
+    padTo2Digits(day.getMonth() + 1),
+    day.getFullYear(),
+  ].join("/");
+}
+
 export default function Homepage() {
   const [postThumb, setPostThumb] = useState();
   const [user, setUser] = useState();
@@ -74,7 +91,13 @@ export default function Homepage() {
           <section className="breakcrumb">
             <h3>Latest</h3>
             <hr></hr>
-            <span>Wednesday, 24/08/2022</span>
+            {postThumb && newPost ? (
+              <span>{`${getDayName(newPost[0])}, ${formatDate(
+                newPost[0]
+              )}`}</span>
+            ) : (
+              <></>
+            )}
           </section>
           <section className="card-container">
             {postThumb &&

@@ -1,6 +1,6 @@
-import { onValue, ref } from "firebase/database";
+import { set, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import Button from "./Button";
 import Card from "./Card";
 
@@ -33,6 +33,14 @@ function timeSince(date) {
 
 export default function Popup(props) {
   const [post, setPost] = useState();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, []);
   useEffect(() => {
     if (props.postID) {
       onValue(ref(db, `/postDetail/${props.postID}`), (snapshot) => {
@@ -90,10 +98,45 @@ export default function Popup(props) {
       });
     }, 200);
   };
+  function checkExist(savedPost, id) {
+    return new Promise((resolve, reject) => {
+      if (Object.keys(savedPost).indexOf(id) === -1) {
+        savedPost[`${id}`] = true;
+      } else {
+        delete savedPost[`${id}`];
+      }
+      resolve(savedPost);
+      reject("error");
+    });
+  }
   const changePopupContent = (id) => {
     onValue(ref(db, `/postDetail/${id}`), (snapshot) => {
       setPost(snapshot.val());
     });
+  };
+  const handleSavePost = async (e, id) => {
+    const savedPost = user && user.savedPost ? user.savedPost : {};
+    const saveBtn = e.currentTarget;
+    if (user) {
+      saveBtn.classList.remove("is-invalid");
+      await checkExist(savedPost, id)
+        .then((result) => {
+          set(ref(db, `/users/${user.id}/savedPost/`), result);
+          setUser({
+            email: user.email,
+            id: user.id,
+            image: user.image,
+            jobs: user.jobs,
+            name: user.name,
+            savedPost: result,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      saveBtn.classList.add("is-invalid");
+    }
   };
   return props.trigger && post ? (
     <div className="popup" style={{ display: "none" }}>
@@ -118,9 +161,30 @@ export default function Popup(props) {
               <span>{ago}</span>
             </div>
             <Button
-              value={"Save"}
-              iconLeft="favorite"
-              state="is-ghost"
+              onClick={(e) => {
+                handleSavePost(e, props.postID);
+              }}
+              value={`${
+                user &&
+                user.savedPost &&
+                Object.keys(user.savedPost).indexOf(props.postID) !== -1
+                  ? "Saved"
+                  : "Save"
+              }`}
+              iconLeft={`${
+                user &&
+                user.savedPost &&
+                Object.keys(user.savedPost).indexOf(props.postID) !== -1
+                  ? "favorite"
+                  : "favorite_border"
+              }`}
+              state={`${
+                user &&
+                user.savedPost &&
+                Object.keys(user.savedPost).indexOf(props.postID) !== -1
+                  ? "is-filled is-saved"
+                  : "is-ghost"
+              }`}
               isSmall="true"
             />
             <Button

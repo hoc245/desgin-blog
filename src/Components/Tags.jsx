@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Tags() {
+function Tags(props) {
   const [tags, setTags] = useState();
+  useEffect(() => {
+    if(props.tags) {
+      setTags([Object.keys(props.tags)[0].replace('-','/')])
+    }
+  },[props.tags]);
   const addTag = (e) => {
     const value = e.currentTarget.innerHTML;
     const input = document.querySelector(".tags-input");

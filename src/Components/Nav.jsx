@@ -26,7 +26,11 @@ export default function Nav({ loginState, user, triggerPopup }) {
     <>
       <nav
         className={`${
-          location.pathname.includes("Result") ? "is-result nav" : "nav"
+          location.pathname.includes("Result") ||
+          location.pathname.includes("Account") ||
+          location.pathname.includes("Postmanagement")
+            ? "is-result nav"
+            : "nav"
         }`}
       >
         <div className="nav-container">
@@ -150,11 +154,14 @@ export default function Nav({ loginState, user, triggerPopup }) {
                 >
                   <img src={`${user && user.image}`} alt="user-image" />
                   <ul className="nav-user-dropdown">
-                    <li className="--dropdown-item" onClick={() => {}}>
+                    <li className="--dropdown-item">
                       <Link to="/Result/Saved">Saved post</Link>
                     </li>
-                    <li className="--dropdown-item" onClick={() => {}}>
-                      Account
+                    <li className="--dropdown-item">
+                      <Link to="/Account">Account</Link>
+                    </li>
+                    <li className="--dropdown-item">
+                      <Link to="/Postmanagement">Post Management</Link>
                     </li>
                     <li
                       className="--dropdown-item"

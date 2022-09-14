@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 
 function CustomeDaypicker(props) {
-  const [selected, setSelected] = useState(new Date());
+  const [selected, setSelected] = useState(props.value ? new Date(props.value) : new Date());
   const handleCallBack = (e) => {
     let mm = 0;
     let dd = 0;

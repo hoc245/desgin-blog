@@ -39,7 +39,7 @@ export default function Card(props) {
         setUser(snapshot.val());
       });
     }
-  }, []);
+  }, [props.user]);
   var ago = "";
   if (props.time !== "") {
     ago = timeSince(props.time);

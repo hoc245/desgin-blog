@@ -1,4 +1,4 @@
-import { ref, set } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Button from "./Button";
@@ -7,10 +7,10 @@ function Setting(props) {
   const [newCatalogue, setNewcatalogue] = useState(null);
   const [createNew, setCreateNew] = useState(false);
   useEffect(() => {
-    if (props.trigger) {
-      setNewcatalogue(props.catalogue);
-    }
-  }, [props.trigger, props.catalogue]);
+    onValue(ref(db, `/catalogue`), (snapshot) => {
+      setNewcatalogue(snapshot.val());
+    });
+  }, []);
   useEffect(() => {
     if (props.trigger) {
       let popup = document.querySelector(".popup.is-confirm");
@@ -31,28 +31,32 @@ function Setting(props) {
       props.setTriggerPopup(false);
     }, 200);
   };
-  const removeCatalogue = (index, item) => {
+  const removeCatalogue = (item) => {
     let invalid = document.querySelector(".popup.is-confirm .is-invalid");
     let valid = checkValid(item);
     valid.then((res) => {
-      if (res) {
+      if (res > 0) {
         invalid.innerHTML = `Your current catalogue has: ${res} post(s)</br>Please remove these post(s) before delete catalogue!`;
         invalid.classList.add("is-active");
       } else {
         invalid.classList.remove("is-active");
-        setNewcatalogue(newCatalogue.splice(index, 1));
+        let mArray = newCatalogue;
+        mArray.splice(newCatalogue.indexOf(item), 1);
+        updateCatalogue(mArray);
+        setTimeout(() => {
+          document.body.setAttribute("style", "overflow:hidden");
+        }, 0);
       }
     });
   };
-  const updateCatalogue = async () => {
+  const updateCatalogue = async (array) => {
     let invalid = document.querySelector(
       ".popup.is-confirm .is-invalid.is-active"
     );
     if (invalid) {
       return false;
     } else {
-      console.log(newCatalogue);
-      set(ref(db, `/catalogue`), newCatalogue);
+      set(ref(db, `/catalogue`), array);
     }
   };
   const checkValid = (cata) => {
@@ -102,9 +106,7 @@ function Setting(props) {
                     iconLeft={"delete"}
                     state="is-outline"
                     isSmall={true}
-                    onClick={() =>
-                      removeCatalogue(newCatalogue.indexOf(item), item)
-                    }
+                    onClick={() => removeCatalogue(item)}
                   />
                 </div>
               );

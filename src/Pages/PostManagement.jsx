@@ -409,7 +409,6 @@ function PostManagement(props) {
       <Setting
         trigger={isSetting}
         postList={postList}
-        catalogue={catalogue ? catalogue : null}
         setTriggerPopup={setIsSetting}
       />
     </>

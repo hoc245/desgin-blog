@@ -27,12 +27,8 @@ export default function Nav({ loginState, user, triggerPopup }) {
       <nav
         className={`${
           location.pathname.includes("Result") ||
-<<<<<<< HEAD
           location.pathname.includes("Account") ||
           location.pathname.includes("Postmanagement")
-=======
-          location.pathname.includes("Account")
->>>>>>> b29d7b46eca6b733722f0cabae83350f8d5776c3
             ? "is-result nav"
             : "nav"
         }`}
@@ -163,12 +159,9 @@ export default function Nav({ loginState, user, triggerPopup }) {
                     </li>
                     <li className="--dropdown-item">
                       <Link to="/Account">Account</Link>
-<<<<<<< HEAD
                     </li>
                     <li className="--dropdown-item">
                       <Link to="/Postmanagement">Post Management</Link>
-=======
->>>>>>> b29d7b46eca6b733722f0cabae83350f8d5776c3
                     </li>
                     <li
                       className="--dropdown-item"

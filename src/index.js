@@ -7,11 +7,8 @@ import Result from "./Pages/Result";
 import Course from "./Pages/Course";
 import About from "./Pages/About";
 import Account from "./Pages/Account";
-<<<<<<< HEAD
 import PostManagement from "./Pages/PostManagement";
 import PostDetail from "./Pages/PostDetail";
-=======
->>>>>>> b29d7b46eca6b733722f0cabae83350f8d5776c3
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,14 +28,11 @@ root.render(
           <Route path="Course" element={<Course />} />
           <Route path="About" element={<About />} />
           <Route path="Account" element={<Account />} />
-<<<<<<< HEAD
           <Route path="Postmanagement" element={<PostManagement />}>
             <Route path="Postdetail" element={<PostDetail />} >
                 <Route path=":id" element={<Account />} />
             </Route>
           </Route>
-=======
->>>>>>> b29d7b46eca6b733722f0cabae83350f8d5776c3
         </Route>
       </Routes>
     </BrowserRouter>

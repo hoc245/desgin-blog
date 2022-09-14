@@ -5,6 +5,7 @@ import { storage } from "../firebase";
 import { uid } from "uid";
 import imageCompression from "browser-image-compression";
 import imageUploader from "quill-image-uploader";
+import 'quill-paste-smart';
 
 Quill.register("modules/imageUploader", imageUploader);
 
@@ -57,6 +58,14 @@ export default function Editor(props) {
           });
         });
       },
+    },
+    clipboard: {
+      allowed: {
+          tags: ['a', 'b', 'strong', 'u', 's', 'i', 'p', 'br', 'ul', 'ol', 'li', 'span', 'h1', 'h2', 'h3', 'img'],
+          attributes: ['href', 'rel', 'target', 'class','src']
+      },
+      keepSelection: false,
+      magicPasteLinks: true,
     },
   };
   let formats = [

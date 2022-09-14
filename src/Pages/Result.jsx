@@ -260,6 +260,7 @@ export default function Result() {
                   <Card
                     key={`${post}`}
                     user={user}
+                    creator={postThumb[`${post}`].creator ? postThumb[`${post}`].creator : null}
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}

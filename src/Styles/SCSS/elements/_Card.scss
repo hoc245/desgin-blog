@@ -101,3 +101,45 @@
     }
   }
 }
+
+.card .content {
+  .card-creator {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    img {
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      border:1px solid col.$neutral-20;
+      margin-right: 4px;
+    }
+    p {
+      margin:0;
+      @include font.medium12;
+      color: col.$neutral-50;
+    }
+  }
+}
+.popup .popup-container {
+  .popup-content {
+    .card-creator {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      margin-bottom: 16px;
+      img {
+        height: 36px;
+        width: 36px;
+        border-radius: 50%;
+        border:1px solid col.$neutral-20;
+        margin-right: 4px;margin-bottom: 0;
+      }
+      p {
+        margin:0;
+        @include font.medium14;
+        color: col.$neutral-50;
+      }
+    }
+  }
+}

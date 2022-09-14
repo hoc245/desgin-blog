@@ -105,6 +105,7 @@ export default function Homepage() {
                 return (
                   <Card
                     user={user}
+                    creator={postThumb[`${post}`].creator ? postThumb[`${post}`].creator : null}
                     key={`new${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
@@ -128,6 +129,7 @@ export default function Homepage() {
                 return (
                   <Card
                     user={user}
+                    creator={postThumb[`${post}`].creator ? postThumb[`${post}`].creator : null}
                     key={`graphic${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
@@ -158,6 +160,7 @@ export default function Homepage() {
                 return (
                   <Card
                     user={user}
+                    creator={postThumb[`${post}`].creator ? postThumb[`${post}`].creator : null}
                     key={`uiux${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}

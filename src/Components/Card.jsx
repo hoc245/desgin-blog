@@ -110,7 +110,12 @@ export default function Card(props) {
               );
             })}
         </div>
-        {}
+        {props.creator ? 
+        <div className="card-creator">
+          <img src={props.creator.image} alt="avatar" />
+          <p>{props.creator.name}</p>
+        </div>
+        : <></>}  
         <h3
           onClick={() => {
             openPopup(props.postID);

@@ -154,7 +154,13 @@ export default function Popup(props) {
           <hr></hr>
         </section>
         <section className="popup-content">
-          <h2>{post.title}</h2>
+          {post.creator ? 
+          <div className="card-creator">
+            <img src={post.creator.image} alt="avatar" />
+            <p>{post.creator.name}</p>
+          </div>
+          : <></>}
+          <h2>{post.title}</h2> 
           <div className="card-description">
             <div className="description-time">
               <span className="material-symbols-outlined">schedule</span>

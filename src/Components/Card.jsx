@@ -1,5 +1,5 @@
-import { set, ref } from "firebase/database";
-import React, { useState } from "react";
+import { set, ref, onValue } from "firebase/database";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import Button from "./Button";
 import { motion } from "framer-motion";
@@ -32,7 +32,14 @@ function timeSince(date) {
 }
 
 export default function Card(props) {
-  const [user, setUser] = useState(props.user);
+  const [user, setUser] = useState();
+  useEffect(() => {
+    if (props.user) {
+      onValue(ref(db, `/users/${props.user.id}`), (snapshot) => {
+        setUser(snapshot.val());
+      });
+    }
+  }, []);
   var ago = "";
   if (props.time !== "") {
     ago = timeSince(props.time);
@@ -41,7 +48,7 @@ export default function Card(props) {
     props.setPostPopup({
       trigger: true,
       id: val,
-      user: props.user,
+      user: user,
     });
   };
   function checkExist(savedPost, id) {
@@ -79,7 +86,7 @@ export default function Card(props) {
       saveBtn.classList.add("is-invalid");
     }
   };
-  return (
+  return user ? (
     <motion.div
       id={props.postID}
       className={`card ${props.type === "" ? props.type : "is-line"}`}
@@ -110,6 +117,16 @@ export default function Card(props) {
               );
             })}
         </div>
+        {props.creator ? (
+          <div className="card-creator">
+            <img src={props.creator.image} alt="avatar" />
+            <p>
+              {props.creator.name} <span>{props.creator.jobs}</span>
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
         <h3
           onClick={() => {
             openPopup(props.postID);
@@ -117,7 +134,10 @@ export default function Card(props) {
         >
           {props.title}
         </h3>
-        <p style={{ display: `${props.description ? "" : "none"}` }}>
+        <p
+          style={{ display: `${props.description ? "" : "none"}` }}
+          title={`${props.description ? props.description : ""}`}
+        >
           {props.description}
         </p>
         <div className="card-description">
@@ -161,5 +181,7 @@ export default function Card(props) {
         </div>
       </div>
     </motion.div>
+  ) : (
+    <></>
   );
 }

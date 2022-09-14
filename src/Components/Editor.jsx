@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import { uploadBytes, ref as sRef, getDownloadURL } from "@firebase/storage";
 import { storage } from "../firebase";
 import { uid } from "uid";
 import imageCompression from "browser-image-compression";
 import imageUploader from "quill-image-uploader";
-import 'quill-paste-smart';
+import "quill-paste-smart";
 
 Quill.register("modules/imageUploader", imageUploader);
 
 export default function Editor(props) {
-  const [text, setText] = useState("");
   let uidd = uid();
   let imageRef = "";
 
@@ -61,8 +60,25 @@ export default function Editor(props) {
     },
     clipboard: {
       allowed: {
-          tags: ['a', 'b', 'strong', 'u', 's', 'i', 'p', 'br', 'ul', 'ol', 'li', 'span', 'h1', 'h2', 'h3', 'img'],
-          attributes: ['href', 'rel', 'target', 'class','src']
+        tags: [
+          "a",
+          "b",
+          "strong",
+          "u",
+          "s",
+          "i",
+          "p",
+          "br",
+          "ul",
+          "ol",
+          "li",
+          "span",
+          "h1",
+          "h2",
+          "h3",
+          "img",
+        ],
+        attributes: ["href", "rel", "target", "class", "src"],
       },
       keepSelection: false,
       magicPasteLinks: true,
@@ -86,7 +102,7 @@ export default function Editor(props) {
       theme="snow"
       modules={modules}
       formats={formats}
-      value={text}
+      value={props.value ? props.value : ""}
       onChange={(e) => {
         props.sendValue(e);
       }}

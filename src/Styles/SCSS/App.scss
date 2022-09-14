@@ -205,6 +205,8 @@ h3 {
             margin-top: 16px;
           }
           li {
+            width: 100%;
+            white-space: nowrap;
             @include font.medium14;
             cursor: pointer;
 
@@ -633,6 +635,57 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .account-toolbar {
+      width: 100%;
+      max-width: 1040px;
+      margin: auto;
+      display: flex;
+      margin-bottom: 32px;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: nowrap;
+      .searchbar {
+        width: 100%;
+        max-width: 400px;
+        input {
+          border: 1px solid col.$neutral-20;
+        }
+      }
+      .post-catalogies {
+        min-width: 200px;
+        position: relative;
+        .dropdown-catalogies-title {
+          height: 35px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+        .dropdown-catalogies-menu {
+          position: absolute;
+          display: none;
+          z-index: 999;
+          background-color: white;
+          &.is-active {
+            display: block;
+          }
+          top: 100%;
+          width: fit-content;
+          min-width: 150px;
+          padding: 16px;
+          border-radius: 4px;
+          box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.14);
+          p {
+            cursor: pointer;
+            &:hover {
+              color: col.$text-link;
+            }
+          }
+          p + p {
+            margin-top: 8px;
+          }
+        }
+      }
+    }
     .account-info {
       display: flex;
       gap: 32px;
@@ -718,6 +771,77 @@ section {
           }
         }
       }
+    }
+  }
+}
+
+.post-item {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid col.$neutral-20;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.14);
+  }
+  img {
+    width: 100px;
+    border-radius: 8px 0 0 8px;
+    height: 100px;
+  }
+  .post-detail {
+    flex: 1 1 0%;
+    width: calc(100% - 100px - 180px - 180px - 130px - (16px * 4));
+    h3 {
+      @include font.bold14;
+    }
+    h4 {
+      width: 100%;
+      @include font.regular14;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  p {
+    width: 180px;
+    text-align: center;
+    @include font.bold14;
+  }
+  .post-creator {
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    img {
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+    p {
+      flex: 1 1 0%;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .post-action {
+    display: flex;
+    width: 180px;
+    margin-right: 16px;
+    justify-content: flex-end;
+    button + button {
+      margin-left: 8px;
+    }
+    .button.is-ghost {
+      color: col.$error;
     }
   }
 }

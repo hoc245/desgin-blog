@@ -28,6 +28,7 @@ function formatDate(date) {
 export default function Homepage() {
   const [postThumb, setPostThumb] = useState();
   const [user, setUser] = useState();
+  const [catalogue, setCatalogue] = useState();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user && localStorage.getItem("saveLogin")) {
@@ -36,7 +37,16 @@ export default function Homepage() {
         });
       }
     });
+    setCatalogue(JSON.parse(localStorage.getItem("catalogue")));
   }, []);
+  useEffect(() => {
+    let popup = document.querySelector(".popup.is-active");
+    if (popup) {
+      document.body.setAttribute("style", "overflow:hidden");
+    } else {
+      document.body.removeAttribute("style");
+    }
+  }, [user]);
   const [postPopup, setPostPopup] = useState({
     trigger: false,
     id: "",
@@ -59,34 +69,10 @@ export default function Homepage() {
         })
         .splice(0, 4)
     : [];
-  const graphicPost = postThumb
-    ? Object.keys(postThumb)
-        .filter((item) => {
-          if (postThumb[`${item}`].catalogue === "Graphic Design") {
-            return true;
-          }
-        })
-        .sort((a, b) => {
-          return b - a;
-        })
-        .splice(0, 4)
-    : [];
-  const uiuxPost = postThumb
-    ? Object.keys(postThumb)
-        .filter((item) => {
-          if (postThumb[`${item}`].catalogue === "UI/UX Design") {
-            return true;
-          }
-        })
-        .sort((a, b) => {
-          return b - a;
-        })
-        .splice(0, 4)
-    : [];
   return (
     <>
       <div className="main">
-        <Hero />
+        <Hero catalogue={catalogue ? catalogue : null} />
         <div className="main-content">
           <section className="breakcrumb">
             <h3>Latest</h3>
@@ -105,6 +91,11 @@ export default function Homepage() {
                 return (
                   <Card
                     user={user}
+                    creator={
+                      postThumb[`${post}`].creator
+                        ? postThumb[`${post}`].creator
+                        : null
+                    }
                     key={`new${post}`}
                     setPostPopup={setPostPopup}
                     postID={post}
@@ -118,66 +109,68 @@ export default function Homepage() {
                 );
               })}
           </section>
-          <section className="breakcrumb">
-            <h3>Graphic Design</h3>
-            <hr></hr>
-          </section>
-          <section className="card-container">
-            {postThumb &&
-              graphicPost.map((post) => {
+          {catalogue && postThumb ? (
+            <>
+              {catalogue.map((cata) => {
+                const cataPost = postThumb
+                  ? Object.keys(postThumb)
+                      .filter((item) => {
+                        if (postThumb[`${item}`].catalogue === cata) {
+                          return true;
+                        }
+                      })
+                      .sort((a, b) => {
+                        return b - a;
+                      })
+                      .splice(0, 4)
+                  : [];
                 return (
-                  <Card
-                    user={user}
-                    key={`graphic${post}`}
-                    setPostPopup={setPostPopup}
-                    postID={post}
-                    title={postThumb[`${post}`].title}
-                    description={postThumb[`${post}`].description}
-                    cover={postThumb[`${post}`].image}
-                    time={post}
-                    tags={Object.keys(postThumb[`${post}`].tags)}
-                    type={graphicPost.indexOf(post) === 0 ? null : ""}
-                  />
+                  <>
+                    <section className="breakcrumb">
+                      <h3>{cata}</h3>
+                      <hr></hr>
+                    </section>
+                    <section className="card-container">
+                      {cataPost &&
+                        cataPost.map((post) => {
+                          return (
+                            <Card
+                              user={user}
+                              creator={
+                                postThumb[`${post}`].creator
+                                  ? postThumb[`${post}`].creator
+                                  : null
+                              }
+                              key={`graphic${post}`}
+                              setPostPopup={setPostPopup}
+                              postID={post}
+                              title={postThumb[`${post}`].title}
+                              description={postThumb[`${post}`].description}
+                              cover={postThumb[`${post}`].image}
+                              time={post}
+                              tags={Object.keys(postThumb[`${post}`].tags)}
+                              type={cataPost.indexOf(post) === 0 ? null : ""}
+                            />
+                          );
+                        })}
+                      <Link
+                        className="seemore-btn"
+                        to={"/Result/Graphic-Design"}
+                      >
+                        <Button
+                          value={"See all"}
+                          state="is-outline"
+                          iconRight="chevron_right"
+                        />
+                      </Link>
+                    </section>
+                  </>
                 );
               })}
-            <Link className="seemore-btn" to={"/Result/Graphic-Design"}>
-              <Button
-                value={"See all"}
-                state="is-outline"
-                iconRight="chevron_right"
-              />
-            </Link>
-          </section>
-          <section className="breakcrumb">
-            <h3>UI/UX Design</h3>
-            <hr></hr>
-          </section>
-          <section className="card-container">
-            {postThumb &&
-              uiuxPost.map((post) => {
-                return (
-                  <Card
-                    user={user}
-                    key={`uiux${post}`}
-                    setPostPopup={setPostPopup}
-                    postID={post}
-                    title={postThumb[`${post}`].title}
-                    description={postThumb[`${post}`].description}
-                    cover={postThumb[`${post}`].image}
-                    time={post}
-                    tags={Object.keys(postThumb[`${post}`].tags)}
-                    type={uiuxPost.indexOf(post) === 0 ? null : ""}
-                  />
-                );
-              })}
-            <Link className="seemore-btn" to={"/Result/Graphic-Design"}>
-              <Button
-                value={"See all"}
-                state="is-outline"
-                iconRight="chevron_right"
-              />
-            </Link>
-          </section>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
         <Popup
           trigger={postPopup.trigger}

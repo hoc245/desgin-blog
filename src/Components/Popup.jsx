@@ -1,4 +1,4 @@
-import { set, onValue, ref } from "firebase/database";
+import { set, onValue, ref, get } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import Button from "./Button";
@@ -37,7 +37,9 @@ export default function Popup(props) {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setUser(user);
+        onValue(ref(db, `/users/${user.uid}`), (snapshot) => {
+          setUser(snapshot.val());
+        });
       }
     });
   }, []);
@@ -48,6 +50,19 @@ export default function Popup(props) {
       });
     }
   }, [props.postID]);
+  useEffect(() => {
+    if (props.trigger) {
+      let popup = document.querySelector(".popup");
+      if (popup) {
+        popup.removeAttribute("style");
+        popup.scrollTo(0, 0);
+        document.body.setAttribute("style", "overflow:hidden");
+        setTimeout(() => {
+          popup.classList.add("is-active");
+        }, 0);
+      }
+    }
+  }, [props.trigger, post]);
   useEffect(() => {
     let popContent = document.querySelector(".popup-container");
     if (popContent) {
@@ -70,19 +85,6 @@ export default function Popup(props) {
           })
           .splice(0, 5)
       : [];
-  useEffect(() => {
-    if (props.trigger && post) {
-      let popup = document.querySelector(".popup");
-      popup.removeAttribute("style");
-      popup.scrollTo(0, 0);
-      document.body.setAttribute("style", "overflow:hidden");
-      setTimeout(() => {
-        popup.classList.add("is-active");
-      }, 0);
-    } else {
-      document.body.setAttribute("style", "overflow:auto");
-    }
-  }, [props.trigger, post]);
   var ago = "";
   if (post && post.createAt !== "") {
     ago = timeSince(new Date(post.createAt));
@@ -96,6 +98,7 @@ export default function Popup(props) {
         id: "",
         allPost: props.allPost,
       });
+      document.body.setAttribute("style", "overflow:auto");
     }, 200);
   };
   function checkExist(savedPost, id) {
@@ -131,11 +134,25 @@ export default function Popup(props) {
             savedPost: result,
           });
         })
+        .then(() => {
+          document.body.setAttribute("style", "overflow:hidden");
+        })
         .catch((error) => {
           console.log(error);
         });
     } else {
       saveBtn.classList.add("is-invalid");
+    }
+  };
+  const handleComment = (e) => {
+    var text = e.currentTarget.previousSibling.value;
+    if (text) {
+      let time = new Date().getTime();
+      set(ref(db, `/postDetail/${props.postID}/comments/${time}`), {
+        id: time,
+        creator: user.id,
+        text: text,
+      });
     }
   };
   return props.trigger && post ? (
@@ -154,6 +171,14 @@ export default function Popup(props) {
           <hr></hr>
         </section>
         <section className="popup-content">
+          {post.creator ? (
+            <div className="card-creator">
+              <img src={post.creator.image} alt="avatar" />
+              <p>{post.creator.name}</p>
+            </div>
+          ) : (
+            <></>
+          )}
           <h2>{post.title}</h2>
           <div className="card-description">
             <div className="description-time">
@@ -207,7 +232,13 @@ export default function Popup(props) {
               rows={3}
               placeholder={"How do you think about this post?"}
             ></textarea>
-            <Button value="Send" isSmall="true" />
+            <Button
+              value="Send"
+              isSmall="true"
+              onClick={(e) => {
+                handleComment(e);
+              }}
+            />
             <h4>Comment</h4>
             <div className="post-comment-item">
               <img

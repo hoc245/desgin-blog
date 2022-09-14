@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import Button from "./Button";
 import logo from "../Images/logo.png";
 import Login from "./Login";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
-export default function Nav({ loginState, user, triggerPopup }) {
+export default function Nav({ catalogue, loginState, user, triggerPopup }) {
   const [triggerLogin, setTriggerLogin] = useState(false);
+  const param = useParams();
   let location = useLocation();
   window.addEventListener("scroll", () => {
     let nav = document.querySelector(".nav");
@@ -27,7 +28,8 @@ export default function Nav({ loginState, user, triggerPopup }) {
       <nav
         className={`${
           location.pathname.includes("Result") ||
-          location.pathname.includes("Account")
+          location.pathname.includes("Account") ||
+          location.pathname.includes("Postmanagement")
             ? "is-result nav"
             : "nav"
         }`}
@@ -78,26 +80,26 @@ export default function Nav({ loginState, user, triggerPopup }) {
                 >
                   Latest
                 </Link>
-                <Link
-                  className={`${
-                    location.pathname.includes("Graphic-Design")
-                      ? "nav-dropdown-menu-item is-active"
-                      : "nav-dropdown-menu-item"
-                  }`}
-                  to="/Result/Graphic-Design"
-                >
-                  Graphic Design
-                </Link>
-                <Link
-                  className={`${
-                    location.pathname.includes("UIUX-Design")
-                      ? "nav-dropdown-menu-item is-active"
-                      : "nav-dropdown-menu-item"
-                  }`}
-                  to="/Result/UIUX-Design"
-                >
-                  UI/UX Design
-                </Link>
+                {catalogue &&
+                  catalogue.map((cata) => {
+                    return (
+                      <Link
+                        className={`${
+                          param.id &&
+                          param.id.includes(
+                            cata.replace(" ", "-").replace("/", ".")
+                          )
+                            ? "nav-dropdown-menu-item is-active"
+                            : "nav-dropdown-menu-item"
+                        }`}
+                        to={`/Result/${cata
+                          .replace(" ", "-")
+                          .replace("/", ".")}`}
+                      >
+                        {cata}
+                      </Link>
+                    );
+                  })}
                 <Link
                   className={`${
                     location.pathname.includes("Saved")
@@ -158,6 +160,9 @@ export default function Nav({ loginState, user, triggerPopup }) {
                     </li>
                     <li className="--dropdown-item">
                       <Link to="/Account">Account</Link>
+                    </li>
+                    <li className="--dropdown-item">
+                      <Link to="/Postmanagement">Post Management</Link>
                     </li>
                     <li
                       className="--dropdown-item"

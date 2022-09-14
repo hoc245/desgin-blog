@@ -7,7 +7,7 @@ export default function Result() {
     <div className="main">
       <Hero />
       <section className="breakcrumb">
-        <h3 style={{ width: "100%", textAlign: "center" }}>Up coming</h3>
+        <h3 style={{ width: "100%", textAlign: "center" }}>Coming soon</h3>
       </section>
     </div>
   );

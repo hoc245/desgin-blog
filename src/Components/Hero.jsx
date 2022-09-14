@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../Components/Button";
 
-export default function Hero() {
+export default function Hero(props) {
   const [currentSearch, setCurrentSearch] = useState("");
   const param = useParams();
   const navigate = useNavigate();
@@ -56,32 +56,27 @@ export default function Hero() {
         >
           Latest
         </Link>
-        <Link
-          className={`${
-            param.id && param.id.includes("Graphic-Design")
-              ? "--catalogies-item is-active"
-              : "--catalogies-item"
-          }`}
-          to="/Result/Graphic-Design"
-          onClick={() => {
-            clearSearch();
-          }}
-        >
-          Graphic Design
-        </Link>
-        <Link
-          className={`${
-            param.id && param.id.includes("UIUX-Design")
-              ? "--catalogies-item is-active"
-              : "--catalogies-item"
-          }`}
-          to="/Result/UIUX-Design"
-          onClick={() => {
-            clearSearch();
-          }}
-        >
-          UI/UX Design
-        </Link>
+        {props.catalogue &&
+          props.catalogue.map((cata) => {
+            return (
+              <Link
+                className={`${
+                  param.id &&
+                  param.id.includes(
+                    cata.cata.replace(" ", "-").replace("/", ".")
+                  )
+                    ? "--catalogies-item is-active"
+                    : "--catalogies-item"
+                }`}
+                to={`/Result/${cata.replace(" ", "-").replace("/", ".")}`}
+                onClick={() => {
+                  clearSearch();
+                }}
+              >
+                {cata}
+              </Link>
+            );
+          })}
         <Link
           className={`${
             param.id && param.id.includes("Saved")

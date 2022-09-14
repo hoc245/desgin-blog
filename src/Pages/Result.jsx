@@ -29,6 +29,7 @@ export default function Result() {
   const param = useParams();
   const [page, setPage] = useState(1);
   const [currentCatalogue, setCurrentCatalogue] = useState();
+  const [catalogue, setCatalogue] = useState();
   const [postThumb, setPostThumb] = useState();
   const [currentSearch, setCurrentSearch] = useState("");
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ export default function Result() {
         });
       }
     });
+    setCatalogue(JSON.parse(localStorage.getItem("catalogue")));
   }, []);
   const [postPopup, setPostPopup] = useState({
     trigger: false,
@@ -61,16 +63,10 @@ export default function Result() {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
       setPostThumb(snapshot.val());
     });
-    var current = location.pathname.substring(8).replace("-", " ");
-    if (current.includes("UIUX")) {
-      current = "UI/UX Design";
-    }
-    if (current.includes("Search")) {
-      current = current.replace("Search&q=", "").replace("%20", " ");
-    }
-    if (current.includes("/") && !current.includes("UI/UX")) {
-      current = current.substring(0, current.indexOf("/"));
-    }
+    var current = location.pathname
+      .substring(8)
+      .replace("-", " ")
+      .replace(".", "/");
     setCurrentCatalogue(current);
     setPage(1);
   }, [location.pathname]);
@@ -90,40 +86,10 @@ export default function Result() {
     }
   });
   const currentPost =
-    postThumb && currentCatalogue
+    postThumb && currentCatalogue && catalogue
       ? Object.keys(postThumb)
           .filter((item) => {
             if (currentCatalogue === "Latest") {
-              return item;
-            } else {
-              if (
-                Boolean(
-                  currentCatalogue !== "Graphic Design" &&
-                    currentCatalogue !== "UI/UX Design" &&
-                    currentCatalogue !== "Saved"
-                )
-              ) {
-                let result = currentCatalogue
-                  .replace("Result for: ", "")
-                  .split(" ");
-                if (
-                  result.every((v) => {
-                    return postThumb[`${item}`].title
-                      .toLowerCase()
-                      .includes(v.toLowerCase());
-                  })
-                ) {
-                  return item;
-                }
-              }
-            }
-            if (
-              Boolean(
-                currentCatalogue === "Graphic Design" ||
-                  currentCatalogue === "UI/UX Design"
-              ) &&
-              postThumb[`${item}`].catalogue === currentCatalogue
-            ) {
               return item;
             }
             if (currentCatalogue === "Saved") {
@@ -134,6 +100,26 @@ export default function Result() {
               ) {
                 return item;
               }
+            }
+            if (catalogue.indexOf(currentCatalogue) === -1) {
+              let result = currentCatalogue
+                .replace("Result for: ", "")
+                .split(" ");
+              if (
+                result.every((v) => {
+                  return postThumb[`${item}`].title
+                    .toLowerCase()
+                    .includes(v.toLowerCase());
+                })
+              ) {
+                return item;
+              }
+            }
+            if (
+              catalogue.indexOf(currentCatalogue) !== -1 &&
+              postThumb[`${item}`].catalogue === currentCatalogue
+            ) {
+              return item;
             }
           })
           .sort((a, b) => {
@@ -191,26 +177,24 @@ export default function Result() {
             >
               Latest
             </Link>
-            <Link
-              className={`${
-                param.id && param.id.includes("Graphic-Design")
-                  ? "--catalogies-item is-active"
-                  : "--catalogies-item"
-              }`}
-              to="/Result/Graphic-Design"
-            >
-              Graphic Design
-            </Link>
-            <Link
-              className={`${
-                param.id && param.id.includes("UIUX-Design")
-                  ? "--catalogies-item is-active"
-                  : "--catalogies-item"
-              }`}
-              to="/Result/UIUX-Design"
-            >
-              UI/UX Design
-            </Link>
+            {catalogue &&
+              catalogue.map((cata) => {
+                return (
+                  <Link
+                    className={`${
+                      param.id &&
+                      param.id.includes(
+                        cata.replace(" ", "-").replace("/", ".")
+                      )
+                        ? "--catalogies-item is-active"
+                        : "--catalogies-item"
+                    }`}
+                    to={`/Result/${cata.replace(" ", "-").replace("/", ".")}`}
+                  >
+                    {cata}
+                  </Link>
+                );
+              })}
             <Link
               className={`${
                 param.id && param.id.includes("Saved")
@@ -260,6 +244,11 @@ export default function Result() {
                   <Card
                     key={`${post}`}
                     user={user}
+                    creator={
+                      postThumb[`${post}`].creator
+                        ? postThumb[`${post}`].creator
+                        : null
+                    }
                     setPostPopup={setPostPopup}
                     postID={post}
                     title={postThumb[`${post}`].title}
@@ -287,7 +276,11 @@ export default function Result() {
                   {Array.from(Array(5), (_e, i) => {
                     return (
                       <li
-                        className="pagination-item"
+                        className={
+                          page === i + 1
+                            ? "pagination-item is-active"
+                            : "pagination-item"
+                        }
                         onClick={(e) => {
                           changePage(e);
                         }}
@@ -306,7 +299,11 @@ export default function Result() {
                           return (
                             <li
                               key={`page-${i}`}
-                              className="pagination-item"
+                              className={
+                                page === i + 1
+                                  ? "pagination-item is-active"
+                                  : "pagination-item"
+                              }
                               onClick={(e) => {
                                 changePage(e);
                               }}
@@ -326,7 +323,11 @@ export default function Result() {
                             return (
                               <li
                                 key={`page-${i}`}
-                                className="pagination-item"
+                                className={
+                                  page === i + 1
+                                    ? "pagination-item is-active"
+                                    : "pagination-item"
+                                }
                                 onClick={(e) => {
                                   changePage(e);
                                 }}
@@ -337,9 +338,13 @@ export default function Result() {
                           }
                         }
                       )}
-                      <li className="pagination-item">...</li>
+                      <li className={"pagination-item"}>...</li>
                       <li
-                        className="pagination-item"
+                        className={
+                          page === maxpage
+                            ? "pagination-item is-active"
+                            : "pagination-item"
+                        }
                         onClick={(e) => {
                           changePage(e);
                         }}

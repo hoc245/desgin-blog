@@ -86,102 +86,100 @@ export default function Card(props) {
       saveBtn.classList.add("is-invalid");
     }
   };
-  return user ? (
+  return (
     <motion.div
-      id={props.postID}
-      className={`card ${props.type === "" ? props.type : "is-line"}`}
-      transition={{ duration: 1, type: "spring" }}
-      initial={{ x: -40, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 40, opacity: 1 }}
-    >
-      <img
-        src={
-          props.cover
-            ? props.cover
-            : "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/cb/3c4030d65011e682d8b14e2f0915fa/shutterstock_226881610.jpg?auto=format%2Ccompress&dpr=1"
-        }
-        alt="cover"
+    id={props.postID}
+    className={`card ${props.type === "" ? props.type : "is-line"}`}
+    transition={{ duration: 1, type: "spring" }}
+    initial={{ x: -40, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 40, opacity: 1 }}
+  >
+    <img
+      src={
+        props.cover
+          ? props.cover
+          : "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/cb/3c4030d65011e682d8b14e2f0915fa/shutterstock_226881610.jpg?auto=format%2Ccompress&dpr=1"
+      }
+      alt="cover"
+      onClick={() => {
+        openPopup(props.postID);
+      }}
+    />
+    <div className="content">
+      <div className="tags-container">
+        {props.tags.length &&
+          props.tags.map((tag) => {
+            return (
+              <span key={`card-${tag}`} className="tag">
+                {tag}
+              </span>
+            );
+          })}
+      </div>
+      {props.creator ? (
+        <div className="card-creator">
+          <img src={props.creator.image} alt="avatar" />
+          <p>
+            {props.creator.name} <span>{props.creator.jobs}</span>
+          </p>
+        </div>
+      ) : (
+        <></>
+      )}
+      <h3
         onClick={() => {
           openPopup(props.postID);
         }}
-      />
-      <div className="content">
-        <div className="tags-container">
-          {props.tags.length &&
-            props.tags.map((tag) => {
-              return (
-                <span key={`card-${tag}`} className="tag">
-                  {tag}
-                </span>
-              );
-            })}
+      >
+        {props.title}
+      </h3>
+      <p
+        style={{ display: `${props.description ? "" : "none"}` }}
+        title={`${props.description ? props.description : ""}`}
+      >
+        {props.description}
+      </p>
+      <div className="card-description">
+        <div className="description-time">
+          <span className="material-symbols-outlined">schedule</span>
+          <span>{ago}</span>
         </div>
-        {props.creator ? (
-          <div className="card-creator">
-            <img src={props.creator.image} alt="avatar" />
-            <p>
-              {props.creator.name} <span>{props.creator.jobs}</span>
-            </p>
-          </div>
-        ) : (
-          <></>
-        )}
-        <h3
-          onClick={() => {
-            openPopup(props.postID);
+        <Button
+          onClick={(e) => {
+            handleSavePost(e, props.postID);
           }}
-        >
-          {props.title}
-        </h3>
-        <p
-          style={{ display: `${props.description ? "" : "none"}` }}
-          title={`${props.description ? props.description : ""}`}
-        >
-          {props.description}
-        </p>
-        <div className="card-description">
-          <div className="description-time">
-            <span className="material-symbols-outlined">schedule</span>
-            <span>{ago}</span>
-          </div>
-          <Button
-            onClick={(e) => {
-              handleSavePost(e, props.postID);
-            }}
-            value={`${
-              user &&
-              user.savedPost &&
-              Object.keys(user.savedPost).indexOf(props.postID) !== -1
-                ? "Saved"
-                : "Save"
-            }`}
-            iconLeft={`${
-              user &&
-              user.savedPost &&
-              Object.keys(user.savedPost).indexOf(props.postID) !== -1
-                ? "favorite"
-                : "favorite_border"
-            }`}
-            state={`${
-              user &&
-              user.savedPost &&
-              Object.keys(user.savedPost).indexOf(props.postID) !== -1
-                ? "is-filled is-saved"
-                : "is-ghost"
-            }`}
-            isSmall="true"
-          />
-          <Button
-            value={"Share"}
-            iconLeft="share"
-            state="is-ghost"
-            isSmall="true"
-          />
-        </div>
+          value={`${
+            user &&
+            user.savedPost &&
+            Object.keys(user.savedPost).indexOf(props.postID) !== -1
+              ? "Saved"
+              : "Save"
+          }`}
+          iconLeft={`${
+            user &&
+            user.savedPost &&
+            Object.keys(user.savedPost).indexOf(props.postID) !== -1
+              ? "favorite"
+              : "favorite_border"
+          }`}
+          state={`${
+            user &&
+            user.savedPost &&
+            Object.keys(user.savedPost).indexOf(props.postID) !== -1
+              ? "is-filled is-saved"
+              : "is-ghost"
+          }`}
+          isSmall="true"
+        />
+        <Button
+          value={"Share"}
+          iconLeft="share"
+          state="is-ghost"
+          isSmall="true"
+        />
       </div>
-    </motion.div>
-  ) : (
-    <></>
-  );
+    </div>
+  </motion.div>
+  )
 }

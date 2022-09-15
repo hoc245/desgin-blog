@@ -31,7 +31,7 @@ export default function Homepage() {
   const [catalogue, setCatalogue] = useState();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user && localStorage.getItem("saveLogin")) {
+      if (user) {
         onValue(ref(db, `/users/${user.uid}`), (snapshot) => {
           setUser(snapshot.val());
         });

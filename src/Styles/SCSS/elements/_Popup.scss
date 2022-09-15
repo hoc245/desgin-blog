@@ -196,18 +196,24 @@
           align-items: flex-start;
           margin-bottom: 16px;
           img {
-            width: 36px;
-            height: 36px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 16px;
             margin-bottom: 0;
+            border: 2px solid col.$neutral-50;
           }
           &-content {
             p {
-              @include font.bold12;
+              @include font.bold14;
+              li {
+                display: inline-block;
+                margin-left: 16px;
+                @include font.italic12;
+              }
             }
             span {
-              @include font.regular12;
+              @include font.regular14;
             }
           }
         }

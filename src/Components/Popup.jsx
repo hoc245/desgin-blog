@@ -34,6 +34,7 @@ function timeSince(date) {
 export default function Popup(props) {
   const [post, setPost] = useState();
   const [user, setUser] = useState();
+  const [commentLoad, setCommentLoad] = useState(1);
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -150,11 +151,18 @@ export default function Popup(props) {
       let time = new Date().getTime();
       set(ref(db, `/postDetail/${props.postID}/comments/${time}`), {
         id: time,
-        creator: user.id,
-        text: text,
+        creator: user,
+        content: text,
       });
     }
   };
+  console.log(post);
+  const comments =
+    post &&
+    post.comments &&
+    Object.keys(post.comments)
+      .sort((a, b) => a - b)
+      .splice((commentLoad - 1) * 5, 5);
   return props.trigger && post ? (
     <div className="popup" style={{ display: "none" }}>
       <Button
@@ -240,46 +248,32 @@ export default function Popup(props) {
               }}
             />
             <h4>Comment</h4>
-            <div className="post-comment-item">
-              <img
-                src="https://work.conando.vn/upload/220223/637812349690327647.jpg"
-                alt="user"
-              />
-              <div className="post-comment-item-content">
-                <p>Jane Cooper</p>
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  eu turpis molestie, dictum est a, mattis tellus
-                </span>
-              </div>
-            </div>
-            <div className="post-comment-item">
-              <img
-                src="https://work.conando.vn/upload/220223/637812349690327647.jpg"
-                alt="user"
-              />
-              <div className="post-comment-item-content">
-                <p>Jane Cooper</p>
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  eu turpis molestie, dictum est a, mattis tellus
-                </span>
-              </div>
-            </div>
-            <div className="post-comment-item">
-              <img
-                src="https://work.conando.vn/upload/220223/637812349690327647.jpg"
-                alt="user"
-              />
-              <div className="post-comment-item-content">
-                <p>Jane Cooper</p>
-                <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  eu turpis molestie, dictum est a, mattis tellus
-                </span>
-              </div>
-            </div>
-            <Button value="More" state="is-ghost" isSmall="true" />
+            {comments &&
+              comments.map((item) => {
+                return (
+                  <div className="post-comment-item">
+                    <img
+                      src={post.comments[`${item}`].creator.image}
+                      alt="user"
+                    />
+                    <div className="post-comment-item-content">
+                      <p>
+                        {`${post.comments[`${item}`].creator.name}`}
+                        <li>{timeSince(item)}</li>
+                      </p>
+                      <span>{post.comments[`${item}`].content}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            <Button
+              value="More"
+              state="is-ghost"
+              isSmall="true"
+              onClick={() => {
+                setCommentLoad(commentLoad + 1);
+              }}
+            />
             <div className="related-news">
               <section className="breakcrumb">
                 <h3>Related Post</h3>

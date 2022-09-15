@@ -1,16 +1,18 @@
 import {
   createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
-import { set, ref } from "firebase/database";
+import { set, ref, get } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { uid } from "uid";
 import { auth, db } from "../firebase";
 import Button from "./Button";
 
 function Login(props) {
   const [checked, setChecked] = useState(false);
-  const param = useParams();
   const [signUp, setSignUp] = useState(false);
   useEffect(() => {
     if (props.trigger) {
@@ -30,6 +32,7 @@ function Login(props) {
     popup.classList.remove("is-active");
     setTimeout(() => {
       props.setTriggerPopup(false);
+      setSignUp(false);
     }, 200);
   };
   const handleLogin = () => {
@@ -41,7 +44,6 @@ function Login(props) {
         .then(() => {
           valid.classList.remove("is-active");
           closePopup();
-          Navigate(`${param}`);
         })
         .catch(() => {
           valid.classList.add("is-active");
@@ -84,26 +86,33 @@ function Login(props) {
       valid.innerHTML = "Password and re-password must be the same";
       valid.classList.add("is-active");
     } else {
-      createUserWithEmailAndPassword(auth, mail, password)
-        .then(() => {
-          valid.classList.remove("is-active");
-          set(ref(db, `/users/${auth.currentUser.uid}`), {
-            email: mail,
-            id: auth.currentUser.uid,
-            image: "",
-            jobs: job,
-            name: mail,
-            savedPost: {},
+      fetch(
+        `https://avatars.dicebear.com/api/micah/${mail.slice(
+          0,
+          mail.indexOf("@")
+        )}.svg?mood[]=happy`
+      ).then((res) => {
+        createUserWithEmailAndPassword(auth, mail, password)
+          .then(() => {
+            valid.classList.remove("is-active");
+            set(ref(db, `/users/${auth.currentUser.uid}`), {
+              email: mail,
+              id: auth.currentUser.uid,
+              image: res.url,
+              jobs: job,
+              name: mail,
+              savedPost: {},
+            });
+          })
+          .then(() => {
+            localStorage.setItem("saveLogin", false);
+            setSignUp(false);
+          })
+          .catch(() => {
+            valid.innerHTML = "Your Email has been used";
+            valid.classList.add("is-active");
           });
-        })
-        .then(() => {
-          localStorage.setItem("saveLogin", false);
-          setSignUp(false);
-        })
-        .catch(() => {
-          valid.innerHTML = "Your Email has been used";
-          valid.classList.add("is-active");
-        });
+      });
     }
   };
   const handleJob = (e) => {
@@ -118,6 +127,50 @@ function Login(props) {
       other.classList.remove("is-active");
       job.innerHTML = value;
     }
+  };
+  const handleLoginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      const user = result.user;
+      get(ref(db, `/users/${user.uid}`)).then((res) => {
+        if (!res.val()) {
+          set(ref(db, `/users/${user.uid}`), {
+            email: user.email,
+            id: user.uid,
+            image: user.photoURL,
+            jobs: "Other",
+            name: user.displayName,
+            role: "user",
+            savedPost: {},
+          }).then(() => {
+            closePopup();
+          });
+        }
+      });
+    });
+  };
+  const handleLoginWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      const user = result.user;
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
+      get(ref(db, `/users/${user.uid}`)).then((res) => {
+        if (!res.val()) {
+          set(ref(db, `/users/${user.uid}`), {
+            email: user.email,
+            id: user.uid,
+            image: user.photoURL + `?access_token=${accessToken}`,
+            jobs: "Other",
+            name: user.displayName,
+            role: "user",
+            savedPost: {},
+          }).then(() => {
+            closePopup();
+          });
+        }
+      });
+    });
   };
   return props.trigger ? (
     <div className="popup login">
@@ -179,6 +232,21 @@ function Login(props) {
                 </span>
                 <span> Remember me </span>
               </label>
+            </section>
+            <section className="other-method">
+              <h3>Other Sign-in method</h3>
+              <div
+                className="google"
+                onClick={() => {
+                  handleLoginWithGoogle();
+                }}
+              ></div>
+              <div
+                className="facebook"
+                onClick={() => {
+                  handleLoginWithFacebook();
+                }}
+              ></div>
             </section>
             <p className="login-valid">Email or password is incorrect</p>
             <Button

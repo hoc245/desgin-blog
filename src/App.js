@@ -1,11 +1,13 @@
+import jwt_decode from "jwt-decode";
 import "./Styles/CSS/App.css";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
 import Nav from "./Components/Nav";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import CreatePost from "./Components/CreatePost";
 import { onValue, ref } from "firebase/database";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function App() {
   const location = useLocation();

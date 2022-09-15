@@ -145,6 +145,8 @@ function Login(props) {
           }).then(() => {
             closePopup();
           });
+        } else {
+          closePopup();
         }
       });
     });
@@ -168,6 +170,8 @@ function Login(props) {
           }).then(() => {
             closePopup();
           });
+        } else {
+          closePopup();
         }
       });
     });

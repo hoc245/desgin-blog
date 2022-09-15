@@ -406,50 +406,52 @@ export default function EditPost(props) {
                   />
                 </div>
                 <Tags tags={postDetail.tags} />
-                {props.creator && props.creator.role === "admin" && (
-                  <div className="post-creator">
-                    <h3>Creator (Required)</h3>
-                    <div className="dropdown-catalogies">
-                      <div
-                        className="dropdown-catalogies-title"
-                        onClick={(e) => {
-                          e.currentTarget.nextSibling.classList.toggle(
-                            "is-active"
-                          );
-                        }}
-                      >
-                        <span
-                          className="dropdown-catalogies-title-value"
-                          data-id={postDetail.creator ? postDetail.creator : ""}
-                        >
-                          {userList[`${postDetail.creator}`]
-                            ? userList[`${postDetail.creator}`].name
-                            : "Choose a creator"}
-                        </span>
-                        <span class="material-symbols-outlined">
-                          navigate_next
-                        </span>
-                      </div>
-                      <div className="dropdown-catalogies-menu">
-                        {props.userList &&
-                          Object.keys(userList).map((user) => {
-                            return (
-                              <div
-                                className="dropdown-catalogies-item"
-                                onClick={() => handleCreator(user)}
-                              >
-                                <img
-                                  src={userList[`${user}`].image}
-                                  alt="avatar"
-                                />
-                                <p>{userList[`${user}`].name}</p>
-                              </div>
+                {props.userList[`${auth.currentUser.uid}`] &&
+                  props.userList[`${auth.currentUser.uid}`].role ===
+                    "admin" && (
+                    <div className="post-creator">
+                      <h3>Creator (Required)</h3>
+                      <div className="dropdown-catalogies">
+                        <div
+                          className="dropdown-catalogies-title"
+                          onClick={(e) => {
+                            e.currentTarget.nextSibling.classList.toggle(
+                              "is-active"
                             );
-                          })}
+                          }}
+                        >
+                          <span
+                            className="dropdown-catalogies-title-value"
+                            data-id={props.creator ? props.creator.id : ""}
+                          >
+                            {postDetail.creator.name
+                              ? postDetail.creator.name
+                              : "Choose a creator"}
+                          </span>
+                          <span class="material-symbols-outlined">
+                            navigate_next
+                          </span>
+                        </div>
+                        <div className="dropdown-catalogies-menu">
+                          {props.userList &&
+                            Object.keys(userList).map((user) => {
+                              return (
+                                <div
+                                  className="dropdown-catalogies-item"
+                                  onClick={() => handleCreator(user)}
+                                >
+                                  <img
+                                    src={userList[`${user}`].image}
+                                    alt="avatar"
+                                  />
+                                  <p>{userList[`${user}`].name}</p>
+                                </div>
+                              );
+                            })}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </section>
               <section className="post-banner">
                 <h3>Banner (Required)</h3>

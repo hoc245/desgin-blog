@@ -65,7 +65,9 @@ export default function Result() {
     });
     var current = location.pathname
       .substring(8)
+      .replace("Search&q=", "")
       .replace("-", " ")
+      .replace("%20", " ")
       .replace(".", "/");
     setCurrentCatalogue(current);
     setPage(1);
@@ -103,13 +105,13 @@ export default function Result() {
             }
             if (catalogue.indexOf(currentCatalogue) === -1) {
               let result = currentCatalogue
-                .replace("Result for: ", "")
+                .replace("Search&q=", "")
+                .replace("%20", " ")
+                .toLowerCase()
                 .split(" ");
               if (
-                result.every((v) => {
-                  return postThumb[`${item}`].title
-                    .toLowerCase()
-                    .includes(v.toLowerCase());
+                result.some((v) => {
+                  return postThumb[`${item}`].title.toLowerCase().includes(v);
                 })
               ) {
                 return item;
@@ -157,55 +159,63 @@ export default function Result() {
         {/* <Hero /> */}
         <div className="main-content">
           <ul className="hero-section-catalogies">
-            <Link
-              className={`${
-                param.id && param.id.includes("Homepage")
-                  ? "--catalogies-item is-active"
-                  : "--catalogies-item"
-              }`}
-              to="/Homepage"
+            <div className="hero-section-catalogies-menu">
+              <Link
+                className={`${
+                  param.id && param.id.includes("Homepage")
+                    ? "--catalogies-item is-active"
+                    : "--catalogies-item"
+                }`}
+                to="/Homepage"
+              >
+                All
+              </Link>
+              <Link
+                className={`${
+                  param.id && param.id.includes("Latest")
+                    ? "--catalogies-item is-active"
+                    : "--catalogies-item"
+                }`}
+                to="/Result/Latest"
+              >
+                Latest
+              </Link>
+              {catalogue &&
+                catalogue.map((cata) => {
+                  return (
+                    <Link
+                      className={`${
+                        param.id &&
+                        param.id.includes(
+                          cata.replace(" ", "-").replace("/", ".")
+                        )
+                          ? "--catalogies-item is-active"
+                          : "--catalogies-item"
+                      }`}
+                      to={`/Result/${cata.replace(" ", "-").replace("/", ".")}`}
+                    >
+                      {cata}
+                    </Link>
+                  );
+                })}
+              <Link
+                className={`${
+                  param.id && param.id.includes("Saved")
+                    ? "--catalogies-item is-active"
+                    : "--catalogies-item"
+                }`}
+                to="/Result/Saved"
+              >
+                Saved
+              </Link>
+            </div>
+            <div
+              className={
+                catalogue && catalogue.length >= 3
+                  ? "searchbar is-collapse"
+                  : "searchbar"
+              }
             >
-              All
-            </Link>
-            <Link
-              className={`${
-                param.id && param.id.includes("Latest")
-                  ? "--catalogies-item is-active"
-                  : "--catalogies-item"
-              }`}
-              to="/Result/Latest"
-            >
-              Latest
-            </Link>
-            {catalogue &&
-              catalogue.map((cata) => {
-                return (
-                  <Link
-                    className={`${
-                      param.id &&
-                      param.id.includes(
-                        cata.replace(" ", "-").replace("/", ".")
-                      )
-                        ? "--catalogies-item is-active"
-                        : "--catalogies-item"
-                    }`}
-                    to={`/Result/${cata.replace(" ", "-").replace("/", ".")}`}
-                  >
-                    {cata}
-                  </Link>
-                );
-              })}
-            <Link
-              className={`${
-                param.id && param.id.includes("Saved")
-                  ? "--catalogies-item is-active"
-                  : "--catalogies-item"
-              }`}
-              to="/Result/Saved"
-            >
-              Saved
-            </Link>
-            <div className="searchbar">
               <input
                 type={"text"}
                 className="search"

@@ -336,7 +336,6 @@ section {
       @include font.bold14;
       color: col.$text-light;
       padding: 8px;
-      margin-bottom: 32px;
       cursor: pointer;
       &:hover {
         color: white;
@@ -605,7 +604,17 @@ section {
       position: relative;
       width: 100%;
       max-width: 1040px;
-      margin: auto;
+      margin: 0 auto 32px auto;
+      &-menu {
+        flex: 1 1 0%;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        flex-wrap: nowrap;
+      }
+      .--catalogies-item {
+        white-space: nowrap;
+      }
       .--catalogies-item:hover {
         color: col.$neutral-50;
       }
@@ -613,6 +622,28 @@ section {
         flex: 1 1 0%;
         position: relative;
         margin-left: 16px;
+        max-width: 500px;
+        transition: all 300ms ease;
+        &.is-collapse {
+          max-width: 104px;
+          margin-left: auto;
+          &:hover {
+            max-width: 500px;
+            margin-left: 16px;
+            .button {
+              border-radius: 0 50px 50px 0;
+            }
+            .search {
+              padding: 0px 120px 0 16px;
+            }
+          }
+          .button {
+            border-radius: 50px;
+          }
+          .search {
+            padding: 0;
+          }
+        }
         .search {
           border: 1px solid col.$neutral-20;
         }
@@ -844,4 +875,15 @@ section {
       color: col.$error;
     }
   }
+}
+.breakcrumb h3 {
+  align-items: baseline;
+  display: flex;
+}
+.indicator {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  @include font.medium14;
+  color: col.$neutral-50;
 }

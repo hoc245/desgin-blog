@@ -5,14 +5,14 @@
   height: 35px;
   display: flex;
   .search {
-    flex: 1 1 0%;
+    width: 100%;
     height: 100%;
     border: none;
     outline: none;
     padding: 0px 120px 0 16px;
     color: col.$text;
     border-radius: 100px;
-    transition: all 200ms ease;
+    transition: all 300ms ease;
     &::placeholder {
       @include font.italic12;
       color: col.$text-light;

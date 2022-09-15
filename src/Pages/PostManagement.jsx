@@ -157,6 +157,11 @@ function PostManagement(props) {
           <section className="breakcrumb">
             <h3>Post management</h3>
             <hr></hr>
+            <p className="indicator">
+              <p>{`Total posts: ${
+                postList && Object.keys(postList).length
+              }`}</p>
+            </p>
           </section>
           <div className="account-toolbar">
             <div className="post-catalogies">
@@ -234,12 +239,7 @@ function PostManagement(props) {
                           src={postList[`${post}`].image}
                           alt={postList[`${post}`].title}
                         />
-                        <div
-                          className="post-detail"
-                          onClick={() => {
-                            goToPostDetail(post, page);
-                          }}
-                        >
+                        <div className="post-detail">
                           <h3 className="post-title">
                             {postList[`${post}`].title}
                           </h3>

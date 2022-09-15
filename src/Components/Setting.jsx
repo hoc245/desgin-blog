@@ -6,10 +6,14 @@ import Button from "./Button";
 function Setting(props) {
   const [newCatalogue, setNewcatalogue] = useState(null);
   const [createNew, setCreateNew] = useState(false);
+  const [hasEdited, setHasEdited] = useState(false);
+  // useEffect(() => {
+  //   onValue(ref(db, `/catalogue`), (snapshot) => {
+  //     setNewcatalogue(snapshot.val());
+  //   });
+  // }, []);
   useEffect(() => {
-    onValue(ref(db, `/catalogue`), (snapshot) => {
-      setNewcatalogue(snapshot.val());
-    });
+    setNewcatalogue(JSON.parse(localStorage.getItem("catalogue")));
   }, []);
   useEffect(() => {
     if (props.trigger) {
@@ -27,9 +31,16 @@ function Setting(props) {
   const closePopup = () => {
     let popup = document.querySelector(".popup.is-confirm");
     popup.classList.remove("is-active");
-    setTimeout(() => {
-      props.setTriggerPopup(false);
-    }, 200);
+    if (hasEdited) {
+      setNewcatalogue(JSON.parse(localStorage.getItem("catalogue")));
+      setTimeout(() => {
+        props.setTriggerPopup(false);
+      }, 200);
+    } else {
+      setTimeout(() => {
+        props.setTriggerPopup(false);
+      }, 200);
+    }
   };
   const removeCatalogue = (item) => {
     let invalid = document.querySelector(".popup.is-confirm .is-invalid");
@@ -39,24 +50,34 @@ function Setting(props) {
         invalid.innerHTML = `Your current catalogue has: ${res} post(s)</br>Please remove these post(s) before delete catalogue!`;
         invalid.classList.add("is-active");
       } else {
+        setHasEdited(true);
         invalid.classList.remove("is-active");
-        let mArray = newCatalogue;
-        mArray.splice(newCatalogue.indexOf(item), 1);
-        updateCatalogue(mArray);
+        setNewcatalogue(
+          newCatalogue.filter((e) => {
+            if (e !== item) {
+              return item;
+            }
+          })
+        );
         setTimeout(() => {
           document.body.setAttribute("style", "overflow:hidden");
         }, 0);
       }
     });
   };
-  const updateCatalogue = async (array) => {
+  const updateCatalogue = async () => {
     let invalid = document.querySelector(
       ".popup.is-confirm .is-invalid.is-active"
     );
     if (invalid) {
       return false;
     } else {
-      set(ref(db, `/catalogue`), array);
+      set(ref(db, `/catalogue`), newCatalogue).then(() => {
+        setHasEdited(false);
+        setTimeout(() => {
+          closePopup();
+        }, 0);
+      });
     }
   };
   const checkValid = (cata) => {
@@ -76,12 +97,11 @@ function Setting(props) {
     if (value) {
       newCatalogue[`${Object.keys(newCatalogue).length}`] = value;
       setNewcatalogue(newCatalogue);
-      setCreateNew(false);
-    } else {
-      setCreateNew(false);
+      setHasEdited(true);
     }
+    setCreateNew(false);
   };
-  return props.trigger ? (
+  return props.trigger && newCatalogue ? (
     <div className="popup is-confirm" style={{ display: "none" }}>
       <Button
         value=""

@@ -62,10 +62,20 @@ function Login(props) {
     const mail = document.querySelector('input[id="email"]').value;
     const password = document.querySelector('input[id="password"]').value;
     const rePassword = document.querySelector('input[id="re-password"]').value;
-    const job = document.querySelector(".jobs-value").innerHTML;
+    let job = document.querySelector(".jobs-value").innerHTML;
     const valid = document.querySelector(".login-valid");
     if (job === "Your position") {
       job = "Other";
+    } else if (
+      job === "Other" &&
+      !document.querySelector(".jobs-other input").value
+    ) {
+      job = "Other";
+    } else if (
+      job === "Other" &&
+      document.querySelector(".jobs-other input").value
+    ) {
+      job = document.querySelector(".jobs-other input").value;
     }
     if (!mail || !password || !rePassword) {
       valid.innerHTML = "Please enter your email and password";
@@ -98,6 +108,7 @@ function Login(props) {
   };
   const handleJob = (e) => {
     const value = e.currentTarget.innerHTML;
+    console.log(value);
     const other = document.querySelector(".jobs-other");
     const job = document.querySelector(".jobs-value");
     if (value === "Other") {
@@ -304,7 +315,11 @@ function Login(props) {
                 </ul>
               </div>
               <div className="jobs-other">
-                <input type={"text"} placeholder={"Enter your position"} />
+                <input
+                  type={"text"}
+                  onChange={() => {}}
+                  placeholder={"Enter your position"}
+                />
               </div>
             </section>
             <p className="login-valid">Email or password is incorrect</p>

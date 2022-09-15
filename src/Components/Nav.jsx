@@ -19,9 +19,7 @@ export default function Nav({ catalogue, loginState, user, triggerPopup }) {
     }
   });
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      Navigate(`${location.pathname}`);
-    });
+    signOut(auth);
   };
   return (
     <>

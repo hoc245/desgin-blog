@@ -1,13 +1,12 @@
-import jwt_decode from "jwt-decode";
 import "./Styles/CSS/App.css";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
 import Nav from "./Components/Nav";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import CreatePost from "./Components/CreatePost";
 import { onValue, ref } from "firebase/database";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Button from "./Components/Button";
 
 function App() {
   const location = useLocation();
@@ -34,6 +33,13 @@ function App() {
       }
     });
   }, []);
+  const scrollToTop = () => {
+    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    if (c > 0) {
+      window.requestAnimationFrame(scrollToTop);
+      window.scrollTo(0, c - c / 8);
+    }
+  };
   return (
     <div className="App">
       <Nav
@@ -54,6 +60,13 @@ function App() {
         hasLogin={hasLogin}
         catalogue={catalogue ? catalogue : null}
         setCreatePost={setCreatePost}
+      />
+      <Button
+        iconLeft={"arrow_upward"}
+        state={"is-filled scroll-top"}
+        onClick={() => {
+          scrollToTop();
+        }}
       />
     </div>
   );

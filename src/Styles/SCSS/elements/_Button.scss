@@ -2,6 +2,7 @@
 @use "../abstracts/font" as font;
 
 .button {
+  position: relative;
   height: 35px;
   padding: 0 16px;
   display: flex;

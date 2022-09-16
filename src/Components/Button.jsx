@@ -6,6 +6,7 @@ export default function Button({
   value,
   isSmall = false,
   state = "is-filled",
+  rounded,
   ...rootDOMAttributes
 }) {
   return (
@@ -16,8 +17,10 @@ export default function Button({
       <span
         className={`${
           iconLeft === ""
-            ? "is-hidden material-symbols-outlined"
-            : "material-symbols-outlined"
+            ? `is-hidden material-symbols-${
+                rounded === "true" ? "rounded" : "outlined"
+              }`
+            : `material-symbols-${rounded === "true" ? "rounded" : "outlined"}`
         }`}
       >
         {iconLeft}
@@ -28,8 +31,10 @@ export default function Button({
       <span
         className={`${
           iconRight === ""
-            ? "is-hidden material-symbols-outlined"
-            : "material-symbols-outlined"
+            ? `is-hidden material-symbols-${
+                rounded === "true" ? "rounded" : "outlined"
+              }`
+            : `material-symbols-${rounded === "true" ? "rounded" : "outlined"}`
         }`}
       >
         {iconRight}

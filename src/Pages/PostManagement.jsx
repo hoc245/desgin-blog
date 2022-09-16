@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Button from "../Components/Button";
 import ConfirmPopup from "../Components/ConfirmPopup";
 import EditPost from "../Components/EditPost";
+import loadMore from "../Components/loadMore";
 import Setting from "../Components/Setting";
 import { auth, db } from "../firebase";
 
@@ -24,7 +25,7 @@ function formatDate(date) {
   ].join("/");
 }
 
-function PostManagement(props) {
+function PostManagement() {
   const [userList, setUserList] = useState();
   const [user, setUser] = useState();
   const [postList, setPostList] = useState();
@@ -36,7 +37,7 @@ function PostManagement(props) {
   const [search, setSearch] = useState("");
   const [catalogue, setCatalogue] = useState();
   const [currentCatalogue, setCurrentCatalogue] = useState("All catalogies");
-  const [page, setPage] = useState(props.page ? props.page : 1);
+  const [page, setPage] = useState(1);
   const [postDetail, setPostDetail] = useState({
     id: "",
     trigger: false,
@@ -62,31 +63,11 @@ function PostManagement(props) {
     });
   }, []);
   useEffect(() => {
-    document.scrollingElement.scrollTo(0, 0);
-  }, [page]);
-  const maxpage =
-    postList && Object.keys(postList)
-      ? Math.floor(Object.keys(postList).length / postPerPage) +
-        (Object.keys(postList).length % postPerPage !== 0 ? 1 : 0)
-      : 1;
-  const changePage = (e) => {
-    const value = e.currentTarget.innerHTML;
-    setPage(parseInt(value));
-  };
-  const nextPage = () => {
-    if (page === maxpage) {
-      return false;
-    } else {
-      setPage(page + 1);
-    }
-  };
-  const prePage = () => {
-    if (page === 1) {
-      return false;
-    } else {
-      setPage(page - 1);
-    }
-  };
+    window.addEventListener("scroll", loadContent);
+    return function cleanUp() {
+      window.removeEventListener("scroll", loadContent);
+    };
+  });
   const goToPostDetail = async (id) => {
     await get(ref(db, `/postDetail/${id}`)).then((res) => {
       setPostDetail({
@@ -149,6 +130,15 @@ function PostManagement(props) {
     const input = e.currentTarget.previousSibling;
     const value = input.value;
     setSearch(value);
+  };
+  const loadContent = () => {
+    let current = page;
+    let next = loadMore(current);
+    if (next) {
+      setPage(next);
+    } else {
+      return false;
+    }
   };
   return (
     <>
@@ -230,168 +220,63 @@ function PostManagement(props) {
           {user && userList ? (
             <section className="post-container">
               {postList &&
-                currentPostList
-                  .splice((page - 1) * postPerPage, postPerPage)
-                  .map((post) => {
-                    return (
-                      <div key={post} className="post-item">
-                        <img
-                          src={postList[`${post}`].image}
-                          alt={postList[`${post}`].title}
-                        />
-                        <div className="post-detail">
-                          <h3 className="post-title">
-                            {postList[`${post}`].title}
-                          </h3>
-                          <h4
-                            className="post-description"
-                            title={postList[`${post}`].description}
-                          >
-                            {postList[`${post}`].description}
-                          </h4>
-                        </div>
-                        {postList[`${post}`].creator && (
-                          <div className="post-creator">
-                            <img
-                              src={postList[`${post}`].creator.image}
-                              alt="avatar"
-                            />
-                            <p>{postList[`${post}`].creator.name}</p>
-                          </div>
-                        )}
-                        <p className="post-createAt">{`${getDayName(
-                          post
-                        )}, ${formatDate(post)}`}</p>
-                        <div className="post-action">
-                          <Button
-                            value="Edit"
-                            iconLeft="Edit"
-                            isSmall={true}
-                            state="is-outline"
-                            onClick={() => {
-                              goToPostDetail(post);
-                            }}
-                          />
-                          <Button
-                            value="Delete"
-                            iconLeft="Delete"
-                            isSmall={true}
-                            state="is-ghost"
-                            onClick={() => {
-                              deletePost(post);
-                            }}
-                          />
-                        </div>
+                currentPostList.splice(0, postPerPage * page).map((post) => {
+                  return (
+                    <div key={post} className="post-item">
+                      <img
+                        src={postList[`${post}`].image}
+                        alt={postList[`${post}`].title}
+                      />
+                      <div className="post-detail">
+                        <h3 className="post-title">
+                          {postList[`${post}`].title}
+                        </h3>
+                        <h4
+                          className="post-description"
+                          title={postList[`${post}`].description}
+                        >
+                          {postList[`${post}`].description}
+                        </h4>
                       </div>
-                    );
-                  })}
+                      {postList[`${post}`].creator && (
+                        <div className="post-creator">
+                          <img
+                            src={postList[`${post}`].creator.image}
+                            alt="avatar"
+                          />
+                          <p>{postList[`${post}`].creator.name}</p>
+                        </div>
+                      )}
+                      <p className="post-createAt">{`${getDayName(
+                        post
+                      )}, ${formatDate(post)}`}</p>
+                      <div className="post-action">
+                        <Button
+                          value="Edit"
+                          iconLeft="Edit"
+                          isSmall={true}
+                          state="is-outline"
+                          onClick={() => {
+                            goToPostDetail(post);
+                          }}
+                        />
+                        <Button
+                          value="Delete"
+                          iconLeft="Delete"
+                          isSmall={true}
+                          state="is-ghost"
+                          onClick={() => {
+                            deletePost(post);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
             </section>
           ) : (
             <></>
           )}
-
-          <ul className="pagination">
-            <Button
-              value=""
-              iconLeft="arrow_left"
-              state="is-ghost"
-              onClick={() => {
-                prePage();
-              }}
-            />
-            {maxpage <= 5 ? (
-              <>
-                {Array.from(Array(5), (_e, i) => {
-                  return (
-                    <li
-                      className={
-                        page === i + 1
-                          ? "pagination-item is-active"
-                          : "pagination-item"
-                      }
-                      onClick={(e) => {
-                        changePage(e);
-                      }}
-                    >
-                      {i + 1}
-                    </li>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {page >= maxpage - 3 ? (
-                  <>
-                    {Array.from(Array(maxpage), (_e, i) => {
-                      if (i >= maxpage - 5 && i <= maxpage) {
-                        return (
-                          <li
-                            key={`page-${i}`}
-                            className={
-                              page === i + 1
-                                ? "pagination-item is-active"
-                                : "pagination-item"
-                            }
-                            onClick={(e) => {
-                              changePage(e);
-                            }}
-                          >
-                            {i + 1}
-                          </li>
-                        );
-                      }
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {Array.from(
-                      Array(page === 1 ? page + 2 : page + 1),
-                      (_e, i) => {
-                        if (i > page - 3) {
-                          return (
-                            <li
-                              key={`page-${i}`}
-                              className={
-                                page === i + 1
-                                  ? "pagination-item is-active"
-                                  : "pagination-item"
-                              }
-                              onClick={(e) => {
-                                changePage(e);
-                              }}
-                            >
-                              {i + 1}
-                            </li>
-                          );
-                        }
-                      }
-                    )}
-                    <li className={"pagination-item"}>...</li>
-                    <li
-                      className={
-                        page === maxpage
-                          ? "pagination-item is-active"
-                          : "pagination-item"
-                      }
-                      onClick={(e) => {
-                        changePage(e);
-                      }}
-                    >
-                      {maxpage}
-                    </li>
-                  </>
-                )}
-              </>
-            )}
-            <Button
-              value=""
-              iconRight="arrow_right"
-              state="is-ghost"
-              onClick={() => {
-                nextPage();
-              }}
-            />
-          </ul>
         </div>
       </div>
       <EditPost

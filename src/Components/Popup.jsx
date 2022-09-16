@@ -1,4 +1,4 @@
-import { set, onValue, ref, get } from "firebase/database";
+import { set, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import Button from "./Button";
@@ -78,7 +78,9 @@ export default function Popup(props) {
               props.allPost[`${item}`].catalogue === post.catalogue &&
               parseInt(item) !== parseInt(post.createAt)
             ) {
-              return true;
+              return item;
+            } else {
+              return false;
             }
           })
           .sort((a, b) => {
@@ -156,7 +158,6 @@ export default function Popup(props) {
       });
     }
   };
-  console.log(post);
   const comments =
     post &&
     post.comments &&
@@ -172,6 +173,25 @@ export default function Popup(props) {
         onClick={() => {
           closePopup();
         }}
+      />
+      <Button
+        onClick={(e) => {
+          handleSavePost(e, props.postID);
+        }}
+        iconLeft={`${
+          user &&
+          user.savedPost &&
+          Object.keys(user.savedPost).indexOf(props.postID) !== -1
+            ? "favorite"
+            : "favorite_border"
+        }`}
+        state={`${
+          user &&
+          user.savedPost &&
+          Object.keys(user.savedPost).indexOf(props.postID) !== -1
+            ? "is-filled is-sticky is-saved"
+            : "is-filled is-sticky"
+        }`}
       />
       <div className="popup-container">
         <section className="breakcrumb">
@@ -204,12 +224,19 @@ export default function Popup(props) {
                   ? "Saved"
                   : "Save"
               }`}
+              rounded={
+                user &&
+                user.savedPost &&
+                Object.keys(user.savedPost).indexOf(props.postID) !== -1
+                  ? true
+                  : false
+              }
               iconLeft={`${
                 user &&
                 user.savedPost &&
                 Object.keys(user.savedPost).indexOf(props.postID) !== -1
                   ? "favorite"
-                  : "favorite_border"
+                  : "favorite"
               }`}
               state={`${
                 user &&

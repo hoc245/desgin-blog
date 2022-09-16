@@ -1,6 +1,6 @@
 import { set, ref, onValue } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import Button from "./Button";
 import { motion } from "framer-motion";
 
@@ -153,31 +153,27 @@ export default function Card(props) {
               user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
-                ? "Saved"
-                : "Save"
+                ? ""
+                : ""
             }`}
             iconLeft={`${
               user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
                 ? "favorite"
-                : "favorite_border"
+                : "favorite"
             }`}
             state={`${
               user &&
               user.savedPost &&
               Object.keys(user.savedPost).indexOf(props.postID) !== -1
                 ? "is-filled is-saved"
-                : "is-ghost"
+                : "is-outline"
             }`}
             isSmall="true"
+            rounded="true"
           />
-          <Button
-            value={"Share"}
-            iconLeft="share"
-            state="is-ghost"
-            isSmall="true"
-          />
+          <Button value={""} iconLeft="share" state="is-ghost" isSmall="true" />
         </div>
       </div>
     </motion.div>

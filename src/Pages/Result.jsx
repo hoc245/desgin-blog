@@ -6,6 +6,7 @@ import Button from "../Components/Button";
 import Popup from "../Components/Popup";
 import { onValue, ref } from "firebase/database";
 import { auth, db } from "../firebase";
+import loadMore from "../Components/loadMore";
 
 function getDayName(dateStr) {
   var date = new Date(parseInt(dateStr));
@@ -41,6 +42,7 @@ export default function Result() {
     } else {
       navigate(`/Result/Search&q=${value}`);
     }
+    setCurrentSearch(value);
   };
   const [user, setUser] = useState();
   useEffect(() => {
@@ -58,6 +60,12 @@ export default function Result() {
     id: "",
     user: user,
   });
+  useEffect(() => {
+    window.addEventListener("scroll", loadContent);
+    return function cleanUp() {
+      window.removeEventListener("scroll", loadContent);
+    };
+  });
   const postPerPage = 10;
   useEffect(() => {
     onValue(ref(db, `/postThumb/`), (snapshot) => {
@@ -71,10 +79,11 @@ export default function Result() {
       .replace(".", "/");
     setCurrentCatalogue(current);
     setPage(1);
-  }, [location.pathname]);
-  useEffect(() => {
+    if (!location.pathname.includes("Search")) {
+      setCurrentSearch("");
+    }
     document.scrollingElement.scrollTo(0, 0);
-  }, [page]);
+  }, [location.pathname]);
   useEffect(() => {
     const pages = document.querySelectorAll(".pagination-item");
     if (pages) {
@@ -127,32 +136,28 @@ export default function Result() {
           .sort((a, b) => {
             return b - a;
           })
-          .splice((page - 1) * postPerPage, postPerPage)
+          .splice(0, postPerPage * page)
       : [];
 
-  const maxpage =
-    postThumb && currentPost
-      ? Math.floor(currentPost.length / postPerPage) +
-        (currentPost.length % postPerPage !== 0 ? 1 : 0)
-      : 1;
-  const changePage = (e) => {
-    const value = e.currentTarget.innerHTML;
-    setPage(parseInt(value));
-  };
-  const nextPage = () => {
-    if (page === maxpage) {
-      return false;
+  // const maxpage =
+  //   postThumb && currentPost
+  //     ? Math.floor(currentPost.length / postPerPage) +
+  //       (currentPost.length % postPerPage !== 0 ? 1 : 0)
+  //     : 1;
+  // const changePage = (e) => {
+  //   const value = e.currentTarget.innerHTML;
+  //   setPage(parseInt(value));
+  // };
+  const loadContent = () => {
+    let current = page;
+    let next = loadMore(current);
+    if (next) {
+      setPage(next);
     } else {
-      setPage(page + 1);
+      return false;
     }
   };
-  const prePage = () => {
-    if (page === 1) {
-      return false;
-    } else {
-      setPage(page - 1);
-    }
-  };
+
   return (
     <>
       <div className="main is-result">
@@ -220,7 +225,8 @@ export default function Result() {
                 type={"text"}
                 className="search"
                 placeholder="Tiêu đề bài viết"
-                defaultValue={currentSearch}
+                value={currentSearch}
+                onChange={(e) => setCurrentSearch(e.currentTarget.value)}
               />
               <Button
                 value="Search"
@@ -272,7 +278,7 @@ export default function Result() {
             ) : (
               <p className="no-result">No matching results were found</p>
             )}
-            <ul className="pagination">
+            {/* <ul className="pagination">
               <Button
                 value=""
                 iconLeft="arrow_left"
@@ -373,7 +379,7 @@ export default function Result() {
                   nextPage();
                 }}
               />
-            </ul>
+            </ul> */}
           </section>
         </div>
       </div>

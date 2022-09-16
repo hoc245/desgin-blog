@@ -68,15 +68,11 @@ export default function EditPost(props) {
   const handleCatalogue = (e) => {
     const value = e.currentTarget.innerHTML;
     const catalogue = document.querySelector(
-      ".post-catalogies .dropdown-catalogies-title-value"
+      ".popup.edit-post .dropdown-catalogies-title-value"
     );
-    if (value === catalogue.innerHTML) {
-      catalogue.innerHTML = "Choose catalogue";
-    } else {
-      catalogue.innerHTML = value;
-    }
+    catalogue.innerHTML = value;
     document
-      .querySelector(".dropdown-catalogies-menu")
+      .querySelector(".popup.edit-post .dropdown-catalogies-menu")
       .classList.toggle("is-active");
   };
   const closePopup = () => {
@@ -92,23 +88,35 @@ export default function EditPost(props) {
   };
   const newPost = async () => {
     const catalogies = document.querySelector(
-      ".dropdown-catalogies-title-value"
+      ".popup.edit-post .dropdown-catalogies-title-value"
     ).innerHTML;
-    const source = document.querySelector(".post-create-source input").value;
+    const source = document.querySelector(
+      ".popup.edit-post .post-create-source input"
+    ).value;
     var tags = {};
-    let selectedTags = document.querySelectorAll(".tag.is-selected");
+    let selectedTags = document.querySelectorAll(
+      ".popup.edit-post .tag.is-selected"
+    );
     [].forEach.call(selectedTags, (item) => {
       tags[`${item.innerHTML.replace("/", "-")}`] = true;
     });
     const image = "";
-    const title = document.querySelector(".post-content-header").value;
-    const subTitle = document.querySelector(".post-content-sub").value;
+    const title = document.querySelector(
+      ".popup.edit-post .post-content-header"
+    ).value;
+    const subTitle = document.querySelector(
+      ".popup.edit-post .post-content-sub"
+    ).value;
     const body = value;
     const creator = document
-      .querySelector(".post-creator .dropdown-catalogies-title-value")
+      .querySelector(
+        ".popup.edit-post .post-creator .dropdown-catalogies-title-value"
+      )
       .getAttribute("data-id");
     const valid = checkValid();
-    const createBtn = document.querySelector(".button.create-post");
+    const createBtn = document.querySelector(
+      ".popup.edit-post .button.create-post"
+    );
     var mPost = {
       createAt: postDetail.createAt,
       catalogue: "",
@@ -130,10 +138,14 @@ export default function EditPost(props) {
     mPost[`creator`] = userList[`${creator}`];
     if (valid) {
       console.log("valid");
-      let [file] = document.querySelector('input[id="banner-upload"]').files;
+      let [file] = document.querySelector(
+        '.popup.edit-post input[id="banner-upload"]'
+      ).files;
       createBtn.classList.add("is-loading");
       if (!file) {
-        mPost.image = document.querySelector(".post-banner-link input").value;
+        mPost.image = document.querySelector(
+          ".popup.edit-post .post-banner-link input"
+        ).value;
         await set(ref(db, `/postDetail/${mPost.createAt}`), mPost)
           .then(() => {
             set(ref(db, `/postThumb/${mPost.createAt}`), {
@@ -149,7 +161,7 @@ export default function EditPost(props) {
             createBtn.classList.remove("is-loading");
             createBtn.classList.add("is-success");
             document.querySelector(
-              ".button.create-post .button-value"
+              ".popup.edit-post .button.create-post .button-value"
             ).innerHTML = "Post created successfully";
             setTimeout(() => {
               closePopup();
@@ -184,7 +196,7 @@ export default function EditPost(props) {
                 createBtn.classList.remove("is-loading");
                 createBtn.classList.add("is-success");
                 document.querySelector(
-                  ".button.create-post .button-value"
+                  ".popup.edit-post .button.create-post .button-value"
                 ).innerHTML = "Post created successfully";
                 setTimeout(() => {
                   closePopup();
@@ -199,31 +211,49 @@ export default function EditPost(props) {
     }
   };
   const checkValid = () => {
-    const validText = document.querySelector(".post-action-valid");
+    const validText = document.querySelector(
+      ".popup.edit-post .post-action-valid"
+    );
     const createAt = document.querySelector(
-      ".post-create-day--value"
+      ".popup.edit-post .post-create-day--value"
     ).innerHTML;
     const catalogies = document.querySelector(
-      ".dropdown-catalogies-title-value"
+      ".popup.edit-post .dropdown-catalogies-title-value"
     ).innerHTML;
     var tags = {};
-    let selectedTags = document.querySelectorAll(".tag.is-selected");
+    let selectedTags = document.querySelectorAll(
+      ".popup.edit-post .tag.is-selected"
+    );
     [].forEach.call(selectedTags, (item) => {
       tags[`${item.innerHTML.replace("/", "-")}`] = true;
     });
-    const image = document.querySelector(".post-banner-preview img").src;
-    const title = document.querySelector(".post-content-header").value;
+    const image = document.querySelector(
+      ".popup.edit-post .post-banner-preview img"
+    ).src;
+    const title = document.querySelector(
+      ".popup.edit-post .post-content-header"
+    ).value;
     const body = value;
-    const imageLink = document.querySelector(".post-banner-link input").value;
+    const imageLink = document.querySelector(
+      ".popup.edit-post .post-banner-link input"
+    ).value;
     // Container
-    const daypickerSection = document.querySelector(".post-create-day");
-    const catalogiesSection = document.querySelector(".post-catalogies");
-    const tagsSection = document.querySelector(".post-tags");
-    const bannerSection = document.querySelector(".post-banner");
-    const contentSection = document.querySelector(".post-content");
-    const creator = document.querySelector(".post-creator");
+    const daypickerSection = document.querySelector(
+      ".popup.edit-post .post-create-day"
+    );
+    const catalogiesSection = document.querySelector(
+      ".popup.edit-post .post-catalogies"
+    );
+    const tagsSection = document.querySelector(".popup.edit-post .post-tags");
+    const bannerSection = document.querySelector(
+      ".popup.edit-post .post-banner"
+    );
+    const contentSection = document.querySelector(
+      ".popup.edit-post .post-content"
+    );
+    const creator = document.querySelector(".popup.edit-post .post-creator");
     const creatorID = document
-      .querySelector(".post-creator .dropdown-catalogies-title-value")
+      .querySelector(".popup.edit-post dropdown-catalogies-title-value")
       .getAttribute("data-id");
     if (createAt === "Select a day") {
       daypickerSection.classList.add("is-invalid");
@@ -278,7 +308,9 @@ export default function EditPost(props) {
     const [file] = await e.currentTarget.files;
     const time = new Date();
     const fileName = `${time.getTime()}${file.name}`;
-    const preview = document.querySelector(".post-banner-preview img");
+    const preview = document.querySelector(
+      ".popup.edit-post .post-banner-preview img"
+    );
     if (file) {
       await imageCompression(file, options).then((compressFile) => {
         preview.src = URL.createObjectURL(compressFile);
@@ -287,7 +319,9 @@ export default function EditPost(props) {
     }
   };
   const handleDaypicker = (e) => {
-    let current = document.querySelector(".post-create-day--value");
+    let current = document.querySelector(
+      ".popup.edit-post .post-create-day--value"
+    );
     let value = current.innerHTML;
     if (value !== e) {
       current.innerHTML = e;
@@ -317,12 +351,12 @@ export default function EditPost(props) {
   };
   const handleCreator = (id) => {
     const catalogue = document.querySelector(
-      ".post-creator .dropdown-catalogies-title-value"
+      ".popup.edit-post .dropdown-catalogies-title-value"
     );
     catalogue.setAttribute("data-id", id);
     catalogue.innerHTML = userList[`${id}`].name;
     document
-      .querySelector(".post-creator .dropdown-catalogies-menu")
+      .querySelector(".popup.edit-post .dropdown-catalogies-menu")
       .classList.toggle("is-active");
   };
   return props.trigger && postDetail ? (
@@ -422,7 +456,9 @@ export default function EditPost(props) {
                         >
                           <span
                             className="dropdown-catalogies-title-value"
-                            data-id={props.creator ? props.creator.id : ""}
+                            data-id={
+                              postDetail.creator ? postDetail.creator.id : ""
+                            }
                           >
                             {postDetail.creator.name
                               ? postDetail.creator.name

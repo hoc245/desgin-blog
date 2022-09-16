@@ -248,7 +248,7 @@ function Login(props) {
               <div
                 className="facebook"
                 onClick={() => {
-                  handleLoginWithFacebook();
+                  // handleLoginWithFacebook();
                 }}
               ></div>
             </section>

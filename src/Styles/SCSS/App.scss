@@ -35,6 +35,9 @@
   appearance: none;
   text-decoration: none;
 }
+html {
+  scroll-behavior: smooth;
+}
 // Global Style
 img {
   display: block;
@@ -61,7 +64,21 @@ h3 {
 * {
   font-family: font.$font-family;
 }
-
+.is-filled.scroll-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  height: 35px;
+  width: 35px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: col.$neutral-20;
+  span {
+    padding: 0;
+  }
+}
 .nav {
   width: 100%;
   padding: 20px;
@@ -880,6 +897,7 @@ section {
   align-items: baseline;
   display: flex;
 }
+
 .indicator {
   display: flex;
   justify-content: flex-end;
@@ -887,3 +905,5 @@ section {
   @include font.medium14;
   color: col.$neutral-50;
 }
+//783799184727-rbu59u0pgbuf01dq175rp6j4phv0mph5.apps.googleusercontent.com
+//349155623906-2drkn3kob1jk8ljgp685qbqmui94srtc.apps.googleusercontent.com

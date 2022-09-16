@@ -57,6 +57,27 @@
     justify-content: center;
     z-index: 999;
   }
+  .button.is-sticky {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    bottom: 70px;
+    right: 70px;
+    flex-direction: column;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 0;
+    z-index: 9;
+    span {
+      font-size: 24px;
+    }
+    span.is-hidden {
+      display: none;
+    }
+  }
   .popup-overlay {
     position: fixed;
     top: 0;
@@ -98,6 +119,7 @@
     }
     .popup-content {
       max-width: 600px;
+      position: relative;
       h2 {
         margin-bottom: 16px;
       }

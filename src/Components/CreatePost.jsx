@@ -4,7 +4,7 @@ import CustomeDaypicker from "./CustomeDaypicker";
 import imageCompression from "browser-image-compression";
 import { auth, db, storage } from "../firebase";
 import Editor from "./Editor";
-import { set, ref } from "firebase/database";
+import { set, ref, onValue } from "firebase/database";
 import "react-quill/dist/quill.snow.css";
 import "react-day-picker/dist/style.css";
 import Tags from "./Tags";

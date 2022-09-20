@@ -14,6 +14,7 @@ function App() {
   const [createPost, setCreatePost] = useState(false);
   const [user, setUser] = useState();
   const [catalogue, setCatalogue] = useState();
+  const [tags, setTags] = useState();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -30,6 +31,12 @@ function App() {
       if (snapshot) {
         setCatalogue(snapshot.val());
         localStorage.setItem("catalogue", JSON.stringify(snapshot.val()));
+      }
+    });
+    onValue(ref(db, `/tags/`), (snapshot) => {
+      if (snapshot) {
+        setTags(snapshot.val());
+        localStorage.setItem("tags", JSON.stringify(snapshot.val()));
       }
     });
   }, []);
@@ -59,6 +66,7 @@ function App() {
         trigger={createPost}
         hasLogin={hasLogin}
         catalogue={catalogue ? catalogue : null}
+        tags={tags ? tags : null}
         setCreatePost={setCreatePost}
       />
       <Button

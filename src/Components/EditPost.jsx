@@ -253,7 +253,9 @@ export default function EditPost(props) {
     );
     const creator = document.querySelector(".popup.edit-post .post-creator");
     const creatorID = document
-      .querySelector(".popup.edit-post dropdown-catalogies-title-value")
+      .querySelector(
+        ".popup.edit-post .post-creator .dropdown-catalogies-title-value"
+      )
       .getAttribute("data-id");
     if (createAt === "Select a day") {
       daypickerSection.classList.add("is-invalid");
@@ -351,12 +353,12 @@ export default function EditPost(props) {
   };
   const handleCreator = (id) => {
     const catalogue = document.querySelector(
-      ".popup.edit-post .dropdown-catalogies-title-value"
+      ".popup.edit-post .post-creator .dropdown-catalogies-title-value"
     );
     catalogue.setAttribute("data-id", id);
     catalogue.innerHTML = userList[`${id}`].name;
     document
-      .querySelector(".popup.edit-post .dropdown-catalogies-menu")
+      .querySelector(".popup.edit-post .post-creator .dropdown-catalogies-menu")
       .classList.toggle("is-active");
   };
   return props.trigger && postDetail ? (

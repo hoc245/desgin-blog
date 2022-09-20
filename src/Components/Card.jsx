@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Button from "./Button";
 import { motion } from "framer-motion";
+import hexToHSL from "./HEXtoHSL";
 
 function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -111,8 +112,16 @@ export default function Card(props) {
           {props.tags.length &&
             props.tags.map((tag) => {
               return (
-                <span key={`card-${tag}`} className="tag">
-                  {tag}
+                <span
+                  key={`card-${tag}`}
+                  className="tag"
+                  style={{
+                    "--hue": `${hexToHSL(tag.color).h}`,
+                    "--sat": `${hexToHSL(tag.color).s}`,
+                    "--light": `${hexToHSL(tag.color).l}`,
+                  }}
+                >
+                  {tag.value}
                 </span>
               );
             })}

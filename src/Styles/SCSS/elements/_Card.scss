@@ -78,12 +78,19 @@
   }
 }
 .tag {
+  --threshold: 70;
+  --switch: calc((var(--light) - var(--threshold)) * -100%);
   padding: 4px 8px;
-  background-color: col.$neutral-10;
+  background-color: hsl(
+    var(--hue),
+    calc(var(--sat) * 1%),
+    calc(var(--light) * 1%)
+  );
   border-radius: 4px;
   @include font.medium10;
-  color: col.$text-des;
+  color: hsl(0, 0%, var(--switch));
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .card-description {

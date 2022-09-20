@@ -139,12 +139,13 @@
         }
         p {
           margin-bottom: 8px;
-          strong {
-            display: block;
-            padding-bottom: 8px;
-          }
         }
-        ul {
+        a {
+          color: col.$text-link;
+          text-decoration: underline;
+        }
+        ul,
+        ol {
           margin-bottom: 32px;
           padding-left: 32px;
           li + li {
@@ -431,6 +432,10 @@
         width: fit-content;
         min-width: 200px;
         top: 66px;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         .tag {
           display: none;
           &.is-active {

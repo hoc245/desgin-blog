@@ -271,7 +271,7 @@ export default function Result() {
                     description={postThumb[`${post}`].description}
                     cover={postThumb[`${post}`].image}
                     time={post}
-                    tags={Object.keys(postThumb[`${post}`].tags)}
+                    tags={postThumb[`${post}`].tags}
                   />
                 );
               })

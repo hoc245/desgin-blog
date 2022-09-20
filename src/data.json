@@ -11,22 +11,22 @@
       "catalogue": "UI/UX Design",
       "createAt": 1662801073632,
       "creator": {
-        "email": "rjnsitrum245@gmail.com",
-        "id": "mO3yF6LLz6SVQP5Og4OhXhVVGW13",
-        "image": "https://graph.facebook.com/5125994270836116/picture?access_token=EAAIo4a8govoBAAJDEnGs2VxmVX7h0WLEhkXZBRHvlTcnjrBNtfYZCIbdC66yUxcc26j2FEHMX4wj8ZAGZB3hJaad9uw6DCSLykOKZAZBv67mdSnOOyHDZCoSZBvfzG077lRnedgbaYGJODsm43YAjpENcK8b7tUCdOZAqWAioIT8QK1iZCZBvTSHQjKrgSYHXcRaLtJBt4ZAWqAvNMOigLrYhkD69CfelubAkGmKIcZBbSeHJ1n8hu0QcWUUu",
-        "jobs": "Other",
-        "name": "Rin Nguyễn",
-        "role": "user",
-        "savedPost": {
-          "1663140978491": true
-        }
+        "email": "admin@designblog.com",
+        "id": "wGeJfc7BnROvkoyoMfJ1l3gVtPg1",
+        "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663000387832Untitled.png.png?alt=media&token=3b0f8fdd-0a78-4cfa-ac6b-37e01512bbfa",
+        "jobs": "UI/UX Lead Designer",
+        "name": "Học Pro",
+        "role": "admin"
       },
       "description": "Thematic analysis is a method of analyzing qualitative data. It is usually applied to a set of texts, such as an interview or transcripts. The researcher closely examines the data to identify common themes – topics, ideas and patterns of meaning that come up repeatedly.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2FUntitled.png?alt=media&token=e0016dc2-c349-4d3f-a473-e6e660aa4f87",
       "source": "https://www.scribbr.com/methodology/thematic-analysis/",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to Do Thematic Analysis | Step-by-Step Guide & Examples"
     },
     "1662827287602": {
@@ -47,9 +47,12 @@
       "description": "UX steps by steps",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_D4IK6nL5vsukKPDSKVB7iA.png?alt=media&token=4a84bbf6-9932-42ab-a4d7-7ba652afa3db",
       "source": "https://medium.com/nyc-design/ux-ui-design-process-for-beginner-753952bb2241",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX/UI Design Process"
     },
     "1662827808451": {
@@ -70,9 +73,12 @@
       "description": "When you first land on your job as a UX Designer or as an intern, first week or two might pass without any pressure. Developers might give you the requirements and you might use your existing knowledge about the tools to design what they have requested from you. You may deliver whatever the things you designed or you might spend the first two weeks designing that one task you were given.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_lVzcHLM6RLqTBtd5vq8Ogg.jpeg?alt=media&token=a2105d8c-241f-4d94-8d5a-da1302b9352e",
       "source": "https://medium.com/user-experience-design-1/what-is-your-ux-process-2fa146eb8380",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "What is your UX process?"
     },
     "1662827940882": {
@@ -93,9 +99,12 @@
       "description": "For our third project at Red Academy, we worked with a local community partner to design an app based on the requirements and needs of both our client and the app users.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_baBHBqs1CFeFHERZSQ5B-A.png?alt=media&token=6da7a1cc-d07c-473a-bf08-f4944e22bdd6",
       "source": "https://medium.com/swlh/eurika-ui-process-cd39889787a7",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Eurika: A UI Case Study"
     },
     "1662828099322": {
@@ -116,9 +125,12 @@
       "description": "I recently offered to talk at the local primary school, about my job (or at least part of my job). I expected to be speaking to the older kids, and be able to talk specifically about the cool parts of the job, and maybe some of the sucky bits too, and how you get around them. However, I was asked to talk to a reception class (four and five-year-olds), and it turned out to be an interesting exercise in boiling down what you do, to its most basic elements.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_yuPCrnG7qN-WlB4ok7y7Zg.jpeg?alt=media&token=7566f22e-86e2-4ba5-82a1-02d9dc8ecc1c",
       "source": "https://medium.com/@deanvipond/explaining-graphic-design-to-four-year-olds-fe9257ffaf3d",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Explaining graphic design to four-year-olds"
     },
     "1662828179098": {
@@ -139,9 +151,12 @@
       "description": "Gives an overview of some of the hottest trends in graphic design.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F0_3VWeMfCanhNGoz6U.jpg?alt=media&token=96d3080d-434f-4ea1-b351-32b778b84d1c",
       "source": "https://medium.com/geekculture/new-graphic-design-trends-youll-love-7c668b2a0d2d",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "New Graphic Design Trends You’ll Love!"
     },
     "1662828236834": {
@@ -162,9 +177,12 @@
       "description": "And how you can get yours too\n\n",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_EL1CkzG851BEtHNnX7HMOw.png?alt=media&token=a7099715-8db5-4949-9a1b-a599ce54fe30",
       "source": "https://medium.com/@azpidi/how-i-got-my-first-logo-design-client-journey-of-a-nigerian-designer-e04-b5e9f95e601d",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "How I got my first logo design client | Journey of a Nigerian designer — E04"
     },
     "1662828292353": {
@@ -185,9 +203,12 @@
       "description": "Graphic design is the art of communication, stylizing, and problem-solving using type, space, image, and color. The field is considered a subset of visual communication and communication design, but sometimes the term “graphic design” is used synonymously. Graphic designers create and combine symbols, images, and text to form visual representations of ideas and messages. They use typography, visual arts, and page layout techniques to create visual compositions.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F0_pXXAhoraEuA06T2m.jpg?alt=media&token=a5e29cd8-e199-411b-9aeb-97df40653090",
       "source": "https://medium.com/geekculture/the-different-types-of-graphic-design-27770b8882b",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "The Different Types of Graphic Design"
     },
     "1662828355754": {
@@ -208,9 +229,12 @@
       "description": "While browsing the internet for interesting technologies in the field of neural networks and various arts, I came across a Twitter post in which Suraj Patil announced the possibility of training a Stable Diffusion model of text inversion using only 3-5 images.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_ztpPvy00vkXdP4XGxi15AQ.jpeg?alt=media&token=b0a95719-29ee-4af7-974c-458369353e99",
       "source": "https://medium.com/@WiNE_iNEFF/training-a-stable-diffusion-model-with-text-inversion-using-diffusers-59c9c9fe72c6",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Training a Stable Diffusion Model with Text Inversion Using Diffusers"
     },
     "1662829226007": {
@@ -231,9 +255,12 @@
       "description": "Since UX became a thing with the rise of computer programs and the internet in 1993, developments in the niche have been a roller coaster ride. Every year, designers strive to meet the market demands and impress users in ways that designers have not tried before. The result is ever-changing trends of UX designs and features that, for better or worse, have shaped the digital world.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662829226007.png?alt=media&token=4f269929-7320-4265-8849-2d70fee916d5",
       "source": "https://medium.com/@devrodge/newest-2022-ui-ux-trends-used-by-top-tech-companies-ea3a546bd0bb",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Newest 2022 UI/UX Trends Used by Top Tech Companies"
     },
     "1662914798624": {
@@ -254,9 +281,12 @@
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662914798624.jpg?alt=media&token=7f6987c8-6a38-4d91-9d4d-d55e8bba399f",
       "source": "https://medium.com/@FlowMapp/bad-bad-ui-10-common-mistakes-in-user-interfaces-ac89767ac43d",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Bad Bad UI: 10 Common Mistakes in User Interfaces"
     },
     "1662915488191": {
@@ -277,9 +307,12 @@
       "description": "Written by Nicole Locklair, Talent Partnerships and Career Services at Designlab.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915488191.png?alt=media&token=bfa6a8a2-ef46-45de-86d7-e9aebcd77f29",
       "source": "https://medium.com/design-bootcamp/10-ux-ui-design-portfolios-that-will-inspire-you-f0e6fc6aa570",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "10 UX/UI Design Portfolios That Will Inspire You"
     },
     "1662915858151": {
@@ -300,9 +333,12 @@
       "description": "Sometimes, advice on how not to do turns out to be the most practical, because simple guides and recommendations always leave room for wrong decisions. That’s why we decided to share some examples of bad user experience with you.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915858151.peg?alt=media&token=43538a1f-019e-497e-bb2a-bd1fbc16e7eb",
       "source": "https://medium.com/@FlowMapp/bad-bad-ux-20-common-mistakes-in-user-experience-d30301ba686b",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Bad Bad UX: 20 Common Mistakes in User Experience"
     },
     "1662915869318": {
@@ -323,9 +359,12 @@
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915869318.png?alt=media&token=6f6a01b0-eafa-4dec-b096-438481b6c36f",
       "source": "https://medium.com/prototypr/information-architecture-the-most-important-part-of-design-youre-probably-overlooking-20372ade4fc0",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Information Architecture. The Most Important Part of Design You’re Probably Overlooking."
     },
     "1662915946575": {
@@ -346,9 +385,12 @@
       "description": "Working as a product designer in a software house is associated with many different challenges. The first one is to be versatile — after all, a product designer is not only the user’s advocate (just like UX designer), but also helps to achieve the client’s goals. Creativity and analytical thinking are needed, as well as the ability to cooperate with many stakeholders at once — clients, project managers, analysts, testers and developers. Their work not only leads to the creation of an interface that pleases the eye but, above all, to the success of the entire product. This includes conceptual work, strategy and implementation, which is focused on delivering real business value, not just positive UX.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915946575.png?alt=media&token=fbae187f-f4e5-4e37-88fd-d8969663c129",
       "source": "https://medium.com/@juliaszymik/the-ultimate-guide-to-product-design-process-d03b8e3190db",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The Ultimate Guide to Product Design Process"
     },
     "1662916048367": {
@@ -369,9 +411,12 @@
       "description": "When defining a proper color palette for the design system I was working on, I came across the “Dark Yellow Problem”, where designers try to strike a balance between “yellow being yellow” and meeting accessibility requirements for color contrasts.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662916048367.png?alt=media&token=75157568-72e3-4c0f-9327-8eafee7b2c9c",
       "source": "https://medium.com/user-experience-design-1/the-dark-yellow-problem-in-design-system-color-palettes-a0db1eedc99d",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The “dark yellow problem” in design system color palettes"
     },
     "1662916157711": {
@@ -392,9 +437,12 @@
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662916157711.png?alt=media&token=432127b9-9ecf-481e-899d-3f660a70a877",
       "source": "https://medium.com/free-code-camp/graphic-designer-to-front-end-developer-7be7bfd6a46c",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "How I transitioned from a graphic designer to front-end developer in 5 months"
     },
     "1663002190953": {
@@ -415,9 +463,12 @@
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002190953.peg?alt=media&token=e0a10b8d-d2dd-4809-a1ae-465d74e7d39d",
       "source": "https://medium.com/ux-planet/information-architecture-basics-for-designers-b5d43df62e20",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Information Architecture. Basics for Designers."
     },
     "1663002406600": {
@@ -438,9 +489,12 @@
       "description": "As a standard part of the UX process, designers create information architecture when building products. Defining every avenue and path that users can take through an app or website, information architecture is much more than just a sitemap to show what page leads where.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002406600.png?alt=media&token=b63ad0cc-1693-4a55-83e1-d56ac336ee97",
       "source": "https://medium.com/prototypr/the-comprehensive-guide-to-information-architecture-29b09695fbcb",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "A Guide to Information Architecture"
     },
     "1663002504525": {
@@ -461,9 +515,12 @@
       "description": "RED Academy — Community Partnership Project",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002504525.png?alt=media&token=17af4cc2-5863-484c-8f7a-be4e632a4431",
       "source": "https://medium.com/prototypr/ux-case-study-fuud-ca-8c2237530f4a",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX Case Study — FUUD.ca"
     },
     "1663052635389": {
@@ -485,9 +542,12 @@
       "description": "Social media brand Facebook's parent company has changed its name to Meta and updated its logo to an infinity loop that resembles the letter M.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663052635389.png?alt=media&token=758c85f5-27fb-4216-89a5-738b28de209b",
       "source": "https://www.dezeen.com/2021/11/03/meta-facebook-rebrand-infinity-loop/",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Facebook rebrands to Meta and adopts infinity-loop logo"
     },
     "1663053986291": {
@@ -509,9 +569,12 @@
       "description": "Figma and Adobe XD are two of the biggest names in UX design, and every search for the ideal interface design app will likely bring you to one or both of these tools.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663053986291.jpg?alt=media&token=cd5ebb3d-8207-4802-b084-c2e845578ac7",
       "source": "https://uxplanet.org/figma-vs-adobe-xd-an-in-depth-comparison-for-ux-ui-designers-633c5ddfdc5a",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Figma vs Adobe XD: An In-Depth Comparison for UX/UI Designers"
     },
     "1663054133269": {
@@ -532,9 +595,12 @@
       "description": "This article isn’t a beginner’s book list on UX, of course there’s no barrier to entry here and everybody would both enjoy & benefit from these 3 books, but I’ve put together this list to talk about books that have had an important impact on my UX ability, and hopefully will for you too!",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054133269.peg?alt=media&token=4f67ab08-6ebe-4ee7-9653-88d09c1b3809",
       "source": "https://uxplanet.org/3-books-that-will-change-your-outlook-on-ux-ba3c3546ba6b",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "3 Books That Will Change Your Outlook On UX"
     },
     "1663054269667": {
@@ -555,9 +621,12 @@
       "description": "Hello, my name is Leon. I’m one of the youngest product design leads in big tech, and a UX educator dedicated to helping students jumpstart their UX careers.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054269667.gif?alt=media&token=da5a13f8-28f0-4487-930d-e64756c0597e",
       "source": "https://uxplanet.org/how-to-secure-your-first-ux-interview-in-the-2023-recession-34b9ed35e6e9",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to secure your first UX Interview in the 2023 recession. Learn from these three examples at Startups, Apple, & Amazon."
     },
     "1663054455924": {
@@ -578,9 +647,12 @@
       "description": "Know the basics so you can master the complexities.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054455924.png?alt=media&token=a018d6f3-74f7-45ef-acd5-4bd7316fc67b",
       "source": "https://uxplanet.org/6-key-design-principles-for-creating-an-engaging-visual-experience-1d8c5c3083df",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "6 key design principles for creating an engaging visual experience."
     },
     "1663054579648": {
@@ -603,9 +675,12 @@
       "description": "As a UX designer, your portfolio is your best marketing tool.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054579648.jpg?alt=media&token=0ff5339d-edc4-4030-9b47-af8209e2a655",
       "source": "https://uxplanet.org/ux-design-portfolio-tips-and-inspiration-1f07b161b910",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX Design Portfolio Tips and Inspiration"
     },
     "1663062468622": {
@@ -626,9 +701,12 @@
       "description": "",
       "image": "https://miro.medium.com/max/700/1*Fz90CF8Cc5HHqzW4-BRFmA.jpeg",
       "source": "https://medium.com/@bemnetmerete/how-much-do-ux-designers-earn-in-2022-75148aab69fd",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How much do UX designers earn in 2022?"
     },
     "1663140916357": {
@@ -649,31 +727,17 @@
       "description": "People often confuse these three concepts and use them inadvertently for the same aspects of a website-related project.",
       "image": "https://miro.medium.com/max/700/1*Ph8ct17kp4tBu1UK0-_4ig.jpeg",
       "source": "https://amherd.medium.com/the-difference-between-information-architecture-ia-sitemap-and-navigation-64eba19296c",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The difference between information architecture (IA), sitemap, and navigation"
     },
     "1663140978491": {
       "body": "<p>Sometimes UX design requires the perspective of a kid, full of curiosity, to find new heights. By creating a UX sitemap, you’ll be able to take an early glance at your website or application from the tree tops. Let’s look at the what, when, how, and why of UX sitemaps.</p><h2><strong>What is it?</strong></h2><p>A UX sitemap is a hierarchical diagram of a website or application, that shows how pages are prioritized, linked, and labeled. If a user flow is like the street view details, the sitemap is like the bird’s eye view.</p><h2><strong>When is it used?</strong></h2><p><img src=\"https://miro.medium.com/max/600/1*g09eWtH-5a6jFE2NHscUyQ.png\"></p><p>UX Double Diamond Design Process</p><p>Sitemaps are used early in the UX design process, right after the discovery phase. You’ll typically create a sitemap after personas, user journey, and card sorting&nbsp;<a href=\"https://xd.adobe.com/ideas/process/information-architecture/sitemap-and-information-architecture/\" rel=\"noopener noreferrer\" target=\"_blank\">(Babich, 2019)</a>. For an existing website, work on a site audit or content inventory before designing the new sitemap.</p><p><img src=\"https://miro.medium.com/max/600/1*J1jSJrhQSGUf1V8v1ka5Ng.png\"></p><p>Create a UX sitemap after card sorting, and before wireframing.</p><h2><strong>How to create a UX Sitemap</strong></h2><h2><strong>[Anatomy]</strong></h2><p>A UX sitemap consists of linked pages, each with a&nbsp;<strong>reference number</strong>&nbsp;and a&nbsp;<strong>label</strong>. Reference numbers help you keep track of pages even as you move on to wireframes, prototypes, and iterations&nbsp;<a href=\"https://theuxreview.co.uk/sitemaps-the-beginners-guide/\" rel=\"noopener noreferrer\" target=\"_blank\">(Mears, 2013)</a>. Write labels as clear page titles, optimized for users through card sorting.</p><p><img src=\"https://miro.medium.com/max/700/1*kjXuyyoG5jI-UbV1dkjVmQ.png\"></p><p>A single page in a UX sitemap</p><p>Start with the homepage, and place pages in following rows by priority (high-level categories to specific pages). You’ll see&nbsp;<a href=\"https://miro.com/blog/how-to-create-a-sitemap/\" rel=\"noopener noreferrer\" target=\"_blank\">primary pages in a row</a>, secondary pages in the next, and so on.</p><p><img src=\"https://miro.medium.com/max/700/1*wSjjpk0vXFrHfF8BSO26_w.png\"></p><p>3 vertical levels of pages linked by priority</p><p>Another way to look at sitemap hierarchy is&nbsp;<a href=\"https://backlinko.com/hub/seo/architecture\" rel=\"noopener noreferrer\" target=\"_blank\">through URL structure</a>:</p><p>website.com/category/sub-category/specific-page</p><p>Although optional, you can also include a&nbsp;<strong>legend&nbsp;</strong>explaining symbols and lines,&nbsp;<strong>annotations</strong>&nbsp;clarifying information, and&nbsp;<strong>illustrated page types</strong>&nbsp;to show type distribution (<a href=\"https://www.gliffy.com/blog/how-to-create-a-sitemap\" rel=\"noopener noreferrer\" target=\"_blank\">Mock, 2017</a>).</p><p><img src=\"https://miro.medium.com/max/700/1*AaQN0EMgMDnokuwUcU_qPA.png\"></p><p>UX sitemap example of a dessert blog website</p><h2><strong>[Tips for Small, Medium, Large Websites]</strong></h2><p>Depending on the size and complexity of your website, you can create a&nbsp;<a href=\"https://www.nngroup.com/articles/flat-vs-deep-hierarchy/\" rel=\"noopener noreferrer\" target=\"_blank\">flat or deep sitemap</a>.</p><p><img src=\"https://miro.medium.com/max/700/1*u2LqtyrDfuM3JixP3uLrSg.png\"></p><p>Flat vs. deep UX sitemaps</p><p>For a&nbsp;<strong>small</strong>&nbsp;website or application (10+ pages) consider creating a flat sitemap, with 4 or less vertical levels. Flat sitemaps enhance discoverability of content because there are fewer levels to click through. The flattest sitemap consists of 1 vertical level, where different sections are placed on one page.</p><p>For&nbsp;<strong>medium</strong>&nbsp;sized (100+ pages), you can still create a flat sitemap but with a wider row of secondary pages. To surface those pages,&nbsp;<a href=\"https://www.nngroup.com/articles/3-click-rule/\" rel=\"noopener noreferrer\" target=\"_blank\">consider using a mega menu</a>&nbsp;that groups links into sub-categories to improve scanning.</p><p>For<strong>&nbsp;large</strong>&nbsp;sized (1,000+ pages), consider creating a deep sitemap to help house all the information, with 5+ vertical levels. Deep sitemaps can make it harder to discover content, so try to provide alternative ways (like menu shortcuts) to reach deeper pages. Category pages or navigation hubs can also help further organize the volume of pages (<a href=\"https://backlinko.com/hub/seo/architecture\" rel=\"noopener noreferrer\" target=\"_blank\">Backlinko</a>).</p><h2><strong>Why is it valuable?</strong></h2><p>A UX sitemap allows you to plan for usability, whether you’re working on a new website or a redesign (<a href=\"https://slickplan.com/blog/site-mapping-a-comprehensive-guide#para3\" rel=\"noopener noreferrer\" target=\"_blank\">Marie, 2018</a>). It provides a full overview, which then helps teams to simplify, trim off unnecessary pages, and keep what’s important. A UX sitemap also helps you see if linked pages are user and SEO friendly. With a sitemap, you can strategically place content where users would easily find it, and also pinpoint problem areas such pages hidden under an unintuitive label (<a href=\"https://theuxreview.co.uk/sitemaps-the-beginners-guide/\" rel=\"noopener noreferrer\" target=\"_blank\">Mears, 2013</a>).</p><h2><strong>Conclusion</strong></h2><p>Overall, a UX sitemap informs user-centered decisions in navigation, labeling, and organization. Here’s a quick recap of what we’ve learned:</p><ul><li><strong>What:</strong>&nbsp;UX sitemap is a hierarchical diagram of linked pages.</li><li><strong>When:&nbsp;</strong>Create early in the UX design process, after discovery phase.</li><li><strong>How:</strong>&nbsp;Each page has a reference number and label, and pages are linked from high-level categories to specific pages. Consider a flat sitemap for smaller websites, and deep sitemap for larger.</li><li><strong>Why:&nbsp;</strong>UX sitemap shows a full picture of your digital product so you can make better design decisions.</li></ul><p>Now that we’ve climbed the conceptual tree of a UX sitemap, I hope you’ve reached new heights on how to improve the UX design of your website or application.</p><p><img src=\"https://miro.medium.com/max/278/1*3nKIyS2gyB0pJY50jzl4pQ.png\"></p><p>References</p><p><a href=\"https://xd.adobe.com/ideas/process/information-architecture/sitemap-and-information-architecture/\" rel=\"noopener noreferrer\" target=\"_blank\">Sitemaps &amp; Information Architecture (IA)</a>&nbsp;— Nick Babich, 2019</p><p><a href=\"https://theuxreview.co.uk/sitemaps-the-beginners-guide/\" rel=\"noopener noreferrer\" target=\"_blank\">Sitemaps — The Beginner’s Guide</a>&nbsp;— Chris Mears, 2013</p><p><a href=\"https://miro.com/blog/how-to-create-a-sitemap/\" rel=\"noopener noreferrer\" target=\"_blank\">How to create a sitemap in 8 steps: Designing a better UX flow</a>&nbsp;— Anna Savina</p><p><a href=\"https://www.nngroup.com/articles/flat-vs-deep-hierarchy/\" rel=\"noopener noreferrer\" target=\"_blank\">Flat vs. Deep Website Hierarchies&nbsp;</a>— Kathryn Whitenton, 2013</p><p><a href=\"https://www.gliffy.com/blog/how-to-create-a-sitemap\" rel=\"noopener noreferrer\" target=\"_blank\">How to Create a Sitemap: Your Comprehensive Guide</a>&nbsp;— Liza Mock, 2017</p><p><a href=\"https://backlinko.com/hub/seo/architecture\" rel=\"noopener noreferrer\" target=\"_blank\">Website Architecture</a>&nbsp;— Backlinko</p><p><a href=\"https://slickplan.com/blog/site-mapping-a-comprehensive-guide#para3\" rel=\"noopener noreferrer\" target=\"_blank\">Site Mapping: A Comprehensive Guide</a>&nbsp;— Jenn Marie, 2018</p><p><a href=\"https://www.nngroup.com/articles/3-click-rule/\" rel=\"noopener noreferrer\" target=\"_blank\">The 3-Click Rule for Navigation Is False</a>&nbsp;— Page Laubheimer, 2019</p>",
       "catalogue": "UI/UX Design",
-      "comments": {
-        "1663229199072": {
-          "content": "Test comment",
-          "creator": {
-            "email": "rjnsitrum245@gmail.com",
-            "id": "mO3yF6LLz6SVQP5Og4OhXhVVGW13",
-            "image": "https://graph.facebook.com/5125994270836116/picture?access_token=EAAIo4a8govoBAAJDEnGs2VxmVX7h0WLEhkXZBRHvlTcnjrBNtfYZCIbdC66yUxcc26j2FEHMX4wj8ZAGZB3hJaad9uw6DCSLykOKZAZBv67mdSnOOyHDZCoSZBvfzG077lRnedgbaYGJODsm43YAjpENcK8b7tUCdOZAqWAioIT8QK1iZCZBvTSHQjKrgSYHXcRaLtJBt4ZAWqAvNMOigLrYhkD69CfelubAkGmKIcZBbSeHJ1n8hu0QcWUUu",
-            "jobs": "Other",
-            "name": "Rin Nguyễn",
-            "role": "user",
-            "savedPost": {
-              "1663140978491": true
-            }
-          },
-          "id": 1663229199072
-        }
-      },
       "createAt": 1663140978491,
       "creator": {
         "email": "admin@designblog.com",
@@ -689,9 +753,12 @@
       "description": "“As a little kid, I climbed a lot of trees because I always loved the bird’s-eye view” - Felix Baumgartner, Stratosphere Skydiver",
       "image": "https://miro.medium.com/max/700/1*HzixQoo4cxiXJNHI9LoHXw.png",
       "source": "https://uxdesign.cc/how-to-create-a-ux-sitemap-a-simple-guideline-8786c16f85c1",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to create a UX Sitemap: a simple guideline"
     }
   },
@@ -699,21 +766,21 @@
     "1662801073632": {
       "catalogue": "UI/UX Design",
       "creator": {
-        "email": "rjnsitrum245@gmail.com",
-        "id": "mO3yF6LLz6SVQP5Og4OhXhVVGW13",
-        "image": "https://graph.facebook.com/5125994270836116/picture?access_token=EAAIo4a8govoBAAJDEnGs2VxmVX7h0WLEhkXZBRHvlTcnjrBNtfYZCIbdC66yUxcc26j2FEHMX4wj8ZAGZB3hJaad9uw6DCSLykOKZAZBv67mdSnOOyHDZCoSZBvfzG077lRnedgbaYGJODsm43YAjpENcK8b7tUCdOZAqWAioIT8QK1iZCZBvTSHQjKrgSYHXcRaLtJBt4ZAWqAvNMOigLrYhkD69CfelubAkGmKIcZBbSeHJ1n8hu0QcWUUu",
-        "jobs": "Other",
-        "name": "Rin Nguyễn",
-        "role": "user",
-        "savedPost": {
-          "1663140978491": true
-        }
+        "email": "admin@designblog.com",
+        "id": "wGeJfc7BnROvkoyoMfJ1l3gVtPg1",
+        "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663000387832Untitled.png.png?alt=media&token=3b0f8fdd-0a78-4cfa-ac6b-37e01512bbfa",
+        "jobs": "UI/UX Lead Designer",
+        "name": "Học Pro",
+        "role": "admin"
       },
       "description": "Thematic analysis is a method of analyzing qualitative data. It is usually applied to a set of texts, such as an interview or transcripts. The researcher closely examines the data to identify common themes – topics, ideas and patterns of meaning that come up repeatedly.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2FUntitled.png?alt=media&token=e0016dc2-c349-4d3f-a473-e6e660aa4f87",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to Do Thematic Analysis | Step-by-Step Guide & Examples"
     },
     "1662827287602": {
@@ -731,9 +798,12 @@
       },
       "description": "UX steps by steps",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_D4IK6nL5vsukKPDSKVB7iA.png?alt=media&token=4a84bbf6-9932-42ab-a4d7-7ba652afa3db",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX/UI Design Process"
     },
     "1662827808451": {
@@ -751,9 +821,12 @@
       },
       "description": "When you first land on your job as a UX Designer or as an intern, first week or two might pass without any pressure. Developers might give you the requirements and you might use your existing knowledge about the tools to design what they have requested from you. You may deliver whatever the things you designed or you might spend the first two weeks designing that one task you were given.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_lVzcHLM6RLqTBtd5vq8Ogg.jpeg?alt=media&token=a2105d8c-241f-4d94-8d5a-da1302b9352e",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "What is your UX process?"
     },
     "1662827940882": {
@@ -771,9 +844,12 @@
       },
       "description": "For our third project at Red Academy, we worked with a local community partner to design an app based on the requirements and needs of both our client and the app users.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_baBHBqs1CFeFHERZSQ5B-A.png?alt=media&token=6da7a1cc-d07c-473a-bf08-f4944e22bdd6",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Eurika: A UI Case Study"
     },
     "1662828099322": {
@@ -791,9 +867,12 @@
       },
       "description": "I recently offered to talk at the local primary school, about my job (or at least part of my job). I expected to be speaking to the older kids, and be able to talk specifically about the cool parts of the job, and maybe some of the sucky bits too, and how you get around them. However, I was asked to talk to a reception class (four and five-year-olds), and it turned out to be an interesting exercise in boiling down what you do, to its most basic elements.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_yuPCrnG7qN-WlB4ok7y7Zg.jpeg?alt=media&token=7566f22e-86e2-4ba5-82a1-02d9dc8ecc1c",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Explaining graphic design to four-year-olds"
     },
     "1662828179098": {
@@ -811,9 +890,12 @@
       },
       "description": "Gives an overview of some of the hottest trends in graphic design.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F0_3VWeMfCanhNGoz6U.jpg?alt=media&token=96d3080d-434f-4ea1-b351-32b778b84d1c",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "New Graphic Design Trends You’ll Love!"
     },
     "1662828236834": {
@@ -831,9 +913,12 @@
       },
       "description": "And how you can get yours too\n\n",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_EL1CkzG851BEtHNnX7HMOw.png?alt=media&token=a7099715-8db5-4949-9a1b-a599ce54fe30",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "How I got my first logo design client | Journey of a Nigerian designer — E04"
     },
     "1662828292353": {
@@ -851,9 +936,12 @@
       },
       "description": "Graphic design is the art of communication, stylizing, and problem-solving using type, space, image, and color. The field is considered a subset of visual communication and communication design, but sometimes the term “graphic design” is used synonymously. Graphic designers create and combine symbols, images, and text to form visual representations of ideas and messages. They use typography, visual arts, and page layout techniques to create visual compositions.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F0_pXXAhoraEuA06T2m.jpg?alt=media&token=a5e29cd8-e199-411b-9aeb-97df40653090",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "The Different Types of Graphic Design"
     },
     "1662828355754": {
@@ -871,9 +959,12 @@
       },
       "description": "While browsing the internet for interesting technologies in the field of neural networks and various arts, I came across a Twitter post in which Suraj Patil announced the possibility of training a Stable Diffusion model of text inversion using only 3-5 images.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1_ztpPvy00vkXdP4XGxi15AQ.jpeg?alt=media&token=b0a95719-29ee-4af7-974c-458369353e99",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Training a Stable Diffusion Model with Text Inversion Using Diffusers"
     },
     "1662829226007": {
@@ -891,9 +982,12 @@
       },
       "description": "Since UX became a thing with the rise of computer programs and the internet in 1993, developments in the niche have been a roller coaster ride. Every year, designers strive to meet the market demands and impress users in ways that designers have not tried before. The result is ever-changing trends of UX designs and features that, for better or worse, have shaped the digital world.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662829226007.png?alt=media&token=4f269929-7320-4265-8849-2d70fee916d5",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Newest 2022 UI/UX Trends Used by Top Tech Companies"
     },
     "1662914798624": {
@@ -911,9 +1005,12 @@
       },
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662914798624.jpg?alt=media&token=7f6987c8-6a38-4d91-9d4d-d55e8bba399f",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Bad Bad UI: 10 Common Mistakes in User Interfaces"
     },
     "1662915488191": {
@@ -931,9 +1028,12 @@
       },
       "description": "Written by Nicole Locklair, Talent Partnerships and Career Services at Designlab.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915488191.png?alt=media&token=bfa6a8a2-ef46-45de-86d7-e9aebcd77f29",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "10 UX/UI Design Portfolios That Will Inspire You"
     },
     "1662915858151": {
@@ -951,9 +1051,12 @@
       },
       "description": "Sometimes, advice on how not to do turns out to be the most practical, because simple guides and recommendations always leave room for wrong decisions. That’s why we decided to share some examples of bad user experience with you.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915858151.peg?alt=media&token=43538a1f-019e-497e-bb2a-bd1fbc16e7eb",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Bad Bad UX: 20 Common Mistakes in User Experience"
     },
     "1662915869318": {
@@ -971,9 +1074,12 @@
       },
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915869318.png?alt=media&token=6f6a01b0-eafa-4dec-b096-438481b6c36f",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Information Architecture. The Most Important Part of Design You’re Probably Overlooking."
     },
     "1662915946575": {
@@ -991,9 +1097,12 @@
       },
       "description": "Working as a product designer in a software house is associated with many different challenges. The first one is to be versatile — after all, a product designer is not only the user’s advocate (just like UX designer), but also helps to achieve the client’s goals. Creativity and analytical thinking are needed, as well as the ability to cooperate with many stakeholders at once — clients, project managers, analysts, testers and developers. Their work not only leads to the creation of an interface that pleases the eye but, above all, to the success of the entire product. This includes conceptual work, strategy and implementation, which is focused on delivering real business value, not just positive UX.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662915946575.png?alt=media&token=fbae187f-f4e5-4e37-88fd-d8969663c129",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The Ultimate Guide to Product Design Process"
     },
     "1662916048367": {
@@ -1011,9 +1120,12 @@
       },
       "description": "When defining a proper color palette for the design system I was working on, I came across the “Dark Yellow Problem”, where designers try to strike a balance between “yellow being yellow” and meeting accessibility requirements for color contrasts.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662916048367.png?alt=media&token=75157568-72e3-4c0f-9327-8eafee7b2c9c",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The “dark yellow problem” in design system color palettes"
     },
     "1662916157711": {
@@ -1031,9 +1143,12 @@
       },
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1662916157711.png?alt=media&token=432127b9-9ecf-481e-899d-3f660a70a877",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "How I transitioned from a graphic designer to front-end developer in 5 months"
     },
     "1663002190953": {
@@ -1051,9 +1166,12 @@
       },
       "description": "",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002190953.peg?alt=media&token=e0a10b8d-d2dd-4809-a1ae-465d74e7d39d",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Information Architecture. Basics for Designers."
     },
     "1663002406600": {
@@ -1071,9 +1189,12 @@
       },
       "description": "As a standard part of the UX process, designers create information architecture when building products. Defining every avenue and path that users can take through an app or website, information architecture is much more than just a sitemap to show what page leads where.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002406600.png?alt=media&token=b63ad0cc-1693-4a55-83e1-d56ac336ee97",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "A Guide to Information Architecture"
     },
     "1663002504525": {
@@ -1091,9 +1212,12 @@
       },
       "description": "RED Academy — Community Partnership Project",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663002504525.png?alt=media&token=17af4cc2-5863-484c-8f7a-be4e632a4431",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX Case Study — FUUD.ca"
     },
     "1663052635389": {
@@ -1112,9 +1236,12 @@
       },
       "description": "Social media brand Facebook's parent company has changed its name to Meta and updated its logo to an infinity loop that resembles the letter M.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663052635389.png?alt=media&token=758c85f5-27fb-4216-89a5-738b28de209b",
-      "tags": {
-        "Graphic": true
-      },
+      "tags": [
+        {
+          "color": "#8759c0",
+          "value": "Graphic Design"
+        }
+      ],
       "title": "Facebook rebrands to Meta and adopts infinity-loop logo"
     },
     "1663053986291": {
@@ -1133,9 +1260,12 @@
       },
       "description": "Figma and Adobe XD are two of the biggest names in UX design, and every search for the ideal interface design app will likely bring you to one or both of these tools.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663053986291.jpg?alt=media&token=cd5ebb3d-8207-4802-b084-c2e845578ac7",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "Figma vs Adobe XD: An In-Depth Comparison for UX/UI Designers"
     },
     "1663054133269": {
@@ -1153,9 +1283,12 @@
       },
       "description": "This article isn’t a beginner’s book list on UX, of course there’s no barrier to entry here and everybody would both enjoy & benefit from these 3 books, but I’ve put together this list to talk about books that have had an important impact on my UX ability, and hopefully will for you too!",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054133269.peg?alt=media&token=4f67ab08-6ebe-4ee7-9653-88d09c1b3809",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "3 Books That Will Change Your Outlook On UX"
     },
     "1663054269667": {
@@ -1173,9 +1306,12 @@
       },
       "description": "Hello, my name is Leon. I’m one of the youngest product design leads in big tech, and a UX educator dedicated to helping students jumpstart their UX careers.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054269667.gif?alt=media&token=da5a13f8-28f0-4487-930d-e64756c0597e",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to secure your first UX Interview in the 2023 recession. Learn from these three examples at Startups, Apple, & Amazon."
     },
     "1663054455924": {
@@ -1193,9 +1329,12 @@
       },
       "description": "Know the basics so you can master the complexities.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054455924.png?alt=media&token=a018d6f3-74f7-45ef-acd5-4bd7316fc67b",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "6 key design principles for creating an engaging visual experience."
     },
     "1663054579648": {
@@ -1215,9 +1354,12 @@
       },
       "description": "As a UX designer, your portfolio is your best marketing tool.",
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663054579648.jpg?alt=media&token=0ff5339d-edc4-4030-9b47-af8209e2a655",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "UX Design Portfolio Tips and Inspiration"
     },
     "1663062468622": {
@@ -1235,9 +1377,12 @@
       },
       "description": "",
       "image": "https://miro.medium.com/max/700/1*Fz90CF8Cc5HHqzW4-BRFmA.jpeg",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How much do UX designers earn in 2022?"
     },
     "1663140916357": {
@@ -1255,9 +1400,12 @@
       },
       "description": "People often confuse these three concepts and use them inadvertently for the same aspects of a website-related project.",
       "image": "https://miro.medium.com/max/700/1*Ph8ct17kp4tBu1UK0-_4ig.jpeg",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "The difference between information architecture (IA), sitemap, and navigation"
     },
     "1663140978491": {
@@ -1275,12 +1423,29 @@
       },
       "description": "“As a little kid, I climbed a lot of trees because I always loved the bird’s-eye view” - Felix Baumgartner, Stratosphere Skydiver",
       "image": "https://miro.medium.com/max/700/1*HzixQoo4cxiXJNHI9LoHXw.png",
-      "tags": {
-        "UI-UX": true
-      },
+      "tags": [
+        {
+          "color": "#615dd4",
+          "value": "UI/UX"
+        }
+      ],
       "title": "How to create a UX Sitemap: a simple guideline"
     }
   },
+  "tags": [
+    {
+      "color": "#615dd4",
+      "value": "UI/UX"
+    },
+    {
+      "color": "#8759c0",
+      "value": "Graphic Design"
+    },
+    {
+      "color": "#ced871",
+      "value": "Dev"
+    }
+  ],
   "users": {
     "1KlYkYqrziWkknVQwC5v7hiPlYp1": {
       "email": "lequanghuy21699@gmail.com",
@@ -1337,12 +1502,7 @@
       "image": "https://firebasestorage.googleapis.com/v0/b/design-blog-bd8e4.appspot.com/o/images%2F1663000387832Untitled.png.png?alt=media&token=3b0f8fdd-0a78-4cfa-ac6b-37e01512bbfa",
       "jobs": "UI/UX Lead Designer",
       "name": "Học Pro",
-      "role": "admin",
-      "savedPost": {
-        "1662916157711": true,
-        "1663054579648": true,
-        "1663140916357": true
-      }
+      "role": "admin"
     }
   }
 }

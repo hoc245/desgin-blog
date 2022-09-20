@@ -29,6 +29,7 @@ export default function Homepage() {
   const [postThumb, setPostThumb] = useState();
   const [user, setUser] = useState();
   const [catalogue, setCatalogue] = useState();
+  const [tags, setTags] = useState();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -38,6 +39,7 @@ export default function Homepage() {
       }
     });
     setCatalogue(JSON.parse(localStorage.getItem("catalogue")));
+    setTags(JSON.parse(localStorage.getItem("tags")));
   }, []);
   useEffect(() => {
     let popup = document.querySelector(".popup.is-active");
@@ -103,7 +105,7 @@ export default function Homepage() {
                     description={postThumb[`${post}`].description}
                     cover={postThumb[`${post}`].image}
                     time={post}
-                    tags={Object.keys(postThumb[`${post}`].tags)}
+                    tags={postThumb[`${post}`].tags}
                     type={newPost.indexOf(post) === 0 ? null : ""}
                   />
                 );
@@ -148,7 +150,7 @@ export default function Homepage() {
                               description={postThumb[`${post}`].description}
                               cover={postThumb[`${post}`].image}
                               time={post}
-                              tags={Object.keys(postThumb[`${post}`].tags)}
+                              tags={postThumb[`${post}`].tags}
                               type={cataPost.indexOf(post) === 0 ? null : ""}
                             />
                           );
